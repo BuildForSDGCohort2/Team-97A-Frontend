@@ -4,14 +4,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat Alternates", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .nav {
-  display: flex;
+  top: 0;
   height: 14vh;
-  justify-content: space-around;
+  display: flex;
+  position: sticky;
   align-items: center;
+  justify-content: space-around;
+  background-color: hsl(0, 0%, 100%);
 }
 
 .nav-links {
@@ -35,6 +38,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
+  font-family: "Montserrat Alternates", sans-serif;
 }
 
 .navlinks-auth {
@@ -75,6 +79,11 @@
   background-image: none;
   border: 1px solid transparent;
   border-radius: 5px;
+}
+
+.btn-lg {
+  padding: 14px 20px;
+  font-size: 20px;
 }
 
 .btn:focus,
@@ -121,4 +130,34 @@
   color: hsl(0, 0%, 20%);
   background-color: hsl(0, 0%, 90%);
   border-color: hsl(0, 0%, 68%);
+}
+
+/* btn secondary
+---------------------------- */
+.btn-secondary {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(355, 84%, 71%);
+  border-color: #ccc;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+.btn-secondary:focus {
+  color: hsl(208, 96%, 28%);
+  background-color: hsl(50, 87%, 55%);
+  border-color: hsl(0, 0%, 68%);
+}
+
+.btn-secondary:hover {
+  color: hsl(0, 0%, 97%);
+  background-color: hsl(221, 87%, 55%);
+  border-color: hsl(0, 0%, 68%);
+}
+.btn-secondary:active {
+  color: hsl(0, 0%, 20%);
+  background-color: hsl(0, 0%, 90%);
+  border-color: hsl(0, 0%, 68%);
+}
+
+.arrow {
+  color: hsl(0, 0%, 100%);
 }

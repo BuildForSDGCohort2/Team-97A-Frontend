@@ -1,6 +1,64 @@
-.landing-page {
+.landing-page .banner {
+  height: 86vh;
+  display: flex;
   background-color: hsl(50, 87%, 55%);
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.banner-left .intro {
+  margin: 0 0 50px 0;
+}
+
+.banner-left h2 {
+  margin: 0 0 15px 0;
+}
+
+.stats {
+  position: absolute;
+  top: 580px;
+  left: 280px;
+}
+
+.stats,
+.stats-list {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-content: center;
+}
+
+.stats-list {
+  width: 60vw;
+  height: 220px;
+  border-radius: 10px;
+  padding: 20px 0 0 0;
+  background-color: hsl(0, 0%, 100%);
+}
+
+.stats-list img {
+  width: 100px;
+  height: 100px;
+  padding: 15px;
+  border-radius: 30px;
+  background-color: hsl(199, 53%, 61%);
+}
+.stats-list span h3 {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 20px;
+  text-align: center;
+  color: hsl(348, 100%, 70%);
+}
+
+.stats-list span h4 {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 10px;
+  text-align: center;
+  color: hsla(185, 78%, 13%, 0.6);
+}
+
+.stats span h4,
+.stats-list span h3 {
+  margin-top: 15px;
 }
