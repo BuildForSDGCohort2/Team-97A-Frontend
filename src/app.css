@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500&family=Montserrat:wght@400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+.nav {
+  display: flex;
+  height: 14vh;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-links {
+  width: 45vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-links .logo {
+  margin-right: 80px;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.navlinks-auth {
+  width: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.navlinks-auth li {
+  list-style: none;
+}
+
+.navlinks-auth a {
+  text-decoration: none;
+}
+
+/*  btn */
+
+.btn {
+  font-weight: 500px;
+  font-size: 16px;
+  padding: 6px 12px;
+  margin-bottom: 0;
+
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.btn:focus,
+.btn:active:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.btn:hover,
+.btn:focus {
+  color: #333;
+  text-decoration: none;
+}
+
+.btn:active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+/* btn primary
+---------------------------- */
+.btn-primary {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(208, 100%, 40%);
+  border-color: #ccc;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+.btn-primary:focus {
+  color: hsl(208, 96%, 28%);
+  background-color: hsl(50, 87%, 55%);
+  border-color: hsl(0, 0%, 68%);
+}
+
+.btn-primary:hover {
+  color: hsl(208, 96%, 28%);
+  background-color: hsl(50, 87%, 55%);
+  border-color: hsl(0, 0%, 68%);
+}
+.btn-primary:active {
+  color: hsl(0, 0%, 20%);
+  background-color: hsl(0, 0%, 90%);
+  border-color: hsl(0, 0%, 68%);
+}
