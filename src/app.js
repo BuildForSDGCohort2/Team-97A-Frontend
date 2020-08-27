@@ -8,6 +8,7 @@ import HIW from "./components/howitworks/hiw";
 import Features from "./components//features/features";
 import FAQs from "./components/faqs/faqs";
 import GetStarted from "./components/getstarted/getstarted";
+import Footer from "./components/footer/footer";
 import "./app.css";
 
 function App() {
@@ -51,6 +52,10 @@ function App() {
         <Route path="/faqs/" component={FAQs} />
         <Route path="/auth/login/" component={Login} />
         <Route path="/getstarted/" component={GetStarted} />
+
+        {/* footer component */}
+
+        <Footer />
       </div>
     </Router>
   );

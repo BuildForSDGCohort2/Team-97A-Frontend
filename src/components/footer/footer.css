@@ -1,0 +1,37 @@
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  width: 100%;
+  height: 160px;
+  left: 0px;
+  bottom: 0px;
+  background: rgba(240, 208, 39, 0.12);
+}
+
+.copyright-text {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 1em;
+  color: #caad16;
+}
+
+.copyright-text span {
+  color: #67afd0;
+}
+
+.social-icon {
+  margin: 1em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.social-icon:hover {
+  padding: 0.2em;
+  transition: all 0.2s ease-in-out;
+}
