@@ -1,6 +1,22 @@
 .features {
+  height: 68vh;
   background-color: hsl(50, 87%, 55%);
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.feature-list {
+  width: 50vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  list-style: none;
+  margin: 20px;
+}
+
+.screen {
+  margin-top: 10px;
+  height: 430px;
 }
