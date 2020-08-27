@@ -1,6 +1,75 @@
 .hiw {
+  height: 61vh;
   background-color: hsl(50, 87%, 55%);
+}
+
+.steps,
+.step-line-numbers,
+.step-line-numbers::before {
+  width: 60vw;
+}
+
+.hiw,
+.steps,
+.step-line-numbers {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  list-style: none;
+}
+
+.steps img {
+  width: 200px;
+  height: 185px;
+}
+
+.steps li:first-child img {
+  width: 115px;
+}
+
+.steps li:first-child h2 {
+  margin-top: -32px;
+}
+
+.steps li:first-child h4 {
+  margin-left: -35px;
+}
+
+.steps li h4,
+.steps li h2 {
+  text-align: center;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+.step-line-numbers {
+  position: relative;
+  margin-top: 20px;
+}
+
+.step-line-numbers li {
+  width: 50px;
+  height: 50px;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 100%;
+  background-color: hsl(348, 100%, 70%);
+}
+
+.step-line-numbers h4 {
+  margin-top: 2.2vh;
+}
+
+.step-line {
+  width: 60%;
+  height: 10px;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#fff),
+    to(#eee),
+    color-stop(0.75, #eee)
+  );
+  top: 410px;
+  position: absolute;
 }
