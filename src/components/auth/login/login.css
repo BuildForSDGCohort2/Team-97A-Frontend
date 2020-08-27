@@ -1,6 +1,78 @@
 .login {
-  background-color: hsl(50, 87%, 55%);
+  background-color: hsl(0, 0%, 98%);
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.login-form-container {
+  width: 40vw;
+}
+
+.icon-container h2 {
+  font-family: "Montserrat Alternates", sans-serif;
+  margin-top: 10px;
+}
+
+.login-form {
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+.login-form h4:first-child {
+  width: 29vw;
+  height: 6vh;
+  color: #fff;
+  padding-top: 10px;
+  text-align: center;
+  background-color: hsl(50, 80%, 44%);
+}
+
+.login-form,
+.sub-login-area,
+.login-form input {
+  width: 29.28vw;
+}
+
+.login-form input {
+  height: 7.1vh;
+  border: 0;
+  padding: 15px;
+  border-radius: 20px;
+  -webkit-box-shadow: -18px 5px 76px -33px rgba(0, 0, 0, 0.99);
+  -moz-box-shadow: -18px 5px 76px -33px rgba(0, 0, 0, 0.99);
+  box-shadow: -18px 5px 76px -33px rgba(0, 0, 0, 0.99);
+}
+
+.login-form input:focus,
+.login-form input:active {
+  border: 0;
+}
+
+.login-form .text-input,
+.text-input::placeholder {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(199, 53%, 61%);
+}
+
+.login-form .btn-login {
+  color: hsl(0, 0%, 100%);
+  font-size: medium;
+  font-family: "Montserrat Alternates", sans-serif;
+  background-color: hsl(240, 86%, 67%);
+}
+
+.sub-login-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sub-login-area a {
+  font-weight: 500;
+  font-size: 12px;
+  text-decoration: none;
 }
