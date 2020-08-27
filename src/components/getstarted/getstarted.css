@@ -1,6 +1,93 @@
 .getstarted {
-  background-color: hsl(50, 87%, 55%);
   display: flex;
-  justify-content: space-around;
+  padding: 3em 5em;
+}
+.getstarted-left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+}
+.getstarted-left h1 {
+  letter-spacing: 0.1em;
+}
+.getstarted-left h1 span {
+  color: #67afd0;
+  display: block;
+}
+.getstarted-img-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 5em;
+}
+
+.getstarted-img {
+  width: 30%;
+  color: #67afd0;
+}
+
+.getstarted-right {
+  width: 50%;
+  display: flex;
+}
+.form-container {
+  width: 60%;
+}
+
+.signup-form {
+  width: 100%;
+}
+
+.inp-grp {
+  width: 100%;
+  background-color: #fdf9e5;
+  height: 45px;
+  border-radius: 20px;
+  padding-left: 1.2em;
+  margin: 1em;
+}
+
+.inp-grp input {
+  width: 100%;
+  border: 0;
+  background-color: #e9e9f100;
+  height: 100%;
+  font-size: 1em;
+  outline: 0;
+}
+.inp-grp select {
+  width: 100%;
+  border: 0;
+  background-color: #e9e9f100;
+  height: 100%;
+  font-size: 1em;
+  outline: 0;
+}
+
+.signup-btn {
+  background-color: #caad16;
+  color: white !important;
+  width: 100%;
+  height: 45px;
+  border-radius: 20px;
+  margin: 1.2em;
+  cursor: pointer;
+}
+.signup-btn:hover {
+  background-color: #67afd0;
+}
+.signup-btn input {
+  width: 100%;
+  background-color: #e9e9f100;
+  height: 100%;
+  font-size: 1.2em;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  color: white;
+}
+
+.login-prompt p {
+  text-align: center;
 }
