@@ -120,7 +120,7 @@ class GetStarted extends Component {
               <div className="login-prompt">
                 <p className="password-forgot">
                   Already have an account?
-                  <Link to="/">sign-in here</Link>
+                  <Link to="/auth/login/">sign-in here</Link>
                 </p>
               </div>
             </form>
