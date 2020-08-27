@@ -16,7 +16,17 @@
   margin: 20px;
 }
 
+.screen-container {
+  display: flex;
+  margin-top: 100px;
+}
+
+.screen-container h2 {
+  margin: 10px;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
 .screen {
   margin-top: 10px;
-  height: 430px;
+  height: 500px;
 }
