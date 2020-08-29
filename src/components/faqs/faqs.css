@@ -1,6 +1,69 @@
-.faqs {
+.faq-top-area {
+  text-align: center;
+}
+
+.faq-top-area h1,
+h4 {
+  margin: 10px;
+  padding: 5px;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
+.faq-top-area input::placeholder {
+  color: rgb(0, 0, 0);
+}
+
+.faq-top-area input {
+  border: 0;
+  width: 350px;
+  padding: 10px;
+  border-radius: 20px;
+
+  background-position: 300px;
+  background-size: 20px;
+  background-repeat: no-repeat;
+}
+
+.faq-top-area input:focus,
+input:active {
+  outline: 0;
+}
+
+.faq-answers div,
+.faq-top-area input {
   background-color: hsl(50, 87%, 55%);
+}
+
+.faq-answers {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+}
+
+.faq-answers h4:first-child {
+  margin: 10px;
+  text-shadow: 11px 5px 25px rgba(44, 48, 2, 1);
+}
+
+.faq-answers div {
+  margin: 20px;
+  padding: 20px;
+  width: 420px;
+}
+
+.faq-answers div li {
+  list-style: none;
+}
+
+.faq-answers div li a:first-child,
+div li p:nth-child(2) {
+  margin: 20px;
+}
+
+.faq-answers div li p {
+  font-size: 15px;
+  padding-left: 10px;
+}
+
+.faq-answers {
+  margin: 20px;
 }

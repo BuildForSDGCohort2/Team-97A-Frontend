@@ -44,7 +44,7 @@ const Login = () => {
               <Link to="/getstarted/">Register</Link>
             </span>
             <span>
-              <Link to="/forgotpassword/">Forgot password ?</Link>
+              <Link to="/auth/forgot_password/">Forgot password ?</Link>
             </span>
           </div>
         </form>
