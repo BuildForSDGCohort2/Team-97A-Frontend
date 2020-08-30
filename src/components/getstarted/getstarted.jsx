@@ -28,27 +28,6 @@ class GetStarted extends Component {
     },
   };
 
-  interval = null;
-  userTypeRef = React.createRef();
-
-  componentDidMount() {
-    this.interval = setInterval(this.handleUserTypeToggle, 2000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  handleUserTypeToggle = () => {
-    if (this.userTypeRef.current.innerText === "Carrier") {
-      this.userTypeRef.current.innerText = "Sender";
-      this.userTypeRef.current.className = "show";
-    } else {
-      this.userTypeRef.current.className = "unshow";
-      this.userTypeRef.current.innerText = "Carrier";
-    }
-  };
-
   handleChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
@@ -63,7 +42,7 @@ class GetStarted extends Component {
       <div className="getstarted">
         <div className="getstarted-left">
           <h1 className="intro">
-            Sign up as a <span ref={this.userTypeRef}>Carrier</span>
+            Sign up as a <span>Carrier</span>
           </h1>
           <h1 className="intro-sm">Sign up</h1>
           <div className="getstarted-img-container">
