@@ -28,6 +28,27 @@ class GetStarted extends Component {
     },
   };
 
+  interval = null;
+  userTypeRef = React.createRef();
+
+  componentDidMount() {
+    this.interval = setInterval(this.handleUserTypeToggle, 2000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  handleUserTypeToggle = () => {
+    if (this.userTypeRef.current.innerText === "Carrier") {
+      this.userTypeRef.current.innerText = "Sender";
+      this.userTypeRef.current.className = "show";
+    } else {
+      this.userTypeRef.current.className = "unshow";
+      this.userTypeRef.current.innerText = "Carrier";
+    }
+  };
+
   handleChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
@@ -41,9 +62,10 @@ class GetStarted extends Component {
     return (
       <div className="getstarted">
         <div className="getstarted-left">
-          <h1>
-            Sign up as a <span>carrier</span>
+          <h1 className="intro">
+            Sign up as a <span ref={this.userTypeRef}>Carrier</span>
           </h1>
+          <h1 className="intro-sm">Sign up</h1>
           <div className="getstarted-img-container">
             <img src={carImg} alt="getstarted-img" className="getstarted-img" />
           </div>
@@ -120,7 +142,9 @@ class GetStarted extends Component {
               <div className="login-prompt">
                 <p className="password-forgot">
                   Already have an account?
-                  <Link to="/auth/login/">sign-in here</Link>
+                  <Link style={{ marginLeft: ".5em" }} to="/auth/login/">
+                    sign-in here
+                  </Link>
                 </p>
               </div>
             </form>
