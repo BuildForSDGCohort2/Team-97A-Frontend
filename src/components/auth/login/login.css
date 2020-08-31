@@ -77,3 +77,36 @@
   font-size: 12px;
   text-decoration: none;
 }
+
+@media (max-width: 1024px) {
+  .login-form,
+  .sub-login-area {
+    width: 100%;
+  }
+
+  .sub-login-area {
+    width: 330px;
+    margin-top: 10px;
+  }
+
+  .icon-container {
+    display: none;
+  }
+
+  .login-form-container .login-form div h4,
+  .login-form input {
+    width: 90vw;
+    margin-top: 10px;
+  }
+
+  .login-form-container .login-form div h4 {
+    margin-top: 50px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .login-form-container {
+    display: flex;
+    justify-content: space-around;
+  }
+}
