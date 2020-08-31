@@ -79,8 +79,7 @@
 }
 
 @media (max-width: 1024px) {
-  .login-form,
-  .sub-login-area {
+  .login-form {
     width: 100%;
   }
 
@@ -93,7 +92,10 @@
     display: none;
   }
 
-  .login-form-container .login-form div h4,
+  .login-form-container .login-form div h4 {
+    width: 100vw;
+  }
+
   .login-form input {
     width: 90vw;
     margin-top: 10px;
