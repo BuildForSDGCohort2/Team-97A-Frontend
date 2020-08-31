@@ -2,9 +2,15 @@ import React from "react";
 import "./features.css";
 import screen from "../../images/screen.svg";
 
+import { useHistory } from "react-router-dom";
+import useAnchors from "../../utils/useAnchors";
+
 const Features = () => {
+  const history = useHistory();
+  useAnchors(history, 750);
+
   return (
-    <div className="features">
+    <div className="features" id="features">
       <div></div>
       <div className="screen-container">
         <img alt="demo screen" src={screen} className="screen" />

@@ -55,9 +55,9 @@
 
 .login-form .text-input,
 .text-input::placeholder {
-  color: hsl(0, 0%, 100%);
+  color: hsl(0, 0%, 30%);
   outline: none;
-  background-color: hsl(199, 53%, 61%);
+  background-color: #eff7fa;
 }
 
 .login-form .btn-login {

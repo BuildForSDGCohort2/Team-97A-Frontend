@@ -16,7 +16,7 @@ class FAQs extends React.Component {
 
   render() {
     return (
-      <div className="faqs">
+      <div className="faqs" id="faqs">
         <div className="faq-top-area">
           <h1>We're here to help.</h1>
           <h4>Your shipments are safe with us !</h4>

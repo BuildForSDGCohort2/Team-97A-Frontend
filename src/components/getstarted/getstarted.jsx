@@ -39,7 +39,7 @@ class GetStarted extends Component {
 
   render() {
     return (
-      <div className="getstarted">
+      <div className="getstarted" id="getstarted">
         <div className="getstarted-left">
           <h1 className="intro">
             Sign up as a <span>Carrier</span>

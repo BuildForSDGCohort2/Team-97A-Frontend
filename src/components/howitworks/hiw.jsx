@@ -5,14 +5,20 @@ import step_2 from "../../images/steps/2.svg";
 import step_3 from "../../images/steps/3.svg";
 import step_4 from "../../images/steps/4.svg";
 
+import { useHistory } from "react-router-dom";
+import useAnchors from "../../utils/useAnchors";
+
 const HIW = () => {
+  const history = useHistory();
+  useAnchors(history, 750);
+
   return (
-    <div className="hiw">
+    <div className="hiw" id="hiw">
       <div></div>
       <div>
+        <h2>How it Works</h2>
         <ul className="steps">
           <li>
-            <h2>How it Works</h2>
             <img alt="step 1" src={step_1} />
             <h4>Post your Cargo</h4>
           </li>
