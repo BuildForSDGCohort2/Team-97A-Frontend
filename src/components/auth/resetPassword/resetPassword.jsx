@@ -28,6 +28,7 @@ class ResetPassword extends Component {
     return (
       <div className="reset-page">
         <div className="reset-page-left">
+          <h1 className="intro-sm">Reset Password</h1>
           <div className="reset-page-img-container">
             <img
               src={passwordImg}
@@ -63,7 +64,7 @@ class ResetPassword extends Component {
                 />
               </div>
               <div className="reset-btn">
-                <input type="submit" value="Signup" name="signup" id="signup" />
+                <input type="submit" value="Reset" name="signup" id="signup" />
               </div>
               <div className="login-prompt">
                 <p className="password-forgot">

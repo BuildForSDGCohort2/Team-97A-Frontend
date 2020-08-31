@@ -41,9 +41,10 @@ class GetStarted extends Component {
     return (
       <div className="getstarted">
         <div className="getstarted-left">
-          <h1>
-            Sign up as a <span>carrier</span>
+          <h1 className="intro">
+            Sign up as a <span>Carrier</span>
           </h1>
+          <h1 className="intro-sm">Sign up</h1>
           <div className="getstarted-img-container">
             <img src={carImg} alt="getstarted-img" className="getstarted-img" />
           </div>
@@ -120,7 +121,9 @@ class GetStarted extends Component {
               <div className="login-prompt">
                 <p className="password-forgot">
                   Already have an account?
-                  <Link to="/auth/login/">sign-in here</Link>
+                  <Link style={{ marginLeft: ".5em" }} to="/auth/login/">
+                    sign-in here
+                  </Link>
                 </p>
               </div>
             </form>

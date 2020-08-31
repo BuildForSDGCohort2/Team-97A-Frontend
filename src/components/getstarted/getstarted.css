@@ -2,19 +2,23 @@
   display: flex;
   padding: 3em 5em;
 }
+
 .getstarted-left {
   width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .getstarted-left h1 {
   letter-spacing: 0.1em;
 }
+
 .getstarted-left h1 span {
   color: #67afd0;
   display: block;
 }
+
 .getstarted-img-container {
   width: 100%;
   display: flex;
@@ -31,6 +35,7 @@
   width: 50%;
   display: flex;
 }
+
 .form-container {
   width: 60%;
 }
@@ -45,7 +50,7 @@
   height: 45px;
   border-radius: 20px;
   padding-left: 1.2em;
-  margin: 1em;
+  margin: 1em 0;
 }
 
 .inp-grp input {
@@ -67,11 +72,11 @@
 
 .signup-btn {
   background-color: #caad16;
-  color: white !important;
+  color: white;
   width: 100%;
   height: 45px;
   border-radius: 20px;
-  margin: 1.2em;
+  margin: 1.2em 0;
   cursor: pointer;
 }
 .signup-btn:hover {
@@ -90,4 +95,57 @@
 
 .login-prompt p {
   text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .form-container {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .getstarted {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .getstarted-left {
+    width: 100%;
+    padding-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  .getstarted-left h1 {
+    letter-spacing: 0.1em;
+    background-color: #caad16;
+    width: 100%;
+    text-align: center;
+    padding: 0.1em;
+  }
+
+  .intro-sm {
+    display: block;
+  }
+
+  .intro {
+    display: none;
+  }
+
+  .getstarted-img-container {
+    padding-top: 1em;
+  }
+
+  .getstarted-img {
+    width: 30%;
+  }
+
+  .getstarted-right {
+    width: 100%;
+    padding: 2em;
+    padding-top: 0;
+  }
+
+  .form-container {
+    width: 100%;
+  }
 }
