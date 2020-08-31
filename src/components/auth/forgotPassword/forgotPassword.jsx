@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import passwordImg from "../../../images/unlock_key.svg";
 import "./forgotPassword.css";
 
-class ResetPassword extends Component {
+class ForgotPassword extends Component {
   state = {
     data: { email: "" },
     error: { email: "" },
@@ -74,4 +74,4 @@ class ResetPassword extends Component {
   }
 }
 
-export default ResetPassword;
+export default ForgotPassword;
