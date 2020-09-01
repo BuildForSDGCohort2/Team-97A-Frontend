@@ -1,9 +1,9 @@
 .features {
-  height: 68vh;
   background-color: hsl(50, 87%, 55%);
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-bottom: 20px;
 }
 
 .feature-list {
@@ -18,15 +18,31 @@
 
 .screen-container {
   display: flex;
+  flex-direction: column;
   margin-top: 100px;
 }
 
 .screen-container h2 {
-  margin: 10px;
+  font-size: 35px;
+  margin-top: -70px;
   font-family: "Montserrat Alternates", sans-serif;
 }
 
 .screen {
   margin-top: 10px;
   height: 500px;
+}
+
+@media (max-width: 860px) {
+  .features {
+    flex-direction: column;
+  }
+
+  .screen-container h2 {
+    text-align: center;
+  }
+
+  .screen-container img {
+    display: none;
+  }
 }

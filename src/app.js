@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import logo from "./images/logo.svg";
 import LandingPage from "./components/langinPage/landingPage";
@@ -11,38 +11,74 @@ import ForgotPassword from "./components/auth/forgotPassword/forgotPassword";
 import "./app.css";
 
 function App() {
+  const nav = React.useRef(null);
+  const navLinks = useRef([]);
+  navLinks.current = [];
+
+  const ellipsis = React.useRef(null);
+
+  // make a list of refs for use in entry animation of navlinks
+  const addNavItemRef = (element) => {
+    if (element && !navLinks.current.includes(element)) {
+      navLinks.current.push(element);
+    }
+  };
+
+  const handleEllipse = () => {
+    // show and hide the ellipsis toggler
+    nav.current.classList.toggle("nav-active");
+
+    // entry animation for nav items
+    navLinks.current.forEach((link, i) => {
+      link.style.animation = link.style.animation
+        ? ""
+        : (link.style.animation = `showLinks 0.5s ease forwards ${i / 8}s`);
+    });
+
+    // animate ellipses to X when active
+    ellipsis.current.classList.toggle("toggler-ellipsis");
+  };
+
+  // update the following list to add nav item
+  const navLinkItems = [
+    { path: "/#hiw", text: "How it works" },
+    { path: "/#features", text: "Features" },
+    { path: "/faqs/", text: "FAQs" },
+    { path: "/auth/login/", text: "Login" },
+    { path: "/getstarted/", text: "Get Started", className: "btn btn-primary" },
+  ];
+
   return (
     <Router>
       <div className="App" id="top">
         <nav className="nav">
-          <ul className="nav-links">
+          <div className="logo">
             <Link to="/#top">
-              <div className="logo">
-                <img src={logo} width="139" alt="site logo" />
-              </div>
+              <img src={logo} width="139" alt="site logo" />
             </Link>
+          </div>
 
-            <li>
-              <Link to="/#hiw">How it works</Link>
-            </li>
-            <li>
-              <Link to="/#features">Features</Link>
-            </li>
-            <li>
-              <Link to="/faqs/">FAQs</Link>
-            </li>
+          <ul className="nav-links" ref={nav}>
+            {navLinkItems.map((item, key) => {
+              return (
+                <li ref={addNavItemRef} key={key}>
+                  <Link to={item.path} className={item.className}>
+                    {item.text}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
-          <ul className="navlinks-auth">
-            <li>
-              <Link to="/auth/login/">Login</Link>
-            </li>
-            <li>
-              <Link to="/getstarted/" className="btn btn-primary">
-                Get Started
-              </Link>
-            </li>
-          </ul>
+          <div
+            className="ellipsis"
+            ref={ellipsis}
+            onClick={() => handleEllipse()}
+          >
+            <div className="ellipse-1"></div>
+            <div className="ellipse-2"></div>
+            <div className="ellipse-3"></div>
+          </div>
         </nav>
 
         <Route exact={true} path="/" component={LandingPage} />

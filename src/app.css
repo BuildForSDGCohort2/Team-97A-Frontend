@@ -42,21 +42,6 @@
   font-family: "Montserrat Alternates", sans-serif;
 }
 
-.navlinks-auth {
-  width: 20vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.navlinks-auth li {
-  list-style: none;
-}
-
-.navlinks-auth a {
-  text-decoration: none;
-}
-
 /*  btn */
 
 .btn {
@@ -127,6 +112,7 @@
   background-color: hsl(50, 87%, 55%);
   border-color: hsl(0, 0%, 68%);
 }
+
 .btn-primary:active {
   color: hsl(0, 0%, 20%);
   background-color: hsl(0, 0%, 90%);
@@ -153,6 +139,7 @@
   background-color: hsl(221, 87%, 55%);
   border-color: hsl(0, 0%, 68%);
 }
+
 .btn-secondary:active {
   color: hsl(0, 0%, 20%);
   background-color: hsl(0, 0%, 90%);
@@ -161,4 +148,76 @@
 
 .arrow {
   color: hsl(0, 0%, 100%);
+}
+
+.ellipsis {
+  cursor: pointer;
+  display: none;
+}
+
+.ellipsis div {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 860px) {
+  body,
+  html {
+    overflow-x: hidden;
+  }
+
+  .nav-links {
+    position: absolute;
+    right: 0;
+    height: 86vh;
+    top: 14vh;
+    background-color: hsl(50, 87%, 55%);
+
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+
+    transform: translateX(100%);
+    transition: transform 0.5ms ease-in;
+  }
+
+  .nav-links li {
+    opacity: 0;
+  }
+
+  .ellipsis {
+    display: block;
+  }
+}
+
+.nav-active {
+  transform: translateX(0%);
+}
+
+.toggler-ellipsis .ellipse-1 {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggler-ellipsis .ellipse-2 {
+  opacity: 0;
+}
+
+.toggler-ellipsis .ellipse-3 {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+@keyframes showLinks {
+  /* applied in app.js handleEllipse method */
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }

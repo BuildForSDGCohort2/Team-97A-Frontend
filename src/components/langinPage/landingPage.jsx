@@ -16,9 +16,12 @@ const LandingPage = () => {
       <div className="landing-page">
         <div className="banner">
           <div className="banner-left">
-            <h1>Waybilling</h1>
+            <h1>
+              <span>Way</span>
+              <span>billing</span>
+            </h1>
             <h2>made Easier</h2>
-            <p className="intro">
+            <p className="idea">
               Ship your cargo equipment, items to any part of <br />
               the country with ease.
               <br />

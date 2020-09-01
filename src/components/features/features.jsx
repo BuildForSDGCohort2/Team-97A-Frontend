@@ -13,8 +13,8 @@ const Features = () => {
     <div className="features" id="features">
       <div></div>
       <div className="screen-container">
-        <img alt="demo screen" src={screen} className="screen" />
         <h2>Features</h2>
+        <img alt="demo screen" src={screen} className="screen" />
       </div>
       <div></div>
       <div>

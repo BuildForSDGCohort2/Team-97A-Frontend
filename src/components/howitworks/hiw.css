@@ -75,3 +75,28 @@
   bottom: -547px;
   position: absolute;
 }
+
+@media (max-width: 860px) {
+  .hiw,
+  .steps {
+    width: 100vw;
+    flex-direction: column;
+  }
+
+  .hiw {
+    margin: 30px 0px 10px 0px;
+  }
+
+  .step-line {
+    display: none;
+  }
+
+  .step-line-numbers {
+    display: none;
+  }
+
+  .hiw div:nth-child(2) h2 {
+    text-align: center;
+    font-size: 35px;
+  }
+}
