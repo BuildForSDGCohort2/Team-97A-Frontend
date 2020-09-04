@@ -1,0 +1,33 @@
+.dashboard-page {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+.main-dashboard {
+  background-color: #e5e5e5;
+  width: 92%;
+}
+
+.dashboard-body {
+  padding: 0 5em;
+}
+
+/* pagination styles */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 2em 0;
+}
+
+.pagination p {
+  padding-right: 2em;
+}
+
+.pagination img {
+  padding: 0em 1em;
+  cursor: pointer;
+}

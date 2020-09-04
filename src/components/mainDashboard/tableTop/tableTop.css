@@ -1,0 +1,26 @@
+.table-top {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.filter-input {
+  margin: 0 2em;
+}
+
+.filter-input label {
+  margin-right: 1em;
+  color: #6c63ff;
+  font-weight: bold;
+}
+
+.filter-input input {
+  height: 40px;
+  outline: 0;
+  width: 300px;
+  border: 0;
+  background-color: #e6afc2;
+  border-radius: 50px;
+  padding: 1.5em;
+  font-size: 1em;
+}
