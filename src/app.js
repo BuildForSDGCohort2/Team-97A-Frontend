@@ -8,6 +8,7 @@ import GetStarted from "./components/getstarted/getstarted";
 import Footer from "./components/footer/footer";
 import ResetPassword from "./components/auth/resetPassword/resetPassword";
 import ForgotPassword from "./components/auth/forgotPassword/forgotPassword";
+import MainDashboard from "./components/mainDashboard/mainDashboard";
 import "./app.css";
 
 function App() {
@@ -51,7 +52,7 @@ function App() {
   return (
     <Router>
       <div className="App" id="top">
-        <nav className="nav">
+        {/* <nav className="nav">
           <div className="logo">
             <Link to="/#top">
               <img src={logo} width="139" alt="site logo" />
@@ -79,10 +80,11 @@ function App() {
             <div className="ellipse-2"></div>
             <div className="ellipse-3"></div>
           </div>
-        </nav>
+        </nav> */}
 
         <Route exact={true} path="/" component={LandingPage} />
         <Route path="/faqs/" component={FAQs} />
+        <Route path="/dashboard/" component={MainDashboard} />
         <Route path="/auth/login/" component={Login} />
         <Route path="/auth/reset_password/" component={ResetPassword} />
         <Route path="/auth/forgot_password/" component={ForgotPassword} />
@@ -90,7 +92,7 @@ function App() {
 
         {/* footer component */}
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );

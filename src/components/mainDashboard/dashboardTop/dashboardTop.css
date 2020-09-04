@@ -1,0 +1,48 @@
+.dashboard-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 2em;
+}
+
+.dashboard-top-left {
+  display: flex;
+}
+
+.user-details {
+  padding-left: 1em;
+}
+
+.user {
+  display: flex;
+}
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  color: #67afd0;
+}
+.verified {
+  align-items: center;
+  display: flex;
+  padding-left: 0.5em;
+}
+
+.user-rating {
+  padding-top: 0.3em;
+}
+
+.dashboard-top-right {
+  display: flex;
+  align-items: center;
+}
+
+.top-icon-container {
+  padding: 1em;
+}
+
+.top-icon-container img {
+  cursor: pointer;
+}
