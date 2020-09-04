@@ -17,8 +17,13 @@
   justify-content: space-around;
 }
 
+.sidebar-logo {
+  display: flex;
+  justify-content: center;
+}
+
 .sidebar-logo img {
-  width: 100px;
+  width: 90%;
   cursor: pointer;
 }
 

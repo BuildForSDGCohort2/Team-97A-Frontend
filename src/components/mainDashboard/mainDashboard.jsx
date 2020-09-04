@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import paginate from "./../../utils/paginate";
-import { getPackageData } from "../../services/fakeDataService";
+import { getAllPackages } from "../../services/fakeDataService";
 import DashboardTop from "./dashboardTop/dashboardTop";
 import Sidebar from "./sidebar/sidebar";
 import PackageTable from "./table/table";
@@ -10,13 +10,13 @@ import "./mainDashboard.css";
 class MainDashboard extends Component {
   state = {
     queries: { origin: "", destination: "" },
-    data: getPackageData(),
+    data: getAllPackages(),
     currentPage: 1,
     totalPages: 0,
   };
 
   componentDidMount() {
-    const totalPages = Math.ceil(this.state.data.length / 5);
+    const totalPages = Math.ceil(this.state.data.length / 6);
     console.log(totalPages);
     this.setState({ totalPages });
   }
@@ -29,7 +29,7 @@ class MainDashboard extends Component {
         item.destination.toLowerCase().indexOf(currentQueries.destination) !==
           -1 && item.origin.toLowerCase().indexOf(currentQueries.origin) !== -1
     );
-    displayData = paginate(displayData, this.state.currentPage, 5);
+    displayData = paginate(displayData, this.state.currentPage, 6);
     return displayData;
   };
 
@@ -47,6 +47,10 @@ class MainDashboard extends Component {
     this.setState({ currentPage });
   };
 
+  handlePackageClick = (id) => {
+    this.props.history.push(`/packages/${id}/`);
+  };
+
   render() {
     const displayData = this.getDisplayData();
     return (
@@ -60,6 +64,7 @@ class MainDashboard extends Component {
               queries={this.state.queries}
             />
             <PackageTable
+              onPackageClick={this.handlePackageClick}
               onPaginate={this.handlePaginate}
               data={displayData}
               dataSize={this.state.data.length}
