@@ -26,13 +26,16 @@ class Login extends React.Component {
 
   componentDidMount() {
     if (this.state.loggedIn) {
-      fetch("http://127.0.0.1:8000/api/v1/accounts/obtain/", {
-        headers: {
-          Authorization: `Authorization: Bearer ${localStorage.getItem(
-            "token"
-          )}`,
-        },
-      })
+      fetch(
+        `${window.location.protocol}://${window.location.host}/api/v1/accounts/obtain/`,
+        {
+          headers: {
+            Authorization: `Authorization: Bearer ${localStorage.getItem(
+              "token"
+            )}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((json) => {
           this.setState({ username: json.username });
@@ -65,11 +68,14 @@ class Login extends React.Component {
     data = JSON.stringify(data);
 
     this.setState({ loading: true });
-    fetch("http://127.0.0.1:8000/api/v1/accounts/obtain/", {
-      method: "POST",
-      body: data,
-      headers: new Headers({ "content-type": "application/json" }),
-    })
+    fetch(
+      `${window.location.protocol}://${window.location.host}/api/v1/accounts/obtain/`,
+      {
+        method: "POST",
+        body: data,
+        headers: new Headers({ "content-type": "application/json" }),
+      }
+    )
       .then((response) => {
         this.setState({ loading: false });
         return new Promise((resolve) =>
