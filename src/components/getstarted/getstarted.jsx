@@ -34,7 +34,25 @@ class GetStarted extends Component {
     const data = { ...this.state.data };
     data[fieldName] = fieldValue;
     this.setState({ data });
-    console.log(data);
+  };
+
+  handleSignup = (e, data) => {
+    e.preventDefault();
+    fetch("http://localhost:8000/api/v1/accounts/register/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        localStorage.setItem("token", json.token);
+        this.setState({
+          loggedIn: true,
+          username: json.username,
+        });
+      });
   };
 
   render() {
@@ -51,7 +69,12 @@ class GetStarted extends Component {
         </div>
         <div className="getstarted-right">
           <div className="form-container">
-            <form action="" method="post" className="signup-form">
+            <form
+              action=""
+              method="post"
+              className="signup-form"
+              onSubmit={this.handleSignup}
+            >
               <CustomInput
                 name="first_name"
                 label="First name"

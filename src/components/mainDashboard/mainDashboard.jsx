@@ -6,6 +6,7 @@ import Sidebar from "./sidebar/sidebar";
 import PackageTable from "./table/table";
 import TableTop from "./tableTop/tableTop";
 import "./mainDashboard.css";
+import { Redirect } from "react-router-dom";
 
 class MainDashboard extends Component {
   state = {
@@ -53,7 +54,7 @@ class MainDashboard extends Component {
 
   render() {
     const displayData = this.getDisplayData();
-    return (
+    return localStorage.getItem("token") ? (
       <div className="dashboard-page">
         <Sidebar />
         <div className="main-dashboard">
@@ -74,6 +75,8 @@ class MainDashboard extends Component {
           </div>
         </div>
       </div>
+    ) : (
+      <Redirect to="/auth/login/" />
     );
   }
 }

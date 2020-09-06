@@ -17,6 +17,7 @@
 .login-form {
   height: 40vh;
   display: flex;
+  text-align: center;
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
@@ -61,10 +62,18 @@
 }
 
 .login-form .btn-login {
+  cursor: pointer;
+  outline: none;
   color: hsl(0, 0%, 100%);
   font-size: medium;
   font-family: "Montserrat Alternates", sans-serif;
   background-color: hsl(240, 86%, 67%);
+}
+
+.login-form .btn-login:disabled {
+  cursor: auto;
+  color: hsl(0, 0%, 99%);
+  background-color: hsl(240, 83%, 82%);
 }
 
 .sub-login-area {
@@ -92,16 +101,13 @@
     display: none;
   }
 
-  .login-form-container .login-form div h4 {
-    width: 100vw;
-  }
-
   .login-form input {
     width: 90vw;
     margin-top: 10px;
   }
 
   .login-form-container .login-form div h4 {
+    width: 100vw;
     margin-top: 50px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -111,4 +117,13 @@
     display: flex;
     justify-content: space-around;
   }
+}
+
+.login-form .field-error {
+  outline: auto;
+}
+
+.error-label {
+  font-size: 12px;
+  color: red;
 }

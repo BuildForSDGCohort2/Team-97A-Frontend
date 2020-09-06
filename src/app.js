@@ -1,5 +1,10 @@
 import React, { useRef } from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import logo from "./images/logo.svg";
 import LandingPage from "./components/langinPage/landingPage";
 import Login from "./components/auth/login/login";
@@ -13,7 +18,7 @@ import DetailPage from "./components/detailPage/detailPage";
 import "./app.css";
 
 function App() {
-  const nav = React.useRef(null);
+  const nav = useRef(null);
   const navLinks = useRef([]);
   navLinks.current = [];
 
@@ -85,7 +90,16 @@ function App() {
 
         <Route exact={true} path="/" component={LandingPage} />
         <Route path="/faqs/" component={FAQs} />
-        <Route path="/auth/login/" component={Login} />
+        <Route
+          path="/auth/login/"
+          render={(props) =>
+            localStorage.getItem("token") ? (
+              <Redirect to="/packages/" />
+            ) : (
+              <Login />
+            )
+          }
+        />
         <Route path="/auth/reset_password/" component={ResetPassword} />
         <Route path="/auth/forgot_password/" component={ForgotPassword} />
         <Route path="/getstarted/" component={GetStarted} />
