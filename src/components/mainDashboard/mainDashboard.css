@@ -4,6 +4,9 @@
   position: fixed;
   height: 100%;
   width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .main-dashboard {
@@ -13,21 +16,4 @@
 
 .dashboard-body {
   padding: 0 5em;
-}
-
-/* pagination styles */
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  padding: 2em 0;
-}
-
-.pagination p {
-  padding-right: 2em;
-}
-
-.pagination img {
-  padding: 0em 1em;
-  cursor: pointer;
 }

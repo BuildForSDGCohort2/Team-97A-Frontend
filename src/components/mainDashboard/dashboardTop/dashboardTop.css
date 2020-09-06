@@ -1,7 +1,7 @@
 .dashboard-top {
   display: flex;
   justify-content: space-between;
-  padding: 2em;
+  padding: 1em;
 }
 
 .dashboard-top-left {

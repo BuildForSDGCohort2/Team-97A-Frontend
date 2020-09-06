@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import originIcon from "../../../images/dashboard/origin.png";
 import nextIcon from "../../../images/dashboard/next.png";
 import prevIcon from "../../../images/dashboard/prev.png";
@@ -6,6 +7,7 @@ import destinationIcon from "../../../images/dashboard/destination.png";
 import "./table.css";
 
 const PackageTable = ({
+  onPackageClick,
   data,
   onPaginate,
   currentPage,
@@ -25,7 +27,8 @@ const PackageTable = ({
         </tr>
         {data.map((item) => {
           return (
-            <tr>
+            <tr onClick={() => onPackageClick(item.id)}>
+              {item.title}
               <td>{item.name}</td>
               <td>{item.weight}</td>
               <td className="origin">

@@ -1,5 +1,6 @@
 const packages = [
   {
+    id: 1,
     name: "School bag",
     weight: "2KG",
     origin: "Owerri",
@@ -8,6 +9,7 @@ const packages = [
     cost: "NGN 5000",
   },
   {
+    id: 2,
     name: "Bag of rice",
     weight: "10KG",
     origin: "Lagos",
@@ -16,6 +18,7 @@ const packages = [
     cost: "NGN 10000",
   },
   {
+    id: 3,
     name: "Shoe",
     weight: "1KG",
     origin: "Warri",
@@ -24,6 +27,7 @@ const packages = [
     cost: "NGN 1000",
   },
   {
+    id: 4,
     name: "Glass cups",
     weight: "0.5KG",
     origin: "Ibadan",
@@ -32,6 +36,7 @@ const packages = [
     cost: "NGN 5000",
   },
   {
+    id: 5,
     name: "Glass cups",
     weight: "0.9KG",
     origin: "Uyo",
@@ -40,6 +45,7 @@ const packages = [
     cost: "NGN 500",
   },
   {
+    id: 6,
     name: "Glass cups",
     weight: "05KG",
     origin: "Calaba",
@@ -48,6 +54,7 @@ const packages = [
     cost: "NGN 50000",
   },
   {
+    id: 7,
     name: "Glass cups",
     weight: "0.9KG",
     origin: "Uyo",
@@ -56,6 +63,7 @@ const packages = [
     cost: "NGN 500",
   },
   {
+    id: 8,
     name: "Glass cups",
     weight: "05KG",
     origin: "Calaba",
@@ -64,6 +72,7 @@ const packages = [
     cost: "NGN 50000",
   },
   {
+    id: 9,
     name: "Glass cups",
     weight: "0.9KG",
     origin: "Uyo",
@@ -72,6 +81,7 @@ const packages = [
     cost: "NGN 500",
   },
   {
+    id: 9,
     name: "Glass cups",
     weight: "05KG",
     origin: "Calaba",
@@ -80,6 +90,7 @@ const packages = [
     cost: "NGN 50000",
   },
   {
+    id: 10,
     name: "School bag",
     weight: "2KG",
     origin: "Owerri",
@@ -88,6 +99,7 @@ const packages = [
     cost: "NGN 5000",
   },
   {
+    id: 11,
     name: "Bag of rice",
     weight: "10KG",
     origin: "Lagos",
@@ -96,6 +108,7 @@ const packages = [
     cost: "NGN 10000",
   },
   {
+    id: 12,
     name: "Shoe",
     weight: "1KG",
     origin: "Warri",
@@ -104,6 +117,7 @@ const packages = [
     cost: "NGN 1000",
   },
   {
+    id: 13,
     name: "Glass cups",
     weight: "0.5KG",
     origin: "Ibadan",
@@ -112,6 +126,7 @@ const packages = [
     cost: "NGN 5000",
   },
   {
+    id: 14,
     name: "Glass cups",
     weight: "0.9KG",
     origin: "Uyo",
@@ -120,6 +135,7 @@ const packages = [
     cost: "NGN 500",
   },
   {
+    id: 15,
     name: "Glass cups",
     weight: "05KG",
     origin: "Calaba",
@@ -128,6 +144,7 @@ const packages = [
     cost: "NGN 50000",
   },
   {
+    id: 16,
     name: "Glass cups",
     weight: "0.9KG",
     origin: "Uyo",
@@ -136,6 +153,7 @@ const packages = [
     cost: "NGN 500",
   },
   {
+    id: 17,
     name: "Glass cups",
     weight: "05KG",
     origin: "Calaba",
@@ -144,6 +162,7 @@ const packages = [
     cost: "NGN 50000",
   },
   {
+    id: 18,
     name: "Glass cups",
     weight: "0.9KG",
     origin: "Uyo",
@@ -152,6 +171,7 @@ const packages = [
     cost: "NGN 500",
   },
   {
+    id: 19,
     name: "Glass cups",
     weight: "05KG",
     origin: "Calaba",
@@ -160,6 +180,7 @@ const packages = [
     cost: "NGN 50000",
   },
   {
+    id: 20,
     name: "School bag",
     weight: "2KG",
     origin: "Owerri",
@@ -168,6 +189,7 @@ const packages = [
     cost: "NGN 5000",
   },
   {
+    id: 21,
     name: "Bag of rice",
     weight: "10KG",
     origin: "Lagos",
@@ -176,6 +198,7 @@ const packages = [
     cost: "NGN 10000",
   },
   {
+    id: 22,
     name: "Shoe",
     weight: "1KG",
     origin: "Warri",
@@ -184,6 +207,7 @@ const packages = [
     cost: "NGN 1000",
   },
   {
+    id: 23,
     name: "Glass cups",
     weight: "0.5KG",
     origin: "Ibadan",
@@ -192,6 +216,7 @@ const packages = [
     cost: "NGN 5000",
   },
   {
+    id: 24,
     name: "Glass cups",
     weight: "0.9KG",
     origin: "Uyo",
@@ -200,6 +225,7 @@ const packages = [
     cost: "NGN 500",
   },
   {
+    id: 25,
     name: "Glass cups",
     weight: "05KG",
     origin: "Calaba",
@@ -208,6 +234,7 @@ const packages = [
     cost: "NGN 50000",
   },
   {
+    id: 26,
     name: "Glass cups",
     weight: "0.9KG",
     origin: "Uyo",
@@ -216,6 +243,7 @@ const packages = [
     cost: "NGN 500",
   },
   {
+    id: 27,
     name: "Glass cups",
     weight: "05KG",
     origin: "Calaba",
@@ -224,6 +252,7 @@ const packages = [
     cost: "NGN 50000",
   },
   {
+    id: 28,
     name: "Glass cups",
     weight: "0.9KG",
     origin: "Uyo",
@@ -232,6 +261,7 @@ const packages = [
     cost: "NGN 500",
   },
   {
+    id: 29,
     name: "Glass cups",
     weight: "05KG",
     origin: "Calaba",
@@ -241,6 +271,22 @@ const packages = [
   },
 ];
 
-const getPackageData = () => packages;
+const getAllPackages = () => packages;
 
-export { getPackageData };
+const getSinglePackage = () => {
+  const singlePackage = {
+    id: "CG001",
+    name: "school bag",
+    pickupAddress: "No 5, Ajoke Ajose str, V.I, Lagos",
+    deliveryAddress: "No 43, Akintola str, Maitama, Abuja",
+    deliveryPeriod: 2,
+    cost: 2000,
+    weight: 10,
+    origin: "Lagos",
+    destination: "Abuja",
+    info: "A small school bag",
+  };
+  return singlePackage;
+};
+
+export { getAllPackages, getSinglePackage };
