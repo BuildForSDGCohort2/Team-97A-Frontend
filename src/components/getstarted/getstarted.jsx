@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Joi from "joi-browser";
 import { Link } from "react-router-dom";
+import { Register } from "../../services/authService";
 import CustomInput from "./customInput";
 import { toast } from "react-toastify";
 import carImg from "../../images/car.png";
@@ -53,44 +53,33 @@ class GetStarted extends Component {
     this.setState({ data, errors });
   };
 
-  handleSignup = (e) => {
+  handleSignup = async (e) => {
     e.preventDefault();
+
     if (this.validate()) {
+      // if there are errors add the errors to ths.state.errors
       let errors = {};
       errors = this.validate();
       this.setState({ errors });
     } else {
-      this.userSignup(this.state.data);
-    }
-  };
-
-  userSignup = async (data) => {
-    const newData = {};
-    newData.first_name = data.firstName;
-    newData.last_name = data.lastName;
-    newData.phone_number = data.phoneNumber;
-    newData.username = data.username;
-    newData.email = data.email;
-    newData.address = data.address;
-    newData.password1 = data.password1;
-    newData.password2 = data.password2;
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/v1/accounts/register/",
-        newData
-      );
-      toast("account created successfully");
-      this.props.history.push("/auth/login/");
-    } catch (e) {
-      const errors = {};
-      for (let keys in e.response.data) {
-        errors[keys] = e.response.data[keys];
-        this.setState({ errors });
+      // if there are no errors then register new user
+      try {
+        const response = await Register(this.state.data);
+        toast("account created successfully");
+        this.props.history.push("/auth/login/");
+      } catch (e) {
+        const errors = {};
+        for (let keys in e.response.data) {
+          errors[keys] = e.response.data[keys];
+          this.setState({ errors });
+        }
       }
     }
   };
 
   validate = () => {
+    //validates all input fields
+    //returns an error object if there are errors and null if there is no
     const options = { abortEarly: false };
     const result = Joi.validate(this.state.data, this.schema, options);
     if (result.error) {
@@ -105,6 +94,8 @@ class GetStarted extends Component {
   };
 
   validateInput = (e) => {
+    // validates single input field
+    // returns an error message is there is an error and null if there is no error
     let errorMessage = "";
     const result = Joi.validate(e.target.value, this.schema[e.target.name]);
     if (result.error) {

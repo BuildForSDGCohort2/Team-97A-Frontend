@@ -66,16 +66,13 @@ class Login extends React.Component {
     });
 
     data = JSON.stringify(data);
-
+    console.log(window.location.protocol, window.location.host);
     this.setState({ loading: true });
-    fetch(
-      `${window.location.protocol}://${window.location.host}/api/v1/accounts/obtain/`,
-      {
-        method: "POST",
-        body: data,
-        headers: new Headers({ "content-type": "application/json" }),
-      }
-    )
+    fetch(`http://localhost:8000/api/v1/accounts/obtain/`, {
+      method: "POST",
+      body: data,
+      headers: new Headers({ "content-type": "application/json" }),
+    })
       .then((response) => {
         this.setState({ loading: false });
         return new Promise((resolve) =>
