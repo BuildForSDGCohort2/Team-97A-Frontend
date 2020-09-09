@@ -44,13 +44,22 @@
   width: 100%;
 }
 
+.generic-error {
+  text-align: center;
+  color: red;
+}
+
 .inp-grp {
   width: 100%;
   background-color: #fdf9e5;
   height: 45px;
   border-radius: 20px;
   padding-left: 1.2em;
-  margin: 1em 0;
+  margin: 2em 0;
+}
+
+.inp-grp .error {
+  color: red;
 }
 
 .inp-grp input {
