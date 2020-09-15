@@ -4,6 +4,7 @@ import {
   Link,
   Route,
   Redirect,
+  Switch,
 } from "react-router-dom";
 import logo from "./images/logo.svg";
 import LandingPage from "./components/langinPage/landingPage";
@@ -16,6 +17,7 @@ import ForgotPassword from "./components/auth/forgotPassword/forgotPassword";
 import MainDashboard from "./components/mainDashboard/mainDashboard";
 import DetailPage from "./components/detailPage/detailPage";
 import NewPackage from "./components/newPackage/newPackage";
+import Tracker from "./components/tracker/tracker";
 import "./app.css";
 
 function App() {
@@ -88,26 +90,27 @@ function App() {
             <div className="ellipse-3"></div>
           </div>
         </nav>
-
-        <Route exact={true} path="/" component={LandingPage} />
-        <Route path="/faqs/" component={FAQs} />
-        <Route
-          path="/auth/login/"
-          render={(props) =>
-            localStorage.getItem("token") ? (
-              <Redirect to="/packages/" />
-            ) : (
-              <Login />
-            )
-          }
-        />
-        <Route path="/auth/reset_password/" component={ResetPassword} />
-        <Route path="/auth/forgot_password/" component={ForgotPassword} />
-        <Route path="/getstarted/" component={GetStarted} />
-        <Route path="/packages/" component={MainDashboard} />
-        <Route path="/packages/:id/" component={DetailPage} />
-        <Route path="/new/" component={NewPackage} />
-
+        <Switch>
+          <Route exact={true} path="/" component={LandingPage} />
+          <Route path="/faqs/" component={FAQs} />
+          <Route
+            path="/auth/login/"
+            render={(props) =>
+              localStorage.getItem("token") ? (
+                <Redirect to="/packages/" />
+              ) : (
+                <Login />
+              )
+            }
+          />
+          <Route path="/auth/reset_password/" component={ResetPassword} />
+          <Route path="/auth/forgot_password/" component={ForgotPassword} />
+          <Route path="/getstarted/" component={GetStarted} />
+          <Route path="/packages/:id/tracker/" component={Tracker} />
+          <Route path="/packages/new/" component={NewPackage} />
+          <Route path="/packages/:id/" component={DetailPage} />
+          <Route path="/packages/" component={MainDashboard} />
+        </Switch>
         {/* footer component */}
 
         <Footer />

@@ -275,7 +275,7 @@ const getAllPackages = () => packages;
 
 const getSinglePackage = () => {
   const singlePackage = {
-    id: "CG001",
+    id: 1,
     name: "school bag",
     pickupAddress: "No 5, Ajoke Ajose str, V.I, Lagos",
     deliveryAddress: "No 43, Akintola str, Maitama, Abuja",
