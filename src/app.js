@@ -15,6 +15,7 @@ import ResetPassword from "./components/auth/resetPassword/resetPassword";
 import ForgotPassword from "./components/auth/forgotPassword/forgotPassword";
 import MainDashboard from "./components/mainDashboard/mainDashboard";
 import DetailPage from "./components/detailPage/detailPage";
+import NewPackage from "./components/newPackage/newPackage";
 import "./app.css";
 
 function App() {
@@ -105,6 +106,7 @@ function App() {
         <Route path="/getstarted/" component={GetStarted} />
         <Route path="/packages/" component={MainDashboard} />
         <Route path="/packages/:id/" component={DetailPage} />
+        <Route path="/new/" component={NewPackage} />
 
         {/* footer component */}
 
