@@ -7,6 +7,7 @@ import PackageTable from "./table/table";
 import TableTop from "./tableTop/tableTop";
 import "./mainDashboard.css";
 import { Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 class MainDashboard extends Component {
   state = {
@@ -52,13 +53,19 @@ class MainDashboard extends Component {
     this.props.history.push(`/packages/${id}/`);
   };
 
+  handleLogout = () => {
+    localStorage.removeItem("token");
+    toast.warn("you have been logged out");
+    this.props.history.push("/");
+  };
+
   render() {
     const displayData = this.getDisplayData();
     return localStorage.getItem("token") ? (
       <div className="dashboard-page">
         <Sidebar />
         <div className="main-dashboard">
-          <DashboardTop />
+          <DashboardTop onLogout={this.handleLogout} />
           <div className="dashboard-body">
             <TableTop
               onSearch={this.handleSearch}
