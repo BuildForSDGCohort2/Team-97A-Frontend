@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import { Link } from "react-router-dom";
-import { Register } from "../../services/authService";
+import { register } from "../../services/authService";
 import CustomInput from "./customInput";
 import { toast } from "react-toastify";
 import carImg from "../../images/car.png";
@@ -64,13 +64,13 @@ class GetStarted extends Component {
     } else {
       // if there are no errors then register new user
       try {
-        const response = await Register(this.state.data);
+        const response = await register(this.state.data);
         toast("account created successfully");
         this.props.history.push("/auth/login/");
       } catch (e) {
         const errors = {};
-        for (let keys in e.response.data) {
-          errors[keys] = e.response.data[keys];
+        for (let key in e.response.data) {
+          errors[key] = e.response.data[key];
           this.setState({ errors });
         }
       }
