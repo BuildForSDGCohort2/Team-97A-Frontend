@@ -20,7 +20,6 @@ class NewPackage extends Component {
 
   handleDetailClose = () => {
     this.props.history.push("/packages/");
-    //this.detailRef.current.style.display = "none";
   };
 
   handleInput = (e) => {

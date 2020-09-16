@@ -1,0 +1,148 @@
+.animate {
+  -webkit-animation: animatezoom 0.8s;
+  animation: animatezoom 0.8s;
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.tracker-page {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 11%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.tracker-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 50%;
+  max-height: 90%;
+  position: relative;
+  padding: 2em;
+  border: 2px solid #c3deec;
+  border-radius: 5px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  cursor: pointer;
+}
+
+.tracker-status {
+  color: #ff6584;
+  font-family: Montserrat Alternates;
+}
+
+.description {
+  color: #67afd0;
+  font-family: Montserrat Alternates;
+  text-align: center;
+}
+
+.sender {
+  display: flex;
+  align-items: center;
+  padding: 2em;
+}
+
+.sender-details {
+  padding-left: 1em;
+}
+
+.detail-container {
+  margin: 0.5em 0;
+}
+.sender .detail {
+  padding: 0.5em;
+  border: 1px solid #67afd0;
+  border-radius: 2px;
+}
+
+.action-btn {
+  background: #67afd0;
+  border-radius: 2px;
+  padding: 0.7em 1.2em;
+  font-family: Montserrat Alternates;
+  color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #ff6584;
+}
+
+/* tracker styles */
+.tracker {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1em;
+  margin-top: 2em;
+  position: relative;
+}
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ff6584;
+  position: relative;
+  z-index: 1;
+}
+
+.done {
+  background-color: #2ad2be;
+}
+
+.tracker p {
+  font-weight: bold;
+  padding-top: 5px;
+  text-align: center;
+}
+
+.line {
+  left: 40px;
+  top: 38%;
+  width: 84%;
+  height: 4px;
+  background-color: #ff6584;
+  position: absolute;
+}
+
+@media (max-width: 1200px) {
+  .line {
+    width: 75%;
+  }
+}
+
+@media (max-width: 800px) {
+  .line {
+    width: 60%;
+  }
+}

@@ -17,7 +17,7 @@ import ForgotPassword from "./components/auth/forgotPassword/forgotPassword";
 import MainDashboard from "./components/mainDashboard/mainDashboard";
 import DetailPage from "./components/detailPage/detailPage";
 import NewPackage from "./components/newPackage/newPackage";
-import Tracker from "./components/tracker/tracker";
+import TrackerPage from "./components/trackerPage/trackerPage";
 import "./app.css";
 
 function App() {
@@ -106,7 +106,7 @@ function App() {
           <Route path="/auth/reset_password/" component={ResetPassword} />
           <Route path="/auth/forgot_password/" component={ForgotPassword} />
           <Route path="/getstarted/" component={GetStarted} />
-          <Route path="/packages/:id/tracker/" component={Tracker} />
+          <Route path="/packages/:id/tracker/" component={TrackerPage} />
           <Route path="/packages/new/" component={NewPackage} />
           <Route path="/packages/:id/" component={DetailPage} />
           <Route path="/packages/" component={MainDashboard} />
