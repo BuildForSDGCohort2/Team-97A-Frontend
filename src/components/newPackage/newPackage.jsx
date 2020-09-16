@@ -32,6 +32,7 @@ class NewPackage extends Component {
     e.preventDefault();
     console.log(this.state.data);
     // do some submit stuff here
+    //
   };
   render() {
     const {
