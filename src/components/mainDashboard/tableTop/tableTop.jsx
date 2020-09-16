@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import plusImg from "../../../images/dashboard/plus.png";
 import "./tableTop.css";
 
@@ -30,7 +31,9 @@ const TableTop = ({ onSearch, queries }) => {
           />
         </div>
         <div className="add-package">
-          <img src={plusImg} alt="plus" className="plus-img" />
+          <Link to="/packages/new/">
+            <img src={plusImg} alt="plus" className="plus-img" />
+          </Link>
         </div>
       </div>
     </React.Fragment>
