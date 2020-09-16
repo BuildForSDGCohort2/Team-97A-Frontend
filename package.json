@@ -13,7 +13,8 @@
     "react-countup": "^4.3.3",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "react-star-ratings": "^2.3.0"
   },
   "scripts": {
     "start": "node server/server.js",
