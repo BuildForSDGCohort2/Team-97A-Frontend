@@ -1,31 +1,45 @@
-import carImg from "../../images/car.png";
 import React, { Component } from "react";
-import "./getstarted.css";
+import Joi from "joi-browser";
 import { Link } from "react-router-dom";
+import { register } from "../../services/authService";
 import CustomInput from "./customInput";
+import { toast } from "react-toastify";
+import carImg from "../../images/car.png";
+import "./getstarted.css";
 
 class GetStarted extends Component {
   state = {
     data: {
-      first_name: "",
-      last_name: "",
+      username: "",
+      firstName: "",
+      lastName: "",
       email: "",
-      phone_number: "",
-      password: "",
-      password1: "",
+      phoneNumber: "",
       address: "",
-      state: "",
+      password1: "",
+      password2: "",
     },
     errors: {
-      first_name: "",
-      last_name: "",
+      username: "",
+      firstName: "",
+      lastName: "",
       email: "",
-      phone_number: "",
-      password: "",
-      password1: "",
+      phoneNumber: "",
       address: "",
-      state: "",
+      password1: "",
+      password2: "",
     },
+  };
+
+  schema = {
+    username: Joi.string().required().label("Username"),
+    firstName: Joi.string().required().label("First Name"),
+    lastName: Joi.string().required().label("Last Name"),
+    email: Joi.string().email().required().label("Email"),
+    phoneNumber: Joi.string().required().label("Phone number"),
+    address: Joi.string().required().label("Address"),
+    password1: Joi.string().min(5).required().label("password"),
+    password2: Joi.string().min(5).required().label("password"),
   };
 
   handleChange = (e) => {
@@ -33,26 +47,61 @@ class GetStarted extends Component {
     const fieldValue = e.target.value;
     const data = { ...this.state.data };
     data[fieldName] = fieldValue;
-    this.setState({ data });
+    let errors = { ...this.state.errors };
+    const errorMessage = this.validateInput(e);
+    errors[e.target.name] = errorMessage;
+    this.setState({ data, errors });
   };
 
-  handleSignup = (e, data) => {
+  handleSignup = async (e) => {
     e.preventDefault();
-    fetch("http://localhost:8000/api/v1/accounts/register/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        localStorage.setItem("token", json.token);
-        this.setState({
-          loggedIn: true,
-          username: json.username,
-        });
-      });
+
+    if (this.validate()) {
+      // if there are errors add the errors to ths.state.errors
+      let errors = {};
+      errors = this.validate();
+      this.setState({ errors });
+    } else {
+      // if there are no errors then register new user
+      try {
+        const response = await register(this.state.data);
+        toast("account created successfully");
+        this.props.history.push("/auth/login/");
+      } catch (e) {
+        const errors = {};
+        for (let key in e.response.data) {
+          errors[key] = e.response.data[key];
+          this.setState({ errors });
+        }
+      }
+    }
+  };
+
+  validate = () => {
+    //validates all input fields
+    //returns an error object if there are errors and null if there is no
+    const options = { abortEarly: false };
+    const result = Joi.validate(this.state.data, this.schema, options);
+    if (result.error) {
+      const errors = {};
+      for (let error of result.error.details) {
+        errors[error.path[0]] = error.message;
+      }
+      return errors;
+    } else {
+      return null;
+    }
+  };
+
+  validateInput = (e) => {
+    // validates single input field
+    // returns an error message is there is an error and null if there is no error
+    let errorMessage = "";
+    const result = Joi.validate(e.target.value, this.schema[e.target.name]);
+    if (result.error) {
+      errorMessage = result.error.details[0].message;
+    }
+    return errorMessage;
   };
 
   render() {
@@ -75,23 +124,36 @@ class GetStarted extends Component {
               className="signup-form"
               onSubmit={this.handleSignup}
             >
+              <div className="generic-error">
+                {this.state.errors.non_field_errors}
+              </div>
               <CustomInput
-                name="first_name"
+                name="username"
+                label="Username"
+                data={this.state.data.username}
+                handleChange={this.handleChange}
+                error={this.state.errors.username}
+              />
+              <CustomInput
+                name="firstName"
                 label="First name"
-                data={this.state.data.first_name}
+                data={this.state.data.firstName}
                 handleChange={this.handleChange}
+                error={this.state.errors.firstName}
               />
               <CustomInput
-                name="last_name"
+                name="lastName"
                 label="Last name"
-                data={this.state.data.last_name}
+                data={this.state.data.lastName}
                 handleChange={this.handleChange}
+                error={this.state.errors.lastName}
               />
               <CustomInput
-                name="phone_number"
+                name="phoneNumber"
                 label="Phone number"
-                data={this.state.data.phone_number}
+                data={this.state.data.phoneNumber}
                 handleChange={this.handleChange}
+                error={this.state.errors.phoneNumber}
               />
               <CustomInput
                 name="email"
@@ -99,44 +161,31 @@ class GetStarted extends Component {
                 type="email"
                 data={this.state.data.email}
                 handleChange={this.handleChange}
+                error={this.state.errors.email}
               />
-              <CustomInput
-                name="password"
-                label="Password"
-                type="password"
-                data={this.state.data.password}
-                handleChange={this.handleChange}
-              />
-              <CustomInput
-                name="password1"
-                label="Confirm Password"
-                type="password"
-                data={this.state.data.password1}
-                handleChange={this.handleChange}
-              />
-
               <CustomInput
                 name="address"
                 label="Address"
                 data={this.state.data.address}
                 handleChange={this.handleChange}
+                error={this.state.errors.address}
               />
-
-              <div className="inp-grp">
-                <select
-                  onChange={this.handleChange}
-                  name="state"
-                  id=""
-                  value={this.state.data.state}
-                >
-                  <option value="abia">Abia</option>
-                  <option value="adamawa">Adamawa</option>
-                  <option value="bauchi">Bauchi</option>
-                  <option value="benue">Benue</option>
-                  <option value="crossriver">Cross-river</option>
-                  <option value="delta">Delta</option>
-                </select>
-              </div>
+              <CustomInput
+                name="password1"
+                label="Password"
+                type="password"
+                data={this.state.data.password1}
+                handleChange={this.handleChange}
+                error={this.state.errors.password1}
+              />
+              <CustomInput
+                name="password2"
+                label="Confirm Password"
+                type="password"
+                data={this.state.data.password2}
+                handleChange={this.handleChange}
+                error={this.state.errors.password2}
+              />
 
               <div className="signup-btn">
                 <input type="submit" value="Signup" name="signup" id="signup" />

@@ -1,6 +1,6 @@
 import React from "react";
 
-const CustomInput = ({ name, label, type, data, handleChange }) => {
+const CustomInput = ({ name, label, type, data, handleChange, error }) => {
   return (
     <div className="inp-grp">
       <input
@@ -11,6 +11,7 @@ const CustomInput = ({ name, label, type, data, handleChange }) => {
         id={name}
         value={data[name]}
       />
+      <small className="error">{error}</small>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import notificationIcon from "../../../images/dashboard/notification.png";
 import powerIcon from "../../../images/dashboard/power.png";
 import "./dashboardTop.css";
 
-const DashboardTop = () => {
+const DashboardTop = ({ onLogout }) => {
   return (
     <div className="dashboard-top">
       <div className="dashboard-top-left">
@@ -36,7 +36,7 @@ const DashboardTop = () => {
             className="notification-icon"
           />
         </div>
-        <div className="top-icon-container">
+        <div className="top-icon-container" onClick={onLogout}>
           <img src={powerIcon} alt="power icon" className="power-icon" />
         </div>
       </div>
