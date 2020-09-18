@@ -46,3 +46,8 @@
 .top-icon-container img {
   cursor: pointer;
 }
+
+.profile-link {
+  text-decoration: none;
+  display: flex;
+}
