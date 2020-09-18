@@ -98,7 +98,7 @@ class DetailPage extends Component {
             <div className="detail-right">
               <img src={packageImg} alt="package" />
               <button className="accept-btn">Accept Mission </button>
-              {/* display conditionally if user is package carrier or owner  */}
+              {/* display conditionally if user is package carrier or owner */}
               <Link to={`/packages/${id}/tracker/`}>
                 <p>Tracker</p>
               </Link>

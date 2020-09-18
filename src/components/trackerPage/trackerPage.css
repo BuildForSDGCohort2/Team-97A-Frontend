@@ -57,6 +57,7 @@
 .tracker-status {
   color: #ff6584;
   font-family: Montserrat Alternates;
+  width: 100%;
 }
 
 .description {
@@ -83,6 +84,11 @@
   border: 1px solid #67afd0;
   border-radius: 2px;
 }
+.action {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
 
 .action-btn {
   background: #67afd0;
@@ -96,6 +102,14 @@
 
 .action-btn:hover {
   background-color: #ff6584;
+}
+
+#cancel-btn {
+  background-color: #ff6584;
+}
+
+#cancel-btn:hover {
+  background-color: #67afd0;
 }
 
 /* tracker styles */
@@ -173,6 +187,46 @@
   text-align: center;
 }
 
+/* display pin styles */
+.display-pin {
+  margin-bottom: 2em;
+  width: 80%;
+}
+
+.display-pin h3 {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Montserrat Alternates;
+}
+.display-pin p {
+  font-weight: 800;
+  text-align: center;
+  color: #ff6584;
+}
+
+.pin-holder {
+  display: flex;
+  justify-content: center;
+  margin: 0.5em;
+}
+
+.pin-holder div {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #67afd0;
+  box-sizing: border-box;
+  border-radius: 2px;
+  margin: 0.2em;
+
+  font-family: Montserrat Alternates;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  color: rgba(108, 99, 255, 0.6);
+}
+
 /* rating styles */
 
 .rating {
@@ -216,6 +270,11 @@
 
   .pin-input input {
     margin: 0.5em;
+  }
+
+  .display-pin {
+    margin-bottom: 2em;
+    width: 100%;
   }
   .tracker {
     margin-top: 0em;
