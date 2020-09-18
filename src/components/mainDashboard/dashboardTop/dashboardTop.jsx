@@ -5,28 +5,31 @@ import verifiedImg from "../../../images/dashboard/verified.png";
 import notificationIcon from "../../../images/dashboard/notification.png";
 import powerIcon from "../../../images/dashboard/power.png";
 import "./dashboardTop.css";
+import { Link } from "react-router-dom";
 
 const DashboardTop = ({ onLogout }) => {
   return (
     <div className="dashboard-top">
       <div className="dashboard-top-left">
-        <div className="profile-photo-container">
-          <img src={profilePhoto} alt="" className="profile-photo" />
-        </div>
-        <div className="user-details">
-          <div className="user">
-            <div className="greeting">
-              <span>Welcome !</span>
-              <span className="user-name">Jeremiah Abdul</span>
+        <Link to="/profile/" className="profile-link">
+          <div className="profile-photo-container">
+            <img src={profilePhoto} alt="" className="profile-photo" />
+          </div>
+          <div className="user-details">
+            <div className="user">
+              <div className="greeting">
+                <span>Welcome !</span>
+                <span className="user-name">Jeremiah Abdul</span>
+              </div>
+              <div className="verified">
+                <img src={verifiedImg} alt="verified" />
+              </div>
             </div>
-            <div className="verified">
-              <img src={verifiedImg} alt="verified" />
+            <div className="user-rating">
+              <img src={ratingImg} alt="" className="rating" />
             </div>
           </div>
-          <div className="user-rating">
-            <img src={ratingImg} alt="" className="rating" />
-          </div>
-        </div>
+        </Link>
       </div>
       <div className="dashboard-top-right">
         <div className="top-icon-container">
