@@ -19,7 +19,7 @@ class NewPackage extends Component {
   };
 
   handleDetailClose = () => {
-    this.props.history.push("/packages/");
+    this.props.history.push("/packages/all");
   };
 
   handleInput = (e) => {

@@ -1,56 +1,59 @@
 import React, { Component } from "react";
-import paginate from "./../../utils/paginate";
 import { getAllPackages } from "../../services/fakeDataService";
 import DashboardTop from "./dashboardTop/dashboardTop";
 import Sidebar from "./sidebar/sidebar";
-import PackageTable from "./table/table";
-import TableTop from "./tableTop/tableTop";
 import "./mainDashboard.css";
-import { Redirect } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { toast } from "react-toastify";
+import AllPackages from "./allPackages";
+import MyPackages from "./myPackages";
 
 class MainDashboard extends Component {
   state = {
     queries: { origin: "", destination: "" },
     data: getAllPackages(),
-    currentPage: 1,
-    totalPages: 0,
+    user: {
+      id: 1,
+    },
   };
 
-  componentDidMount() {
-    const totalPages = Math.ceil(this.state.data.length / 6);
-    console.log(totalPages);
-    this.setState({ totalPages });
-  }
-
-  getDisplayData = () => {
+  getQueriedPackages = () => {
+    // this logic get all the data in the state
+    // if there is a search query string it filters the data by the query string
     const allData = [...this.state.data];
     const currentQueries = { ...this.state.queries };
-    let displayData = allData.filter(
+    let queriedPackages = allData.filter(
       (item) =>
         item.destination.toLowerCase().indexOf(currentQueries.destination) !==
           -1 && item.origin.toLowerCase().indexOf(currentQueries.origin) !== -1
     );
-    displayData = paginate(displayData, this.state.currentPage, 6);
-    return displayData;
+    return queriedPackages;
   };
 
-  handlePaginate = (dir) => {
-    let currentPage = this.state.currentPage;
-    currentPage = dir === "next" ? currentPage + 1 : currentPage - 1;
-    this.setState({ currentPage });
+  getUserPackages = () => {
+    // This logic all the packages
+    // and returns both the packages that the user has sent and recieved in an object
+    // in line 44 below
+    const allPackages = [...this.state.data];
+
+    const userSentPackages = allPackages.filter(
+      (singlePackage) => singlePackage.carrier.id === this.state.user.id
+    );
+
+    const userCarriedPackages = allPackages.filter(
+      (singlePackage) => singlePackage.sender.id === this.state.user.id
+    );
+    return { userSentPackages, userCarriedPackages };
   };
 
   handleSearch = (e) => {
     const queries = { ...this.state.queries };
     queries[e.target.name] = e.target.value.toLowerCase();
     this.setState({ queries });
-    const currentPage = 1;
-    this.setState({ currentPage });
   };
 
   handlePackageClick = (id) => {
-    this.props.history.push(`/packages/${id}/`);
+    this.props.history.push(`/package/${id}/`);
   };
 
   handleLogout = () => {
@@ -60,26 +63,39 @@ class MainDashboard extends Component {
   };
 
   render() {
-    const displayData = this.getDisplayData();
     return localStorage.getItem("token") ? (
       <div className="dashboard-page">
         <Sidebar />
         <div className="main-dashboard">
           <DashboardTop onLogout={this.handleLogout} />
-          <div className="dashboard-body">
-            <TableTop
-              onSearch={this.handleSearch}
-              queries={this.state.queries}
+          <Switch>
+            <Route
+              path="/packages/all/"
+              render={(props) => {
+                return (
+                  <AllPackages
+                    {...props}
+                    onPackageClick={this.handlePackageClick}
+                    packages={this.getQueriedPackages()}
+                    onSearch={this.handleSearch}
+                    queries={this.state.queries}
+                  />
+                );
+              }}
             />
-            <PackageTable
-              onPackageClick={this.handlePackageClick}
-              onPaginate={this.handlePaginate}
-              data={displayData}
-              dataSize={this.state.data.length}
-              currentPage={this.state.currentPage}
-              totalPages={this.state.totalPages}
+            <Route
+              path="/packages/mine/"
+              render={(props) => {
+                return (
+                  <MyPackages
+                    {...props}
+                    onPackageClick={this.handlePackageClick}
+                    packages={this.getUserPackages()}
+                  />
+                );
+              }}
             />
-          </div>
+          </Switch>
         </div>
       </div>
     ) : (

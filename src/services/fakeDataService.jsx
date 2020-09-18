@@ -7,6 +7,8 @@ const packages = [
     destination: "Kano",
     priority: "high",
     cost: "NGN 5000",
+    sender: { id: 1 },
+    carrier: { id: 2 },
   },
   {
     id: 2,
@@ -16,7 +18,10 @@ const packages = [
     destination: "Abuja",
     priority: "low",
     cost: "NGN 10000",
+    sender: { id: 2 },
+    carrier: { id: 3 },
   },
+
   {
     id: 3,
     name: "Shoe",
@@ -25,7 +30,10 @@ const packages = [
     destination: "Kano",
     priority: "medium",
     cost: "NGN 1000",
+    sender: { id: 3 },
+    carrier: { id: 2 },
   },
+
   {
     id: 4,
     name: "Glass cups",
@@ -34,6 +42,8 @@ const packages = [
     destination: "Akure",
     priority: "high",
     cost: "NGN 5000",
+    sender: { id: 2 },
+    carrier: { id: 1 },
   },
   {
     id: 5,
@@ -43,6 +53,8 @@ const packages = [
     destination: "Onitsha",
     priority: "low",
     cost: "NGN 500",
+    sender: { id: 3 },
+    carrier: { id: 1 },
   },
   {
     id: 6,
@@ -52,6 +64,8 @@ const packages = [
     destination: "Ondo",
     priority: "high",
     cost: "NGN 50000",
+    sender: { id: 2 },
+    carrier: { id: 3 },
   },
   {
     id: 7,
@@ -61,6 +75,8 @@ const packages = [
     destination: "Onitsha",
     priority: "low",
     cost: "NGN 500",
+    sender: { id: 2 },
+    carrier: { id: 1 },
   },
   {
     id: 8,
@@ -70,6 +86,8 @@ const packages = [
     destination: "Ondo",
     priority: "high",
     cost: "NGN 50000",
+    sender: { id: 4 },
+    carrier: { id: 3 },
   },
   {
     id: 9,
@@ -79,6 +97,8 @@ const packages = [
     destination: "Onitsha",
     priority: "low",
     cost: "NGN 500",
+    sender: { id: 4 },
+    carrier: { id: 2 },
   },
   {
     id: 9,
@@ -88,6 +108,8 @@ const packages = [
     destination: "Ondo",
     priority: "high",
     cost: "NGN 50000",
+    sender: { id: 3 },
+    carrier: { id: 1 },
   },
   {
     id: 10,
@@ -97,6 +119,8 @@ const packages = [
     destination: "Kano",
     priority: "high",
     cost: "NGN 5000",
+    sender: { id: 2 },
+    carrier: { id: 4 },
   },
   {
     id: 11,
@@ -106,6 +130,8 @@ const packages = [
     destination: "Abuja",
     priority: "low",
     cost: "NGN 10000",
+    sender: { id: 4 },
+    carrier: { id: 1 },
   },
   {
     id: 12,
@@ -115,6 +141,8 @@ const packages = [
     destination: "Kano",
     priority: "medium",
     cost: "NGN 1000",
+    sender: { id: 1 },
+    carrier: { id: 4 },
   },
   {
     id: 13,
@@ -124,6 +152,8 @@ const packages = [
     destination: "Akure",
     priority: "high",
     cost: "NGN 5000",
+    sender: { id: 3 },
+    carrier: { id: 2 },
   },
   {
     id: 14,
@@ -133,6 +163,8 @@ const packages = [
     destination: "Onitsha",
     priority: "low",
     cost: "NGN 500",
+    sender: { id: 5 },
+    carrier: { id: 2 },
   },
   {
     id: 15,
@@ -142,6 +174,8 @@ const packages = [
     destination: "Ondo",
     priority: "high",
     cost: "NGN 50000",
+    sender: { id: 3 },
+    carrier: { id: 5 },
   },
   {
     id: 16,
@@ -151,6 +185,8 @@ const packages = [
     destination: "Onitsha",
     priority: "low",
     cost: "NGN 500",
+    sender: { id: 5 },
+    carrier: { id: 4 },
   },
   {
     id: 17,
@@ -160,6 +196,8 @@ const packages = [
     destination: "Ondo",
     priority: "high",
     cost: "NGN 50000",
+    sender: { id: 4 },
+    carrier: { id: 5 },
   },
   {
     id: 18,
@@ -169,6 +207,8 @@ const packages = [
     destination: "Onitsha",
     priority: "low",
     cost: "NGN 500",
+    sender: { id: 5 },
+    carrier: { id: 2 },
   },
   {
     id: 19,
@@ -178,6 +218,8 @@ const packages = [
     destination: "Ondo",
     priority: "high",
     cost: "NGN 50000",
+    sender: { id: 3 },
+    carrier: { id: 5 },
   },
   {
     id: 20,
@@ -187,6 +229,8 @@ const packages = [
     destination: "Kano",
     priority: "high",
     cost: "NGN 5000",
+    sender: { id: 4 },
+    carrier: { id: 5 },
   },
   {
     id: 21,
@@ -196,6 +240,8 @@ const packages = [
     destination: "Abuja",
     priority: "low",
     cost: "NGN 10000",
+    sender: { id: 5 },
+    carrier: { id: 2 },
   },
   {
     id: 22,
@@ -205,6 +251,8 @@ const packages = [
     destination: "Kano",
     priority: "medium",
     cost: "NGN 1000",
+    sender: { id: 2 },
+    carrier: { id: 5 },
   },
   {
     id: 23,
@@ -214,6 +262,8 @@ const packages = [
     destination: "Akure",
     priority: "high",
     cost: "NGN 5000",
+    sender: { id: 5 },
+    carrier: { id: 4 },
   },
   {
     id: 24,
@@ -223,6 +273,8 @@ const packages = [
     destination: "Onitsha",
     priority: "low",
     cost: "NGN 500",
+    sender: { id: 4 },
+    carrier: { id: 5 },
   },
   {
     id: 25,
@@ -232,6 +284,8 @@ const packages = [
     destination: "Ondo",
     priority: "high",
     cost: "NGN 50000",
+    sender: { id: 3 },
+    carrier: { id: 2 },
   },
   {
     id: 26,
@@ -241,6 +295,8 @@ const packages = [
     destination: "Onitsha",
     priority: "low",
     cost: "NGN 500",
+    sender: { id: 4 },
+    carrier: { id: 1 },
   },
   {
     id: 27,
@@ -250,6 +306,8 @@ const packages = [
     destination: "Ondo",
     priority: "high",
     cost: "NGN 50000",
+    sender: { id: 1 },
+    carrier: { id: 4 },
   },
   {
     id: 28,
@@ -259,6 +317,8 @@ const packages = [
     destination: "Onitsha",
     priority: "low",
     cost: "NGN 500",
+    sender: { id: 5 },
+    carrier: { id: 2 },
   },
   {
     id: 29,
@@ -268,6 +328,8 @@ const packages = [
     destination: "Ondo",
     priority: "high",
     cost: "NGN 50000",
+    sender: { id: 3 },
+    carrier: { id: 5 },
   },
 ];
 

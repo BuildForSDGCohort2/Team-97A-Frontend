@@ -31,7 +31,7 @@ const TableTop = ({ onSearch, queries }) => {
           />
         </div>
         <div className="add-package">
-          <Link to="/packages/new/">
+          <Link to="/package/new/">
             <img src={plusImg} alt="plus" className="plus-img" />
           </Link>
         </div>

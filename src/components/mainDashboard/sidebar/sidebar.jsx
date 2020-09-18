@@ -14,16 +14,16 @@ const Sidebar = () => {
         <img src={logo} alt="" className="icon" />
       </div>
       <div className="sidebar-menu">
-        <div className="sidebar-menu-item">
+        <div title="dashboard home" className="sidebar-menu-item">
           <img src={homeIcon} alt="" className="icon" />
         </div>
-        <div className="sidebar-menu-item">
+        <div title="my packages" className="sidebar-menu-item">
           <img src={packageIcon} alt="" className="icon" />
         </div>
-        <div className="sidebar-menu-item">
+        <div title="My profile" className="sidebar-menu-item">
           <img src={profileIcon} alt="" className="icon" />
         </div>
-        <div className="sidebar-menu-item">
+        <div title="My wallet" className="sidebar-menu-item">
           <img src={fileIcon} alt="" className="icon" />
         </div>
         <div className="sidebar-menu-item">

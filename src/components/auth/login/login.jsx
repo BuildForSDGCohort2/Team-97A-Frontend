@@ -117,7 +117,7 @@ class Login extends React.Component {
 
   render() {
     return localStorage.getItem("token") ? (
-      <Redirect to="/packages/" />
+      <Redirect to="/packages/all" />
     ) : (
       <div className="login">
         <div className="icon-container">

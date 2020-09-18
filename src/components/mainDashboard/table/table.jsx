@@ -1,71 +1,92 @@
-import React from "react";
-//import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import paginate from "./../../../utils/paginate";
 import originIcon from "../../../images/dashboard/origin.png";
 import nextIcon from "../../../images/dashboard/next.png";
 import prevIcon from "../../../images/dashboard/prev.png";
 import destinationIcon from "../../../images/dashboard/destination.png";
 import "./table.css";
 
-const PackageTable = ({
-  onPackageClick,
-  data,
-  onPaginate,
-  currentPage,
-  totalPages,
-  dataSize,
-}) => {
-  return (
-    <React.Fragment>
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Weight</th>
-          <th>Origin</th>
-          <th>Destination</th>
-          <th>Priority</th>
-          <th>Cost</th>
-        </tr>
-        {data.map((item) => {
-          return (
-            <tr onClick={() => onPackageClick(item.id)}>
-              {item.title}
-              <td>{item.name}</td>
-              <td>{item.weight}</td>
-              <td className="origin">
-                <img src={originIcon} alt="origin icon" /> {item.origin}
-              </td>
-              <td className="destination">
-                <img src={destinationIcon} alt="destination icon" />{" "}
-                {item.destination}
-              </td>
-              <td className="priority-td">
-                <div className="priority">{item.priority}</div>
-              </td>
-              <td>{item.cost}</td>
-            </tr>
-          );
-        })}
-      </table>
-      <div className="pagination">
-        <p>
-          showing {data.length} of {dataSize} entries
-        </p>
-        <img
-          style={currentPage <= 1 ? { display: "none" } : {}}
-          onClick={() => onPaginate("prev")}
-          src={prevIcon}
-          alt="previous icon"
-        />
+class PackageTable extends Component {
+  state = { currentPage: 1, totalPages: 0 };
 
-        <img
-          style={currentPage >= totalPages ? { display: "none" } : {}}
-          onClick={() => onPaginate("next")}
-          src={nextIcon}
-          alt="next icon"
-        />
-      </div>
-    </React.Fragment>
-  );
-};
+  componentDidMount() {
+    const totalPages = Math.ceil(
+      this.props.packages.length / this.props.numPerPage
+    );
+    this.setState({ totalPages });
+  }
+
+  handlePaginate = (dir) => {
+    let currentPage = this.state.currentPage;
+    currentPage = dir === "next" ? currentPage + 1 : currentPage - 1;
+    this.setState({ currentPage });
+  };
+  getPanginatedData = () => {
+    const paginatedData = paginate(
+      this.props.packages,
+      this.state.currentPage,
+      this.props.numPerPage
+    );
+    return paginatedData;
+  };
+
+  render() {
+    const { onPackageClick, packages } = this.props;
+    const { currentPage, totalPages } = this.state;
+    return (
+      <React.Fragment>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Weight</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Priority</th>
+            <th>Cost</th>
+          </tr>
+          {this.getPanginatedData().map((item) => {
+            return (
+              <tr key={item.id} onClick={() => onPackageClick(item.id)}>
+                {item.title}
+                <td>{item.name}</td>
+                <td>{item.weight}</td>
+                <td className="origin">
+                  <img src={originIcon} alt="origin icon" /> {item.origin}
+                </td>
+                <td className="destination">
+                  <img src={destinationIcon} alt="destination icon" />{" "}
+                  {item.destination}
+                </td>
+                <td className="priority-td">
+                  <div className="priority">{item.priority}</div>
+                </td>
+                <td>{item.cost}</td>
+              </tr>
+            );
+          })}
+        </table>
+        <div className="pagination">
+          <p>
+            showing {this.getPanginatedData().length} of {packages.length}{" "}
+            entries
+          </p>
+          <img
+            style={currentPage <= 1 ? { display: "none" } : {}}
+            onClick={() => this.handlePaginate("prev")}
+            src={prevIcon}
+            alt="previous icon"
+          />
+
+          <img
+            style={currentPage >= totalPages ? { display: "none" } : {}}
+            onClick={() => this.handlePaginate("next")}
+            src={nextIcon}
+            alt="next icon"
+          />
+        </div>
+      </React.Fragment>
+    );
+  }
+}
 
 export default PackageTable;

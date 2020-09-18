@@ -14,7 +14,7 @@ class DetailPage extends Component {
   detailRef = React.createRef();
 
   handleDetailClose = () => {
-    this.props.history.push("/packages/");
+    this.props.history.push("/packages/all");
     this.detailRef.current.style.display = "none";
   };
 
@@ -99,7 +99,7 @@ class DetailPage extends Component {
               <img src={packageImg} alt="package" />
               <button className="accept-btn">Accept Mission </button>
               {/* display conditionally if user is package carrier or owner */}
-              <Link to={`/packages/${id}/tracker/`}>
+              <Link to={`/package/${id}/tracker/`}>
                 <p>Tracker</p>
               </Link>
             </div>
