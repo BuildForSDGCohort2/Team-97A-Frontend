@@ -109,10 +109,14 @@ function App() {
           <Route path="/auth/reset_password/" component={ResetPassword} />
           <Route path="/auth/forgot_password/" component={ForgotPassword} />
           <Route path="/getstarted/" component={GetStarted} />
-          <Route path="/packages/:id/tracker/" component={TrackerPage} />
-          <Route path="/packages/new/" component={NewPackage} />
-          <Route path="/packages/:id/" component={DetailPage} />
-          <Route path="/packages/" component={MainDashboard} />
+
+          <Route path="/package/:id/tracker/" component={TrackerPage} />
+          <Route path="/package/new/" component={NewPackage} />
+          <Route path="/package/:id/" component={DetailPage} />
+          <Route
+            path="/packages/"
+            render={(props) => <MainDashboard {...props} />}
+          />
         </Switch>
         {/* footer component */}
 

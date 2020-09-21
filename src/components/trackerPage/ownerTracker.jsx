@@ -22,7 +22,7 @@ class OwnerTracker extends Component {
   };
 
   handleDetailClose = () => {
-    this.props.history.push("/packages/");
+    this.props.history.push("/packages/all");
   };
 
   handleCancel = () => {};

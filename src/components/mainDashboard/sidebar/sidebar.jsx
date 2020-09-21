@@ -15,20 +15,22 @@ const Sidebar = () => {
         <img src={logo} alt="" className="icon" />
       </div>
       <div className="sidebar-menu">
-        <div className="sidebar-menu-item">
-          <Link to="/packages/">
+        <div title="dashboard home" className="sidebar-menu-item">
+          <Link to="/packages/all/">
             <img src={homeIcon} alt="" className="icon" />
           </Link>
         </div>
-        <div className="sidebar-menu-item">
-          <img src={packageIcon} alt="" className="icon" />
+        <div title="my packages" className="sidebar-menu-item">
+          <Link to="/packages/mine/">
+            <img src={packageIcon} alt="" className="icon" />
+          </Link>
         </div>
-        <div className="sidebar-menu-item">
+        <div title="My profile" className="sidebar-menu-item">
           <Link to="/profile/">
             <img src={profileIcon} alt="" className="icon" />
           </Link>
         </div>
-        <div className="sidebar-menu-item">
+        <div title="My wallet" className="sidebar-menu-item">
           <img src={fileIcon} alt="" className="icon" />
         </div>
         <div className="sidebar-menu-item">
