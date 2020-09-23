@@ -99,7 +99,7 @@ function App() {
             path="/auth/login/"
             render={(props) =>
               localStorage.getItem("token") ? (
-                <Redirect to="/packages/" />
+                <Redirect to="/packages/all" />
               ) : (
                 <Login />
               )

@@ -59,7 +59,7 @@
 
 .input-group {
   display: flex;
-  margin: 1em;
+  margin: 0.6em;
 }
 
 .input {
@@ -70,6 +70,7 @@
 
 label,
 input,
+select,
 .unit-container {
   font-family: Montserrat Alternates;
 }
@@ -78,7 +79,8 @@ input,
   width: 100%;
 }
 
-input {
+input,
+select {
   width: 100%;
   padding: 0.7em;
   border: 1px solid #67afd0;

@@ -1,22 +1,40 @@
 import React, { Component } from "react";
+import {
+  createNewPackage,
+  getAllPackages,
+  getCurrentUser,
+} from "../../services/dataService";
 import closeIcon from "../../images/dashboard/close.png";
 import "./newPackage.css";
+import { toast } from "react-toastify";
 
 class NewPackage extends Component {
   state = {
+    user: {},
     data: {
-      pickupAddress: "",
-      dileveryAddress: "",
-      dileveryPeriod: "",
-      cost: "",
+      owner: "",
+      carrier: "",
+      name: "",
       category: "",
+      delivery_period: "",
+      description: "",
+      dest_address: "",
+      pick_address: "",
+      destination: "",
+      origin: "",
+      package_image: null,
+      price: "",
+      priority: "",
       weight: "",
       origin: "",
-      destination: "",
-      info: "",
-      packageImage: "",
+      weight: "",
     },
   };
+
+  async componentDidMount() {
+    const user = await getCurrentUser();
+    this.setState({ user });
+  }
 
   handleDetailClose = () => {
     this.props.history.push("/packages/all");
@@ -28,24 +46,45 @@ class NewPackage extends Component {
     this.setState({ data });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state.data);
-    // do some submit stuff here
-    //
+  handleImageInput = (e) => {
+    const package_image = e.target.files[0];
+    const data = { ...this.state.data };
+    data.package_image = package_image;
+    this.setState({ data });
   };
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = { ...this.state.data };
+    data.owner = this.state.user.id;
+    const formData = new FormData();
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+    try {
+      const newPackage = await createNewPackage(formData);
+      console.log(newPackage);
+      // add new packages to package list in state
+      toast("Package added successfully");
+      this.props.history.push(`/package/${newPackage.id}/`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     const {
-      pickupAddress,
-      dileveryAddress,
-      dileveryPeriod,
-      cost,
+      name,
       category,
-      weight,
-      origin,
+      delivery_period,
+      description,
+      dest_address,
+      pick_address,
       destination,
-      info,
-      packageImage,
+      origin,
+      price,
+      priority,
+      weight,
     } = this.state.data;
 
     return (
@@ -61,39 +100,90 @@ class NewPackage extends Component {
           <form onSubmit={this.handleSubmit} className="package-form">
             <div className="input-group">
               <div className="input">
-                <label htmlFor="pickupAddress">Pick-up Address</label>
+                <label htmlFor="dest_address">Package name</label>
                 <input
                   onInput={this.handleInput}
                   type="text"
-                  name="pickupAddress"
-                  id="pickupAddress"
-                  value={pickupAddress}
+                  name="name"
+                  id="name"
+                  value={name}
                 />
+              </div>
+              <div className="input">
+                <label htmlFor="description">priority</label>
+                <select
+                  onChange={this.handleInput}
+                  name="priority"
+                  id="priority"
+                  value={priority}
+                >
+                  <option value="HIGH">HIGH</option>
+                  <option value="MEDIUM">MEDIUM</option>
+                  <option value="LOW">LOW</option>
+                </select>
               </div>
             </div>
             <div className="input-group">
               <div className="input">
-                <label htmlFor="dileveryAddress">Dilevery Address</label>
+                <label htmlFor="pick_address">Pick-up Address</label>
                 <input
                   onInput={this.handleInput}
                   type="text"
-                  name="dileveryAddress"
-                  id="dileveryAddress"
-                  value={dileveryAddress}
+                  name="pick_address"
+                  id="pick_address"
+                  value={pick_address}
+                />
+              </div>
+              <div className="input">
+                <label htmlFor="dest_address">Dilevery Address</label>
+                <input
+                  onInput={this.handleInput}
+                  type="text"
+                  name="dest_address"
+                  id="dest_address"
+                  value={dest_address}
                 />
               </div>
             </div>
 
             <div className="input-group">
               <div className="input">
-                <label htmlFor="dileveryPeriod">Dilevery Period</label>
+                <label htmlFor="origin">Origin (city)</label>
                 <span className="input-wrapper">
                   <input
                     onInput={this.handleInput}
                     type="text"
-                    name="dileveryPeriod"
-                    id="dileveryPeriod"
-                    value={dileveryPeriod}
+                    name="origin"
+                    id="origin"
+                    value={origin}
+                  />
+                </span>
+              </div>
+
+              <div className="input">
+                <label htmlFor="destination">Destination (city)</label>
+                <span className="input-wrapper">
+                  <input
+                    onInput={this.handleInput}
+                    type="text"
+                    name="destination"
+                    id="destination"
+                    value={destination}
+                  />
+                </span>
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div className="input">
+                <label htmlFor="delivery_period">Dilevery Period</label>
+                <span className="input-wrapper">
+                  <input
+                    onInput={this.handleInput}
+                    type="text"
+                    name="delivery_period"
+                    id="delivery_period"
+                    value={delivery_period}
                   />
                   <span className="unit-container">Days</span>
                 </span>
@@ -105,9 +195,9 @@ class NewPackage extends Component {
                   <input
                     onInput={this.handleInput}
                     type="text"
-                    name="cost"
-                    id="cost"
-                    value={cost}
+                    name="price"
+                    id="price"
+                    value={price}
                   />
                   <span className="unit-container">NGN</span>
                 </span>
@@ -117,15 +207,17 @@ class NewPackage extends Component {
             <div className="input-group">
               <div className="input">
                 <label htmlFor="category">Category</label>
-                <span className="input-wrapper">
-                  <input
-                    onInput={this.handleInput}
-                    type="text"
-                    name="category"
-                    id="category"
-                    value={category}
-                  />
-                </span>
+                <select
+                  onChange={this.handleInput}
+                  name="category"
+                  id="category"
+                  value={category}
+                >
+                  <option value="CLOTHS">CLOTHS</option>
+                  <option value="DOCUMENTS">DOCUMENTS</option>
+                  <option value="GROCERY">GROCERY</option>
+                  <option value="OTHERS">OTHERS</option>
+                </select>
               </div>
 
               <div className="input">
@@ -145,54 +237,25 @@ class NewPackage extends Component {
 
             <div className="input-group">
               <div className="input">
-                <label htmlFor="origin">Origin</label>
-                <span className="input-wrapper">
-                  <input
-                    onInput={this.handleInput}
-                    type="text"
-                    name="origin"
-                    id="origin"
-                    value={origin}
-                  />
-                </span>
-              </div>
-
-              <div className="input">
-                <label htmlFor="destination">Destination</label>
-                <span className="input-wrapper">
-                  <input
-                    onInput={this.handleInput}
-                    type="text"
-                    name="destination"
-                    id="destination"
-                    value={destination}
-                  />
-                </span>
-              </div>
-            </div>
-
-            <div className="input-group">
-              <div className="input">
-                <label htmlFor="info">Other info</label>
+                <label htmlFor="description">Other info</label>
                 <input
                   onInput={this.handleInput}
                   type="text"
-                  name="info"
-                  id="info"
-                  value={info}
+                  name="description"
+                  id="description"
+                  value={description}
                 />
               </div>
             </div>
 
             <div className="input-group">
               <div className="input">
-                <label htmlFor="packageImage">Package Image</label>
+                <label htmlFor="package_image">Package Image</label>
                 <input
-                  onInput={this.handleInput}
+                  onInput={this.handleImageInput}
                   type="file"
-                  name="packageImage"
-                  id="packageImage"
-                  value={packageImage}
+                  name="package_image"
+                  id="package_image"
                 />
               </div>
             </div>

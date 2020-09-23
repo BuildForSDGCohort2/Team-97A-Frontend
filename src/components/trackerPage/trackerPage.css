@@ -69,7 +69,7 @@
 .sender {
   display: flex;
   align-items: center;
-  padding: 2em;
+  padding: 0.5em;
 }
 
 .sender-details {
@@ -118,7 +118,7 @@
   justify-content: space-between;
   width: 100%;
   padding: 1em;
-  margin-top: 2em;
+  /* margin-top: 2em; */
   position: relative;
 }
 .circle {
@@ -189,7 +189,7 @@
 
 /* display pin styles */
 .display-pin {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   width: 80%;
 }
 

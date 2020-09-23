@@ -100,6 +100,7 @@ class Login extends React.Component {
             break;
           case 200:
             localStorage.setItem("token", json.access);
+            localStorage.setItem("refresh_token", json.refresh);
             this.setState({
               loggedIn: true,
               data: json,
@@ -117,7 +118,7 @@ class Login extends React.Component {
 
   render() {
     return localStorage.getItem("token") ? (
-      <Redirect to="/packages/all" />
+      <Redirect to="/packages/all/" />
     ) : (
       <div className="login">
         <div className="icon-container">
