@@ -46,11 +46,15 @@ axiosInstance.interceptors.response.use(
 
 /***************************users***********************/
 export const getCurrentUser = async () => {
-  const access_token = localStorage.getItem("token");
-  const JWTuser = JWTDecode(access_token);
-  const user_id = JWTuser.user_id;
-  const { data: user } = await axiosInstance.get(`/accounts/users/${user_id}/`);
-  return user;
+  try {
+    const access_token = localStorage.getItem("token");
+    const JWTuser = JWTDecode(access_token);
+    const user_id = JWTuser.user_id;
+    const { data: user } = await axiosInstance.get(
+      `/accounts/users/${user_id}/`
+    );
+    return user;
+  } catch (e) {}
 };
 
 export const getAllUsers = async () => {

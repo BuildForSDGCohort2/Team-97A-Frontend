@@ -58,7 +58,9 @@ class PackageTable extends Component {
                   {item.destination}
                 </td>
                 <td className="priority-td">
-                  <div className="priority">{item.priority}</div>
+                  <p className={item.priority + " priority "}>
+                    {item.priority}
+                  </p>
                 </td>
                 <td>{item.cost}</td>
               </tr>

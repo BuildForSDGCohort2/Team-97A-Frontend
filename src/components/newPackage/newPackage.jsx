@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import {
-  createNewPackage,
-  getAllPackages,
-  getCurrentUser,
-} from "../../services/dataService";
+import { createNewPackage, getCurrentUser } from "../../services/dataService";
 import closeIcon from "../../images/dashboard/close.png";
 import "./newPackage.css";
 import { toast } from "react-toastify";
@@ -99,7 +95,7 @@ class NewPackage extends Component {
           />
           <form onSubmit={this.handleSubmit} className="package-form">
             <div className="input-group">
-              <div className="input">
+              <div className="input half">
                 <label htmlFor="dest_address">Package name</label>
                 <input
                   onInput={this.handleInput}
@@ -109,7 +105,7 @@ class NewPackage extends Component {
                   value={name}
                 />
               </div>
-              <div className="input">
+              <div className="input half">
                 <label htmlFor="description">priority</label>
                 <select
                   onChange={this.handleInput}
@@ -124,7 +120,7 @@ class NewPackage extends Component {
               </div>
             </div>
             <div className="input-group">
-              <div className="input">
+              <div className="input half">
                 <label htmlFor="pick_address">Pick-up Address</label>
                 <input
                   onInput={this.handleInput}
@@ -134,7 +130,7 @@ class NewPackage extends Component {
                   value={pick_address}
                 />
               </div>
-              <div className="input">
+              <div className="input half">
                 <label htmlFor="dest_address">Dilevery Address</label>
                 <input
                   onInput={this.handleInput}
@@ -147,7 +143,7 @@ class NewPackage extends Component {
             </div>
 
             <div className="input-group">
-              <div className="input">
+              <div className="input half">
                 <label htmlFor="origin">Origin (city)</label>
                 <span className="input-wrapper">
                   <input
@@ -160,7 +156,7 @@ class NewPackage extends Component {
                 </span>
               </div>
 
-              <div className="input">
+              <div className="input half">
                 <label htmlFor="destination">Destination (city)</label>
                 <span className="input-wrapper">
                   <input
@@ -175,7 +171,7 @@ class NewPackage extends Component {
             </div>
 
             <div className="input-group">
-              <div className="input">
+              <div className="input half">
                 <label htmlFor="delivery_period">Dilevery Period</label>
                 <span className="input-wrapper">
                   <input
@@ -189,7 +185,7 @@ class NewPackage extends Component {
                 </span>
               </div>
 
-              <div className="input">
+              <div className="input half">
                 <label htmlFor="cost">cost</label>
                 <span className="input-wrapper">
                   <input
@@ -205,7 +201,7 @@ class NewPackage extends Component {
             </div>
 
             <div className="input-group">
-              <div className="input">
+              <div className="input half">
                 <label htmlFor="category">Category</label>
                 <select
                   onChange={this.handleInput}
@@ -220,7 +216,7 @@ class NewPackage extends Component {
                 </select>
               </div>
 
-              <div className="input">
+              <div className="input half">
                 <label htmlFor="weight">Weight</label>
                 <span className="input-wrapper">
                   <input
@@ -236,7 +232,7 @@ class NewPackage extends Component {
             </div>
 
             <div className="input-group">
-              <div className="input">
+              <div className="input full">
                 <label htmlFor="description">Other info</label>
                 <input
                   onInput={this.handleInput}
@@ -249,7 +245,7 @@ class NewPackage extends Component {
             </div>
 
             <div className="input-group">
-              <div className="input">
+              <div className="input full">
                 <label htmlFor="package_image">Package Image</label>
                 <input
                   onInput={this.handleImageInput}

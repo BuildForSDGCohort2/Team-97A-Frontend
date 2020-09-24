@@ -31,7 +31,7 @@
 }
 
 .user-rating {
-  padding-top: 0.3em;
+  padding-top: 0.5em;
 }
 
 .dashboard-top-right {
@@ -50,4 +50,16 @@
 .profile-link {
   text-decoration: none;
   display: flex;
+}
+
+@media (max-width: 600px) {
+  .profile-photo-container img {
+    width: 50px;
+  }
+  .dashboard-top-right {
+    flex-direction: column;
+  }
+  .top-icon-container {
+    padding: 0.3em;
+  }
 }
