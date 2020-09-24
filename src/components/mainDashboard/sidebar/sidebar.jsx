@@ -12,7 +12,9 @@ const Sidebar = () => {
   return (
     <div className="dashboard-sidebar">
       <div className="sidebar-logo">
-        <img src={logo} alt="" className="icon" />
+        <Link to="/">
+          <img src={logo} alt="" className="icon" />
+        </Link>
       </div>
       <div className="sidebar-menu">
         <div title="dashboard home" className="sidebar-menu-item">

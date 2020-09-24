@@ -8,8 +8,8 @@ import Rating from "./rating";
 
 class CarrierTracker extends Component {
   state = {
-    tracker: { confirmed: true, inTransit: true, delivered: true },
-    trackerStatus: "delivered",
+    tracker: { confirmed: true, inTransit: false, delivered: false },
+    trackerStatus: "confirmed",
     pin: { pin1: "", pin2: "", pin3: "", pin4: "", pin5: "" },
     rating: 3,
   };

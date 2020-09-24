@@ -11,7 +11,7 @@ class TrackerPage extends Component {
         {/* display conditionally is user is carrier  */}
         <CarrierTracker history={this.props.history} />
         {/* display conditionally is user is owner  */}
-        <OwnerTracker history={this.props.history} />
+        {/* <OwnerTracker history={this.props.history} /> */}
       </React.Fragment>
     );
   }

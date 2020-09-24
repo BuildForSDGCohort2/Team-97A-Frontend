@@ -5,7 +5,7 @@
 }
 
 .filter-input {
-  margin: 0 2em;
+  margin: 0 0;
 }
 
 .filter-input label {
@@ -23,4 +23,23 @@
   border-radius: 50px;
   padding: 1.5em;
   font-size: 1em;
+}
+
+@media (max-width: 800px) {
+  .filter-input input {
+    width: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .table-top {
+    justify-content: flex-start;
+  }
+  .plus-img {
+    width: 40px;
+    padding-left: 5px;
+  }
+  .filter-input input {
+    width: 150px;
+  }
 }

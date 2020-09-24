@@ -1,4 +1,5 @@
 import React from "react";
+import StarRatings from "react-star-ratings";
 import profilePhoto from "../../../images/dashboard/profile-photo.png";
 import ratingImg from "../../../images/dashboard/rating.png";
 import verifiedImg from "../../../images/dashboard/verified.png";
@@ -26,7 +27,13 @@ const DashboardTop = ({ onLogout }) => {
               </div>
             </div>
             <div className="user-rating">
-              <img src={ratingImg} alt="" className="rating" />
+              <StarRatings
+                rating={4}
+                starRatedColor="#2AD2BE"
+                numberOfStars={5}
+                name="rating"
+                starDimension="20px"
+              />
             </div>
           </div>
         </Link>

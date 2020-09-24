@@ -41,3 +41,15 @@
   width: 25px;
   cursor: pointer;
 }
+
+@media (max-width: 900px) {
+  .dashboard-sidebar {
+    width: 10%;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-sidebar {
+    width: 15%;
+  }
+}
