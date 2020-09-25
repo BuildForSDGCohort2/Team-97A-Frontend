@@ -21,6 +21,7 @@ import NewPackage from "./components/newPackage/newPackage";
 import TrackerPage from "./components/trackerPage/trackerPage";
 import "./app.css";
 import Profile from "./components/profile/Profile";
+import Wallet from "./components/wallet/Wallet";
 
 function App() {
   const nav = useRef(null);
@@ -106,6 +107,7 @@ function App() {
             }
           />
           <Route path="/profile/" component={Profile} />
+          <Route path="/wallet/" component={Wallet} />
           <Route path="/auth/reset_password/" component={ResetPassword} />
           <Route path="/auth/forgot_password/" component={ForgotPassword} />
           <Route path="/getstarted/" component={GetStarted} />

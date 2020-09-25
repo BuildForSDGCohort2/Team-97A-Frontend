@@ -1,0 +1,45 @@
+.button {
+  border-radius: 20px;
+  padding: 10px;
+  width: 200px;
+  outline: none;
+  border-width: 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.deposit-button {
+  background-color: #ff2d64;
+  color: white;
+}
+.wallet-body {
+  display: flex;
+  justify-content: space-around;
+}
+
+.wallet-balance .card .card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 60px;
+}
+
+.wallet-balance .card .card-body span {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.wallet-balance .card .card-body span,
+button {
+  margin: 20px 0px;
+}
+
+.table {
+  min-height: 335px;
+}
+
+.amount-text {
+  color: #40da86;
+}
