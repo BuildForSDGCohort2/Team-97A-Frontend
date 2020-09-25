@@ -33,7 +33,9 @@ const Sidebar = () => {
           </Link>
         </div>
         <div title="My wallet" className="sidebar-menu-item">
-          <img src={fileIcon} alt="" className="icon" />
+          <Link to="/wallet/">
+            <img src={fileIcon} alt="" className="icon" />
+          </Link>
         </div>
         <div className="sidebar-menu-item">
           <img src={sendIcon} alt="" className="icon" />
