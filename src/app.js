@@ -19,7 +19,6 @@ import MainDashboard from "./components/mainDashboard/mainDashboard";
 import DetailPage from "./components/detailPage/detailPage";
 import NewPackage from "./components/newPackage/newPackage";
 import { getCurrentUser } from "./services/dataService";
-import Wallet from "./components/wallet/Wallet";
 import "./app.css";
 
 function App() {
@@ -28,6 +27,7 @@ function App() {
   const navLinks = useRef([]);
   navLinks.current = [];
 
+  // Fetches current user and adds it to state
   async function fetchUserData() {
     try {
       const user = await getCurrentUser();
@@ -35,6 +35,7 @@ function App() {
       setUser(user);
     } catch (e) {}
   }
+
   useEffect(() => {
     fetchUserData();
   }, []);
@@ -117,8 +118,6 @@ function App() {
               )
             }
           />
-
-          <Route path="/wallet/" component={Wallet} />
 
           <Route path="/auth/reset_password/" component={ResetPassword} />
           <Route path="/auth/forgot_password/" component={ForgotPassword} />

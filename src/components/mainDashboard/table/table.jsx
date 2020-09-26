@@ -16,11 +16,14 @@ class PackageTable extends Component {
     this.setState({ totalPages });
   }
 
+  // handles onclick of the pagination prompts
   handlePaginate = (dir) => {
     let currentPage = this.state.currentPage;
     currentPage = dir === "next" ? currentPage + 1 : currentPage - 1;
     this.setState({ currentPage });
   };
+
+  // paginates data
   getPanginatedData = () => {
     const paginatedData = paginate(
       this.props.packages,
