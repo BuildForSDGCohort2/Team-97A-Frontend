@@ -5,14 +5,12 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 import "./Profile.css";
 
-const Card = ({ title, topColor, children }) => {
+const Card = ({ title, titleIcon = faEdit, topColor, children }) => {
   return (
     <div className="card">
       <div className="card-top" style={{ backgroundColor: topColor }}>
         <h4 className="card-title">{title}</h4>
-        <h4>
-          <FontAwesomeIcon icon={faEdit} />
-        </h4>
+        <h4>{titleIcon && <FontAwesomeIcon icon={faEdit} />}</h4>
       </div>
       <div className="card-body">{children}</div>
     </div>

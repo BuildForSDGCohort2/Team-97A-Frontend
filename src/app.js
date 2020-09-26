@@ -18,8 +18,9 @@ import ForgotPassword from "./components/auth/forgotPassword/forgotPassword";
 import MainDashboard from "./components/mainDashboard/mainDashboard";
 import DetailPage from "./components/detailPage/detailPage";
 import NewPackage from "./components/newPackage/newPackage";
-import "./app.css";
 import { getCurrentUser } from "./services/dataService";
+import Wallet from "./components/wallet/Wallet";
+import "./app.css";
 
 function App() {
   const [user, setUser] = useState({});
@@ -116,6 +117,9 @@ function App() {
               )
             }
           />
+
+          <Route path="/wallet/" component={Wallet} />
+
           <Route path="/auth/reset_password/" component={ResetPassword} />
           <Route path="/auth/forgot_password/" component={ForgotPassword} />
           <Route path="/getstarted/" component={GetStarted} />
