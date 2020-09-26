@@ -1,7 +1,7 @@
 import React from "react";
 
 const PinForm = ({ onPinChange, pin, trackerStatus }) => {
-  return trackerStatus === "inTransit" ? (
+  return trackerStatus === "in_transit" ? (
     <div className="pin-input">
       <input
         maxLength={1}

@@ -5,14 +5,25 @@ import TrackerAction from "./ownerTrackerAction";
 import Tracker from "./tracker";
 import DisplayPin from "./displayPin";
 import Rating from "./rating";
+import "./trackerPage.css";
 
 class OwnerTracker extends Component {
   state = {
-    tracker: { confirmed: true, inTransit: true, delivered: true },
-    trackerStatus: "delivered",
-    pin: "54345",
     rating: 0,
   };
+
+  trackerStatus = () => {
+    const tracker = { ...this.props.singlePackage.tracker };
+    return tracker.is_delivered === true
+      ? "is_delivered"
+      : tracker.in_transit === true
+      ? "in_transit"
+      : tracker.is_confirmed === true
+      ? "is_confirmed"
+      : null;
+  };
+
+  trackerRef = React.createRef();
 
   changeRating = (newRating, name) => {
     this.setState({
@@ -22,16 +33,17 @@ class OwnerTracker extends Component {
   };
 
   handleDetailClose = () => {
-    this.props.history.push("/packages/all");
+    this.trackerRef.current.style.display = "none";
   };
 
   handleCancel = () => {};
 
   render() {
+    const trackerStatus = this.trackerStatus();
     return (
-      <div className="tracker-page">
+      <div className="tracker-page" ref={this.trackerRef}>
         <div className="tracker-main animate">
-          <h4 className="tracker-status">{this.state.trackerStatus}</h4>
+          <h4 className="tracker-status">{trackerStatus}</h4>
           <img
             onClick={this.handleDetailClose}
             src={closeIcon}
@@ -40,12 +52,14 @@ class OwnerTracker extends Component {
           />
 
           <div className="description">
-            {this.state.trackerStatus === "confirmed" ? (
+            {trackerStatus === "is_confirmed" ? (
               <h4>Your package has been assigned to :</h4>
-            ) : this.state.trackerStatus === "inTransit" ? (
+            ) : trackerStatus === "in_transit" ? (
               <h4>Your package has been assigned to :</h4>
-            ) : (
+            ) : trackerStatus === "in_delivered" ? (
               <h4>Package successfully delivered to :</h4>
+            ) : (
+              <h4>Your packaged has not yet been assigned</h4>
             )}
           </div>
 
@@ -66,17 +80,18 @@ class OwnerTracker extends Component {
               </div>
             </div>
           </div>
-          {this.state.trackerStatus === "delivered" ? null : (
-            <DisplayPin pin={this.state.pin} />
+
+          {trackerStatus === "delivered" ? null : (
+            <DisplayPin
+              pin={{ ...this.props.singlePackage.security_code }}
+              status={trackerStatus}
+            />
           )}
-          <TrackerAction
-            status={this.state.trackerStatus}
-            onCancel={this.handleCancel}
-          />
-          <Tracker tracker={this.state.tracker} />
+          {/* <TrackerAction status={trackerStatus} onCancel={this.handleCancel} /> */}
+          <Tracker tracker={{ ...this.props.singlePackage.tracker }} />
           <Rating
             rating={this.state.rating}
-            trackerStatus={this.state.trackerStatus}
+            trackerStatus={trackerStatus}
             changeRating={this.changeRating}
           />
         </div>

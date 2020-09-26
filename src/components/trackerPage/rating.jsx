@@ -2,7 +2,7 @@ import React from "react";
 import StarRatings from "react-star-ratings";
 
 const Rating = ({ rating, trackerStatus, changeRating }) => {
-  return trackerStatus === "delivered" ? (
+  return trackerStatus === "is_delivered" ? (
     <div className="rating">
       {changeRating ? (
         <h3>Rate the carrier fairly</h3>

@@ -1,7 +1,7 @@
 import React from "react";
 
 const TrackerAction = ({ status, onCancel }) => {
-  return status === "confirmed" ? (
+  return status === "is_confirmed" ? (
     <div className="action">
       <botton className="action-btn">Delivered to Carrier</botton>
       <botton className="action-btn" id="cancel-btn" onClick={onCancel}>

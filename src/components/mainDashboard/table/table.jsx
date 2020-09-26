@@ -49,7 +49,7 @@ class PackageTable extends Component {
               <tr key={item.id} onClick={() => onPackageClick(item.id)}>
                 {item.title}
                 <td>{item.name}</td>
-                <td>{item.weight}</td>
+                <td>{item.weight} KG</td>
                 <td className="origin">
                   <img src={originIcon} alt="origin icon" /> {item.origin}
                 </td>
@@ -62,16 +62,20 @@ class PackageTable extends Component {
                     {item.priority}
                   </p>
                 </td>
-                <td>{item.cost}</td>
+                <td>{item.price} NGN</td>
               </tr>
             );
           })}
         </table>
         <div className="pagination">
-          <p>
-            showing {this.getPanginatedData().length} of {packages.length}{" "}
-            entries
-          </p>
+          {packages.length === 0 ? (
+            <p>No packages to show yet</p>
+          ) : (
+            <p>
+              showing {this.getPanginatedData().length} of {packages.length}{" "}
+              entries
+            </p>
+          )}
           <img
             style={currentPage <= 1 ? { display: "none" } : {}}
             onClick={() => this.handlePaginate("prev")}

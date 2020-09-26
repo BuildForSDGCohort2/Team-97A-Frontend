@@ -17,13 +17,11 @@ class NewPackage extends Component {
       dest_address: "",
       pick_address: "",
       destination: "",
-      origin: "",
       package_image: null,
       price: "",
       priority: "",
       weight: "",
       origin: "",
-      weight: "",
     },
   };
 
@@ -52,7 +50,7 @@ class NewPackage extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     const data = { ...this.state.data };
-    data.owner = this.state.user.id;
+    data.owner = this.props.user.id;
     const formData = new FormData();
     for (const key in data) {
       formData.append(key, data[key]);
@@ -60,11 +58,11 @@ class NewPackage extends Component {
     try {
       const newPackage = await createNewPackage(formData);
       console.log(newPackage);
-      // add new packages to package list in state
       toast("Package added successfully");
+      // push to checkout / payment page here when checkout page is implemented
       this.props.history.push(`/package/${newPackage.id}/`);
     } catch (error) {
-      console.log(error);
+      toast.warn("could not add this package");
     }
   };
 

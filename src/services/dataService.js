@@ -46,15 +46,11 @@ axiosInstance.interceptors.response.use(
 
 /***************************users***********************/
 export const getCurrentUser = async () => {
-  try {
-    const access_token = localStorage.getItem("token");
-    const JWTuser = JWTDecode(access_token);
-    const user_id = JWTuser.user_id;
-    const { data: user } = await axiosInstance.get(
-      `/accounts/users/${user_id}/`
-    );
-    return user;
-  } catch (e) {}
+  const access_token = localStorage.getItem("token");
+  const JWTuser = JWTDecode(access_token);
+  const user_id = JWTuser.user_id;
+  const { data: user } = await axiosInstance.get(`/accounts/users/${user_id}/`);
+  return user;
 };
 
 export const getAllUsers = async () => {
@@ -63,17 +59,46 @@ export const getAllUsers = async () => {
 };
 
 /****************** packages********************/
+
 export const createNewPackage = async (data) => {
-  try {
-    const response = await axiosInstance.post("/packages/", data);
-    console.log(response);
-    return response;
-  } catch (e) {
-    toast.warn("could not add this package");
-  }
+  const response = await axiosInstance.post("/packages/", data);
+  return response.data;
 };
 
 export const getAllPackages = async () => {
-  const { data: packages } = await axiosInstance.get("/packages/");
-  return packages;
+  try {
+    const { data: packages } = await axiosInstance.get("/packages/");
+    return packages;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getSinglePackage = async (packageID) => {
+  try {
+    const { data: singlePackage } = await axiosInstance.get(
+      `/packages/${packageID}/`
+    );
+    return singlePackage;
+  } catch (e) {
+    console.log(e.response);
+  }
+};
+
+export const updatePackage = async (singlePackage) => {
+  const response = await axiosInstance.patch(
+    `/packages/${singlePackage.id}/`,
+    singlePackage
+  );
+  return response;
+};
+
+/**************************tracker****************/
+
+export const updateTracker = async (tracker) => {
+  const response = await axiosInstance.patch(
+    `/trackers/${tracker.id}/`,
+    tracker
+  );
+  return response.data;
 };

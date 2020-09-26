@@ -1,7 +1,7 @@
 import React from "react";
 
-const DisplayPin = ({ pin }) => {
-  return (
+const DisplayPin = ({ pin, status }) => {
+  return status === "is_delivered" ? null : (
     <div className="display-pin">
       <h3>Delivery code</h3>
       <div className="pin-holder">

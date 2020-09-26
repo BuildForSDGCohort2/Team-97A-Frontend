@@ -32,59 +32,52 @@ const user = {
   },
 };
 
-const Profile = () => (
-  <div className="dashboard-page">
-    <Sidebar />
-    <div className="main-dashboard">
-      <DashboardTop />
-      <div className="dashboard-body">
-        <h4>Profile</h4>
-        <div className="profile-body">
-          <div className="profile-left">
-            <Card title="Personal Data" topColor="blue">
-              <FontAwesomeIcon icon={faUserCircle} className="user-icon" />
-              <h5>{user.fullname}</h5>
-              <h5>{user.phone}</h5>
-              <h5>{user.email}</h5>
-              <h5>{user.address}</h5>
-              <FontAwesomeIcon icon={faShieldAlt} className="shield-icon" />
-            </Card>
-          </div>
-          <div className="profile-right">
-            <Card title="Bank Detail" topColor="#FF6584">
-              <h5>{user.bank.accountName}</h5>
-              <h5>{user.bank.accountNumber}</h5>
-              <h5>{user.bank.bankName}</h5>
-            </Card>
-            <Card title="Verification" topColor="#40DA86">
-              <span>
-                <h5>BVN</h5>
-                <FontAwesomeIcon
-                  icon={user.verification.bvn ? faCheckCircle : faTimesCircle}
-                  size="lg"
-                  color="#5ED8A2"
-                />
-              </span>
-              <span>
-                <h5>Identification</h5>
-                <FontAwesomeIcon
-                  icon={user.verification.nin ? faCheckCircle : faTimesCircle}
-                  size="lg"
-                  color="#5ED8A2"
-                />
-              </span>
-            </Card>
-            <Card title="Security" topColor="#6C63FF">
-              <span>
-                <h5>Password</h5>
-                <FontAwesomeIcon icon={faLock} size="lg" color="#6C63FF" />
-              </span>
-            </Card>
-          </div>
-        </div>
+const Profile = (props) => (
+  <div className="dashboard-body">
+    <h4>Profile</h4>
+    <div className="profile-body">
+      <div className="profile-left">
+        <Card title="Personal Data" topColor="blue">
+          <FontAwesomeIcon icon={faUserCircle} className="user-icon" />
+          <h5>{props.user.first_name + " " + props.user.last_name}</h5>
+          <h5>{props.user.phone_number}</h5>
+          <h5>{props.user.email}</h5>
+          <h5>{props.user.address}</h5>
+          <FontAwesomeIcon icon={faShieldAlt} className="shield-icon" />
+        </Card>
+      </div>
+      <div className="profile-right">
+        <Card title="Bank Detail" topColor="#FF6584">
+          <h5>{user.bank.accountName}</h5>
+          <h5>{user.bank.accountNumber}</h5>
+          <h5>{user.bank.bankName}</h5>
+        </Card>
+        <Card title="Verification" topColor="#40DA86">
+          <span>
+            <h5>BVN</h5>
+            <FontAwesomeIcon
+              icon={user.verification.bvn ? faCheckCircle : faTimesCircle}
+              size="lg"
+              color="#5ED8A2"
+            />
+          </span>
+          <span>
+            <h5>Identification</h5>
+            <FontAwesomeIcon
+              icon={user.verification.nin ? faCheckCircle : faTimesCircle}
+              size="lg"
+              color="#5ED8A2"
+            />
+          </span>
+        </Card>
+        <Card title="Security" topColor="#6C63FF">
+          <span>
+            <h5>Password</h5>
+            <FontAwesomeIcon icon={faLock} size="lg" color="#6C63FF" />
+          </span>
+        </Card>
       </div>
     </div>
   </div>
 );
-
 export default Profile;
