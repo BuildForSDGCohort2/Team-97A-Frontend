@@ -107,6 +107,7 @@ class MainDashboard extends Component {
                 return <Profile {...props} user={this.props.user} />;
               }}
             />
+            
           </Switch>
         </div>
       </div>

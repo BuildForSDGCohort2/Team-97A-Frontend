@@ -56,8 +56,10 @@ class OwnerTracker extends Component {
               <h4>Your package has been assigned to :</h4>
             ) : trackerStatus === "in_transit" ? (
               <h4>Your package has been assigned to :</h4>
-            ) : (
+            ) : trackerStatus === "in_delivered" ? (
               <h4>Package successfully delivered to :</h4>
+            ) : (
+              <h4>Your packaged has not yet been assigned</h4>
             )}
           </div>
 

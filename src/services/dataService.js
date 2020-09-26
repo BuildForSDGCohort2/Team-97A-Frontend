@@ -61,13 +61,8 @@ export const getAllUsers = async () => {
 /****************** packages********************/
 
 export const createNewPackage = async (data) => {
-  try {
-    const response = await axiosInstance.post("/packages/", data);
-    console.log(response);
-    return response;
-  } catch (e) {
-    toast.warn("could not add this package");
-  }
+  const response = await axiosInstance.post("/packages/", data);
+  return response.data;
 };
 
 export const getAllPackages = async () => {
