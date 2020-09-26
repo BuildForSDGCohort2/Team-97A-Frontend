@@ -80,7 +80,9 @@ const Profile = (props) => (
         </div>
       </div>
     </div>
-    <Modal render={() => <EditBank />} />
+    {/* <Modal>
+      <EditBank />
+    </Modal> */}
 
     {/* ****************************Edit start************************ */}
     {/* <div className="edit-page">

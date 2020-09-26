@@ -13,7 +13,7 @@ export class Modal extends Component {
             alt="close"
             className="close"
           />
-          {this.props.render()}
+          {this.props.children}
           <div className=" submit-group">
             <input className="submit" type="submit" value="Submit" />
           </div>
