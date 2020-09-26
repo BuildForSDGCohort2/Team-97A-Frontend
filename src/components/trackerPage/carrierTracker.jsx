@@ -7,55 +7,48 @@ import PinForm from "./pinForm";
 import Rating from "./rating";
 
 class CarrierTracker extends Component {
-  state = {
-    tracker: { confirmed: true, inTransit: false, delivered: false },
-    trackerStatus: "confirmed",
-    pin: { pin1: "", pin2: "", pin3: "", pin4: "", pin5: "" },
-    rating: 3,
+  state = {};
+
+  trackerStatus = () => {
+    const tracker = { ...this.props.singlePackage.tracker };
+    return tracker.is_delivered === true
+      ? "is_delivered"
+      : tracker.in_transit === true
+      ? "in_transit"
+      : tracker.is_confirmed === true
+      ? "is_confirmed"
+      : null;
   };
 
-  handleDetailClose = () => {
-    this.props.history.push("/packages/all");
-  };
+  trackerRef = React.createRef();
 
-  handlePinChange = (e) => {
-    e.preventDefault();
-    const pin = { ...this.state.pin };
-    pin[e.target.name] = e.target.value;
-    this.setState({ pin });
-  };
-
-  handleConfirmCollection = () => {
-    console.log("confirming collection");
-  };
-
-  handleConfirmDelivery = () => {
-    const pin = Object.values(this.state.pin).join("");
-    //send pin to backend here
+  handleTrackerClose = () => {
+    this.trackerRef.current.style.display = "none";
   };
 
   render() {
+    const trackerStatus = this.trackerStatus();
     return (
-      <div className="tracker-page">
+      <div className="tracker-page " ref={this.trackerRef}>
         <div className="tracker-main animate">
           <h4 className="tracker-status">Pending </h4>
           <img
-            onClick={this.handleDetailClose}
+            onClick={this.handleTrackerClose}
             src={closeIcon}
             alt="close"
             className="close"
           />
 
           <div className="description">
-            {this.state.trackerStatus === "confirmed" ? (
+            {trackerStatus === "is_delivered" ? (
+              <h4>Package successfully delivered to</h4>
+            ) : trackerStatus === "in_transit" ? (
+              <h4>please request delivery code from</h4>
+            ) : (
               <h4>
                 please call the owner to confirm your misssion and schedule
                 pickup
               </h4>
-            ) : this.state.trackerStatus === "inTransit" ? (
-              <h4>please request delivery code from</h4>
-            ) : (
-              <h4>Package successfully delivered to</h4>
             )}
           </div>
 
@@ -78,20 +71,17 @@ class CarrierTracker extends Component {
           </div>
 
           <PinForm
-            onPinChange={this.handlePinChange}
-            pin={this.state.pin}
-            trackerStatus={this.state.trackerStatus}
+            onPinChange={this.props.onPinChange}
+            pin={this.props.pin}
+            trackerStatus={trackerStatus}
           />
           <TrackerAction
-            status={this.state.trackerStatus}
-            onConfirmCollection={this.handleConfirmCollection}
-            onConfirmDelivery={this.handleConfirmDelivery}
+            status={trackerStatus}
+            onConfirmCollection={this.props.onConfirmCollection}
+            onConfirmDelivery={this.props.onConfirmDelivery}
           />
-          <Tracker tracker={this.state.tracker} />
-          <Rating
-            rating={this.state.rating}
-            trackerStatus={this.state.trackerStatus}
-          />
+          <Tracker tracker={{ ...this.props.singlePackage.tracker }} />
+          <Rating rating={this.state.rating} trackerStatus={trackerStatus} />
         </div>
       </div>
     );

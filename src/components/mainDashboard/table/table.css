@@ -51,15 +51,15 @@ td {
   padding: 0.4em;
 }
 
-.priority.high {
+.priority.HIGH {
   background-color: rgba(255, 184, 184, 0.38);
   color: #ff6584;
 }
-.priority.medium {
+.priority.MEDIUM {
   background: rgba(255, 208, 55, 0.28);
   color: #caad16;
 }
-.priority.low {
+.priority.LOW {
   background: rgba(86, 89, 135, 0.29);
   color: #6c63ff;
 }

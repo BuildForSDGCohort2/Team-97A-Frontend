@@ -52,6 +52,27 @@
   display: flex;
 }
 
+.not-verified-warning {
+  text-align: center;
+  color: red;
+  border-top: 1px solid #e91e63;
+  background: #ffe4e4;
+  font-weight: bold;
+}
+.not-verified-warning span {
+  padding-left: 10px;
+  cursor: pointer;
+  color: #ff6584;
+  text-decoration: underline;
+}
+.not-verified-warning span:hover {
+  color: darkred;
+}
+
+.hide {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .profile-photo-container img {
     width: 50px;

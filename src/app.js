@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Link,
@@ -18,14 +18,26 @@ import ForgotPassword from "./components/auth/forgotPassword/forgotPassword";
 import MainDashboard from "./components/mainDashboard/mainDashboard";
 import DetailPage from "./components/detailPage/detailPage";
 import NewPackage from "./components/newPackage/newPackage";
-import TrackerPage from "./components/trackerPage/trackerPage";
 import "./app.css";
 import Profile from "./components/profile/Profile";
+import { getCurrentUser } from "./services/dataService";
 
 function App() {
+  const [user, setUser] = useState({});
   const nav = useRef(null);
   const navLinks = useRef([]);
   navLinks.current = [];
+
+  async function fetchUserData() {
+    try {
+      const user = await getCurrentUser();
+      console.log(user);
+      setUser(user);
+    } catch (e) {}
+  }
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   const ellipsis = React.useRef(null);
 
@@ -110,16 +122,20 @@ function App() {
           <Route path="/auth/forgot_password/" component={ForgotPassword} />
           <Route path="/getstarted/" component={GetStarted} />
 
-          <Route path="/package/:id/tracker/" component={TrackerPage} />
-          <Route path="/package/new/" component={NewPackage} />
-          <Route path="/package/:id/" component={DetailPage} />
+          <Route
+            path="/package/new/"
+            render={(props) => <NewPackage user={user} {...props} />}
+          />
+          <Route
+            path="/package/:id/"
+            render={(props) => <DetailPage user={user} {...props} />}
+          />
           <Route
             path="/packages/"
-            render={(props) => <MainDashboard {...props} />}
+            render={(props) => <MainDashboard user={user} {...props} />}
           />
         </Switch>
         {/* footer component */}
-
         <Footer />
       </div>
     </Router>

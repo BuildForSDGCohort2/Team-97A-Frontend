@@ -21,6 +21,16 @@
   }
 }
 
+.show-tracker {
+  padding-top: 4px;
+  cursor: pointer;
+  color: #67afd0;
+}
+
+.show-tracker:hover {
+  color: gold;
+}
+
 .tracker-page {
   position: fixed;
   left: 0px;
@@ -32,6 +42,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1;
+  display: none;
 }
 
 .tracker-main {

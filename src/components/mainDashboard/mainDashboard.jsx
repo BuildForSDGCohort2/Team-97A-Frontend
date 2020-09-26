@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getAllPackages } from "../../services/fakeDataService";
+import { getAllPackages } from "../../services/dataService";
 import DashboardTop from "./dashboardTop/dashboardTop";
 import Sidebar from "./sidebar/sidebar";
 import "./mainDashboard.css";
@@ -11,14 +11,16 @@ import MyPackages from "./myPackages";
 class MainDashboard extends Component {
   state = {
     queries: { origin: "", destination: "" },
-    data: getAllPackages(),
-    user: {
-      id: 1,
-    },
+    data: [],
   };
 
+  async componentDidMount() {
+    const packages = await getAllPackages();
+    this.setState({ data: packages });
+  }
+
   getQueriedPackages = () => {
-    // this logic get all the data in the state
+    // this logic gets all the data in the state
     // if there is a search query string it filters the data by the query string
     const allData = [...this.state.data];
     const currentQueries = { ...this.state.queries };
@@ -31,17 +33,18 @@ class MainDashboard extends Component {
   };
 
   getUserPackages = () => {
-    // This logic all the packages
+    // This logic returns all the packages
     // and returns both the packages that the user has sent and recieved in an object
     // in line 44 below
+    console.log(this.state.data);
     const allPackages = [...this.state.data];
 
     const userSentPackages = allPackages.filter(
-      (singlePackage) => singlePackage.carrier.id === this.state.user.id
+      (singlePackage) => singlePackage.owner === this.props.user.id
     );
 
     const userCarriedPackages = allPackages.filter(
-      (singlePackage) => singlePackage.sender.id === this.state.user.id
+      (singlePackage) => singlePackage.carrier === this.props.user.id
     );
     return { userSentPackages, userCarriedPackages };
   };
@@ -58,6 +61,8 @@ class MainDashboard extends Component {
 
   handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
     toast.warn("you have been logged out");
     this.props.history.push("/");
   };
@@ -67,7 +72,7 @@ class MainDashboard extends Component {
       <div className="dashboard-page">
         <Sidebar />
         <div className="main-dashboard">
-          <DashboardTop onLogout={this.handleLogout} />
+          <DashboardTop user={this.props.user} onLogout={this.handleLogout} />
           <Switch>
             <Route
               path="/packages/all/"

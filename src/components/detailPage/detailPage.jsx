@@ -1,16 +1,25 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { getSinglePackage } from "../../services/fakeDataService";
+import { getSinglePackage } from "../../services/dataService";
 import closeIcon from "../../images/dashboard/close.png";
-import packageImg from "../../images/dashboard/package1.png";
+import { updateTracker, updatePackage } from "../../services/dataService";
+import OwnerTracker from "./../trackerPage/ownerTracker";
+import CarrierTracker from "../trackerPage/carrierTracker";
+import { toast } from "react-toastify";
 import "./detailPage.css";
 
 class DetailPage extends Component {
   state = {
-    data: getSinglePackage(),
+    singlePackage: {},
+    inputPin: { pin1: "", pin2: "", pin3: "", pin4: "", pin5: "" },
   };
+  trackerRef = React.createRef();
 
-  componentDidMount() {}
+  async componentDidMount() {
+    const packageID = this.props.match.params.id;
+    const singlePackage = await getSinglePackage(packageID);
+    this.setState({ singlePackage: singlePackage });
+  }
+
   detailRef = React.createRef();
 
   handleDetailClose = () => {
@@ -18,19 +27,90 @@ class DetailPage extends Component {
     this.detailRef.current.style.display = "none";
   };
 
+  handlePinChange = (e) => {
+    e.preventDefault();
+    const inputPin = { ...this.state.inputPin };
+    inputPin[e.target.name] = e.target.value;
+    this.setState({ inputPin });
+  };
+
+  handleConfirmCollection = async () => {
+    const originalPackage = { ...this.state.singlePackage };
+    const modifiedPackage = { ...this.state.singlePackage };
+    try {
+      const tracker = { ...this.state.singlePackage.tracker };
+      tracker.in_transit = true;
+      modifiedPackage.tracker = tracker;
+      this.setState({ singlePackage: modifiedPackage });
+
+      const newTracker = await updateTracker(tracker);
+      console.log("confirming collection", newTracker);
+      toast("collection confirmed");
+    } catch (e) {
+      this.setState({ singlePackage: originalPackage });
+      toast.warn("could not confirm collection at this point");
+    }
+  };
+
+  handleConfirmDelivery = async () => {
+    const pin = Object.values(this.state.inputPin).join("");
+    if (pin === this.state.singlePackage.security_code) {
+      const originalPackage = { ...this.state.singlePackage };
+      const modifiedPackage = { ...this.state.singlePackage };
+      try {
+        const tracker = { ...this.state.singlePackage.tracker };
+        tracker.is_delivered = true;
+        modifiedPackage.tracker = tracker;
+        this.setState({ singlePackage: modifiedPackage });
+
+        await updateTracker(tracker);
+        toast("collection confirmed");
+      } catch (e) {
+        this.setState({ singlePackage: originalPackage });
+        toast.warn("could not confirm delivery at this moment");
+      }
+    } else {
+      toast.error("incorrect pin");
+    }
+    console.log(pin);
+    //send pin to backend here
+  };
+
+  handleAcceptMission = async () => {
+    const originalPackage = { ...this.state.singlePackage };
+    const modifiedPackage = { ...this.state.singlePackage };
+    const packagePayload = {};
+    packagePayload.id = originalPackage.id;
+    packagePayload.carrier = this.props.user.id;
+    modifiedPackage.carrier = this.props.user.id;
+    try {
+      this.setState({ singlePackage: modifiedPackage });
+      await updatePackage(packagePayload);
+      toast("you have been assigned this package");
+    } catch (e) {
+      console.log(e.response);
+      this.setState({ singlePackage: originalPackage });
+      toast.error("could not assign this package to you");
+    }
+  };
+
   render() {
     const {
       id,
       name,
-      pickupAddress,
-      deliveryAddress,
-      deliveryPeriod,
-      cost,
+      priority,
+      pick_address,
+      dest_address,
+      delivery_period,
+      price,
       weight,
       origin,
       destination,
-      info,
-    } = this.state.data;
+      description,
+      package_image,
+      owner,
+      carrier,
+    } = this.state.singlePackage;
     return (
       <div className="package-detail-page" ref={this.detailRef}>
         <div className="package-detail-main animate">
@@ -44,26 +124,38 @@ class DetailPage extends Component {
           <h2 className="page-title">Package detail</h2>
           <div className="row">
             <div className="detail-left">
+              <div className="long-detail-row">
+                <div className="detail-row-left">
+                  <p className="label">Name</p>
+                  <p className="detail">{name}</p>
+                </div>
+                <div className="detail-row-right">
+                  <p className="label">Priority</p>
+                  <p className={priority + " detail detail-priority"}>
+                    {priority}
+                  </p>
+                </div>
+              </div>
               <div className="detail-row">
                 <p className="label">Pickup address</p>
-                <p className="detail">{pickupAddress}</p>
+                <p className="detail">{pick_address}</p>
               </div>
               <div className="detail-row">
                 <p className="label">Delivery address</p>
-                <p className="detail">{deliveryAddress}</p>
+                <p className="detail">{dest_address}</p>
               </div>
               <div className="long-detail-row">
                 <div className="detail-row-left">
                   <p className="label">Delivery period</p>
                   <p className="detail">
-                    {deliveryPeriod}
+                    {delivery_period}
                     <span className="unit">days</span>
                   </p>
                 </div>
                 <div className="detail-row-right">
-                  <p className="label">Cost</p>
+                  <p className="label">price</p>
                   <p className="detail">
-                    {cost}
+                    {price}
                     <span className="unit">NGN</span>
                   </p>
                 </div>
@@ -92,16 +184,45 @@ class DetailPage extends Component {
               </div>
               <div className="detail-row">
                 <p className="label">other info</p>
-                <p className="detail">{info}</p>
+                <p className="detail">{description}</p>
               </div>
             </div>
             <div className="detail-right">
-              <img src={packageImg} alt="package" />
-              <button className="accept-btn">Accept Mission </button>
-              {/* display conditionally if user is package carrier or owner */}
-              <Link to={`/package/${id}/tracker/`}>
-                <p>Tracker</p>
-              </Link>
+              <img src={package_image} alt="package" />
+
+              {/* show tracker prompt only when user is the owner or carrier */}
+              {this.props.user.id === owner ||
+              this.props.user.id === carrier ? (
+                <p
+                  className="show-tracker"
+                  onClick={() => {
+                    document.querySelector(".tracker-page").style.display =
+                      "flex";
+                  }}
+                >
+                  Tracker
+                </p>
+              ) : (
+                <button
+                  className="accept-btn"
+                  onClick={this.handleAcceptMission}
+                >
+                  Accept Mission
+                </button>
+              )}
+
+              {/* display different tracker conditionally if user is package carrier or owner */}
+              {this.props.user.id === owner ? (
+                <OwnerTracker singlePackage={{ ...this.state.singlePackage }} />
+              ) : this.props.user.id === carrier ? (
+                <CarrierTracker
+                  singlePackage={{ ...this.state.singlePackage }}
+                  onConfirmCollection={this.handleConfirmCollection}
+                  onConfirmDelivery={this.handleConfirmDelivery}
+                  onPinChange={this.handlePinChange}
+                  pin={this.state.inputPin}
+                />
+              ) : null}
             </div>
           </div>
         </div>
