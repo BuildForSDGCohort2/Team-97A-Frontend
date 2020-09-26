@@ -17,7 +17,7 @@ class MainDashboard extends Component {
 
   async componentDidMount() {
     const packages = await getAllPackages();
-    this.setState({ data: packages });
+    this.setState({ data: packages || [] });
   }
 
   getQueriedPackages = () => {
@@ -107,7 +107,6 @@ class MainDashboard extends Component {
                 return <Profile {...props} user={this.props.user} />;
               }}
             />
-            
           </Switch>
         </div>
       </div>
