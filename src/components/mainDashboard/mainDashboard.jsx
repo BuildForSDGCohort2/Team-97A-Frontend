@@ -7,6 +7,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { toast } from "react-toastify";
 import AllPackages from "./allPackages";
 import MyPackages from "./myPackages";
+import Profile from "../profile/Profile";
 
 class MainDashboard extends Component {
   state = {
@@ -98,6 +99,12 @@ class MainDashboard extends Component {
                     packages={this.getUserPackages()}
                   />
                 );
+              }}
+            />
+            <Route
+              path="/packages/profile/"
+              render={(props) => {
+                return <Profile {...props} user={this.props.user} />;
               }}
             />
           </Switch>

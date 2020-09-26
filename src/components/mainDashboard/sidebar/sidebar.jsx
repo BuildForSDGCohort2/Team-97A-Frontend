@@ -28,7 +28,7 @@ const Sidebar = () => {
           </Link>
         </div>
         <div title="My profile" className="sidebar-menu-item">
-          <Link to="/profile/">
+          <Link to="/packages/profile/">
             <img src={profileIcon} alt="" className="icon" />
           </Link>
         </div>

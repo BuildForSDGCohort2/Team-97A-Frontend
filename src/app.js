@@ -19,7 +19,6 @@ import MainDashboard from "./components/mainDashboard/mainDashboard";
 import DetailPage from "./components/detailPage/detailPage";
 import NewPackage from "./components/newPackage/newPackage";
 import "./app.css";
-import Profile from "./components/profile/Profile";
 import { getCurrentUser } from "./services/dataService";
 
 function App() {
@@ -117,7 +116,6 @@ function App() {
               )
             }
           />
-          <Route path="/profile/" component={Profile} />
           <Route path="/auth/reset_password/" component={ResetPassword} />
           <Route path="/auth/forgot_password/" component={ForgotPassword} />
           <Route path="/getstarted/" component={GetStarted} />
