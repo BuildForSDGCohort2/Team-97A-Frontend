@@ -2,7 +2,7 @@
 
 LIVE URL: https://carigo.herokuapp.com/
 
-use the following test card for depositing amount into user's wallet
+use the following test card for depositing money into user's wallet
 
 ```
 Card number: 5531 8866 5214 2950
