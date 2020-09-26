@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Sidebar from "../mainDashboard/sidebar/sidebar";
 import DashboardTop from "../mainDashboard/dashboardTop/dashboardTop";
 import Card from "../profile/Card";
+import { useRavePayment } from "react-ravepayment";
 
 import "./wallet.css";
+import Modal from "../Modal";
 
 const Wallet = () => {
-  const handleDeposit = () => {
-    console.log("deposit");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [depositAmount, setDepositAmount] = useState();
+
+  const config = {
+    txref: "rave-123456",
+    customer_email: "user@carigo.ng",
+    customer_phone: "07033389645",
+    amount: depositAmount,
+    PBFPubKey: "FLWPUBK-9d4c93ff4026de069066c00f1a36e899-X", // putting this here for now
+    production: false,
   };
+
+  const { initializePayment } = useRavePayment(config);
 
   const handleWidthraw = () => {
     console.log("widthraw");
@@ -28,7 +40,7 @@ const Wallet = () => {
                 <span>NGN 7,652.34 </span>
                 <button
                   className="button deposit-button"
-                  onClick={() => handleDeposit()}
+                  onClick={() => setModalVisible(true)}
                 >
                   Deposit
                 </button>
@@ -76,6 +88,28 @@ const Wallet = () => {
             </div>
           </div>
         </div>
+
+        <Modal
+          title="Provide amount"
+          visible={modalVisible}
+          setVisible={setModalVisible}
+        >
+          <div className="modal">
+            <input
+              type="number"
+              placeholder="Enter amount"
+              className="input"
+              onChange={({ target: { value } }) => setDepositAmount(value)}
+            />
+
+            <button
+              className="button proceed-button"
+              onClick={() => initializePayment()}
+            >
+              Proceed
+            </button>
+          </div>
+        </Modal>
       </div>
     </div>
   );
