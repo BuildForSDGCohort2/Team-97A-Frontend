@@ -59,13 +59,13 @@
   background: #ffe4e4;
   font-weight: bold;
 }
-.not-verified-warning span {
+.not-verified-warning span a {
   padding-left: 10px;
   cursor: pointer;
   color: #ff6584;
   text-decoration: underline;
 }
-.not-verified-warning span:hover {
+.not-verified-warning span a:hover {
   color: darkred;
 }
 

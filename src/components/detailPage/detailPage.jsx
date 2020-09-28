@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { getSinglePackage } from "../../services/dataService";
 import closeIcon from "../../images/dashboard/close.png";
-import { updateTracker, updatePackage } from "../../services/dataService";
+import APICLient from "../../services/dataService";
 import OwnerTracker from "./../trackerPage/ownerTracker";
 import CarrierTracker from "../trackerPage/carrierTracker";
 import { toast } from "react-toastify";
@@ -16,7 +15,7 @@ class DetailPage extends Component {
 
   async componentDidMount() {
     const packageID = this.props.match.params.id;
-    const singlePackage = await getSinglePackage(packageID);
+    const singlePackage = await APICLient.getSinglePackage(packageID);
     this.setState({ singlePackage: singlePackage });
   }
 
@@ -43,7 +42,7 @@ class DetailPage extends Component {
       modifiedPackage.tracker = tracker;
       this.setState({ singlePackage: modifiedPackage });
 
-      const newTracker = await updateTracker(tracker);
+      const newTracker = await APICLient.updateTracker(tracker);
       console.log("confirming collection", newTracker);
       toast("collection confirmed");
     } catch (e) {
@@ -63,7 +62,7 @@ class DetailPage extends Component {
         modifiedPackage.tracker = tracker;
         this.setState({ singlePackage: modifiedPackage });
 
-        await updateTracker(tracker);
+        await APICLient.updateTracker(tracker);
         toast("collection confirmed");
       } catch (e) {
         this.setState({ singlePackage: originalPackage });
@@ -85,7 +84,7 @@ class DetailPage extends Component {
     modifiedPackage.carrier = this.props.user.id;
     try {
       this.setState({ singlePackage: modifiedPackage });
-      await updatePackage(packagePayload);
+      await APICLient.updatePackage(packagePayload);
       toast("you have been assigned this package");
     } catch (e) {
       console.log(e.response);

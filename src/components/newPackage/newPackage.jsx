@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createNewPackage, getCurrentUser } from "../../services/dataService";
+import APICLient from "../../services/dataService";
 import closeIcon from "../../images/dashboard/close.png";
 import "./newPackage.css";
 import { toast } from "react-toastify";
@@ -26,7 +26,7 @@ class NewPackage extends Component {
   };
 
   async componentDidMount() {
-    const user = await getCurrentUser();
+    const user = await APICLient.getCurrentUser();
     this.setState({ user });
   }
 
@@ -56,7 +56,7 @@ class NewPackage extends Component {
       formData.append(key, data[key]);
     }
     try {
-      const newPackage = await createNewPackage(formData);
+      const newPackage = await APICLient.createNewPackage(formData);
       console.log(newPackage);
       toast("Package added successfully");
       // push to checkout / payment page here when checkout page is implemented

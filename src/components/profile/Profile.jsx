@@ -1,231 +1,189 @@
-import React from "react";
-import EditBank, { Modal, EditVerification } from "./EditProfile";
-import idImg from "../../images/dashboard/id.png";
-import closeIcon from "../../images/dashboard/close.png";
+import React, { useState, useEffect } from "react";
+import { EditBank, EditVerification, EditPersonalDetails } from "./EditProfile";
+import EditModal from "./editProfileModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
-
 import {
   faUserCircle,
   faShieldAlt,
   faCheckCircle,
   faTimesCircle,
+  faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import Card from "./Card";
 import "./Profile.css";
+import APIClient from "../../services/dataService";
+import { toast } from "react-toastify";
 
-const user = {
-  fullname: "Jane Doe",
-  phone: "07000000000",
-  email: "info@carigo.com",
-  address: "No. 12, Kikero Street, Lagos",
+const Profile = (props) => {
+  const [modalVisible, setModalVisible] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
+  const [verification, setVerification] = useState({});
 
-  bank: {
-    accountName: "Jane Doe",
-    accountNumber: "01200023923",
-    bankName: "Access Bank",
-  },
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
-  verification: {
-    bvn: false,
-    nin: true,
-  },
+  const fetchUser = async () => {
+    const user = await APIClient.getCurrentUser();
+    const verification = user.verification ? user.verification : {};
+    setVerification(verification);
+    setCurrentUser(user);
+  };
+
+  const handleProfileInput = (e) => {
+    const user = { ...currentUser };
+    user[e.target.name] = e.target.value;
+    setCurrentUser(user);
+  };
+
+  const handleVerificationInput = (e) => {
+    const modifiedVerification = { ...verification };
+    if (e.target.type === "file") {
+      const uploadedFile = e.target.files[0];
+      modifiedVerification[e.target.name] = uploadedFile;
+    } else {
+      modifiedVerification[e.target.name] = e.target.value;
+    }
+    setVerification(modifiedVerification);
+  };
+
+  const handleEditPersonalDetails = async () => {
+    try {
+      await APIClient.editUser(currentUser);
+      toast("Personal details updated successfully");
+      setModalVisible({ editPersonal: false });
+    } catch (e) {
+      console.log(e.response);
+    }
+  };
+
+  const handleVerification = async () => {
+    try {
+      verification.user = currentUser.id;
+      const data = new FormData();
+      for (let key in verification) {
+        data.append(key, verification[key]);
+      }
+
+      currentUser.is_verified
+        ? await APIClient.updateUserVerification(data, verification.id)
+        : await APIClient.verifyUser(data);
+
+      setModalVisible({ editVerification: false });
+      props.history.push("/packages/profile/");
+      toast("your have been verified successfully");
+    } catch (e) {
+      console.log(e.response);
+      toast.error("could not verify you at this moment");
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <div className="dashboard-body">
+        <h4>Profile</h4>
+        <div className="profile-body">
+          <div className="profile-left">
+            <Card
+              title="Personal Data"
+              topColor="blue"
+              onEditClick={() => setModalVisible({ editPersonal: true })}
+            >
+              <FontAwesomeIcon icon={faUserCircle} className="user-icon" />
+              <h5>{currentUser.first_name + " " + currentUser.last_name}</h5>
+              <h5>{currentUser.phone_number}</h5>
+              <h5>{currentUser.email}</h5>
+              <h5>{currentUser.address}</h5>
+              <FontAwesomeIcon
+                icon={currentUser.is_verified ? faShieldAlt : faTimesCircle}
+                className="shield-icon"
+              />
+            </Card>
+          </div>
+          <div className="profile-right">
+            <Card
+              title="Bank Detail"
+              topColor="#FF6584"
+              onEditClick={() => setModalVisible({ editBank: true })}
+            >
+              <h5>{verification.account_name}</h5>
+              <h5>{verification.account_number}</h5>
+              <h5>{verification.bank_name}</h5>
+            </Card>
+            <Card
+              title="Verification"
+              topColor="#40DA86"
+              onEditClick={() => setModalVisible({ editVerification: true })}
+            >
+              <span>
+                <h5>BVN</h5>
+                <FontAwesomeIcon
+                  icon={verification.BVN ? faCheckCircle : faTimesCircle}
+                  size="lg"
+                  color="#5ED8A2"
+                />
+              </span>
+              <span>
+                <h5>Identification</h5>
+                <FontAwesomeIcon
+                  icon={verification.NIN ? faCheckCircle : faTimesCircle}
+                  size="lg"
+                  color="#5ED8A2"
+                />
+              </span>
+            </Card>
+            <Card title="Security" topColor="#6C63FF">
+              <span>
+                <h5>Password</h5>
+                <FontAwesomeIcon icon={faLock} size="lg" color="#6C63FF" />
+              </span>
+            </Card>
+          </div>
+        </div>
+      </div>
+      <EditModal
+        visible={modalVisible.editPersonal}
+        onClose={() => setModalVisible({ editPersonal: false })}
+      >
+        <EditPersonalDetails
+          data={currentUser}
+          onInputChange={handleProfileInput}
+          onSubmit={handleEditPersonalDetails}
+        />
+      </EditModal>
+      <EditModal
+        visible={
+          props.location.pathname === "/packages/profile/verify/"
+            ? true
+            : modalVisible.editBank
+        }
+        onClose={() => {
+          props.history.push("/packages/profile/");
+          setModalVisible({ editBank: false });
+        }}
+      >
+        <EditBank
+          data={verification}
+          onInputChange={handleVerificationInput}
+          onSubmit={() =>
+            setModalVisible({ editBank: false, editVerification: true })
+          }
+        />
+      </EditModal>
+      <EditModal
+        visible={modalVisible.editVerification}
+        onClose={() => {
+          props.history.push("/packages/profile/");
+          setModalVisible({ editVerification: false });
+        }}
+      >
+        <EditVerification
+          data={verification}
+          onSubmit={() => handleVerification()}
+          onInputChange={handleVerificationInput}
+        />
+      </EditModal>
+    </React.Fragment>
+  );
 };
-
-const Profile = (props) => (
-  <React.Fragment>
-    <div className="dashboard-body">
-      <h4>Profile</h4>
-      <div className="profile-body">
-        <div className="profile-left">
-          <Card title="Personal Data" topColor="blue">
-            <FontAwesomeIcon icon={faUserCircle} className="user-icon" />
-            <h5>{props.user.first_name + " " + props.user.last_name}</h5>
-            <h5>{props.user.phone_number}</h5>
-            <h5>{props.user.email}</h5>
-            <h5>{props.user.address}</h5>
-            <FontAwesomeIcon icon={faShieldAlt} className="shield-icon" />
-          </Card>
-        </div>
-        <div className="profile-right">
-          <Card title="Bank Detail" topColor="#FF6584">
-            <h5>{user.bank.accountName}</h5>
-            <h5>{user.bank.accountNumber}</h5>
-            <h5>{user.bank.bankName}</h5>
-          </Card>
-          <Card title="Verification" topColor="#40DA86">
-            <span>
-              <h5>BVN</h5>
-              <FontAwesomeIcon
-                icon={user.verification.bvn ? faCheckCircle : faTimesCircle}
-                size="lg"
-                color="#5ED8A2"
-              />
-            </span>
-            <span>
-              <h5>Identification</h5>
-              <FontAwesomeIcon
-                icon={user.verification.nin ? faCheckCircle : faTimesCircle}
-                size="lg"
-                color="#5ED8A2"
-              />
-            </span>
-          </Card>
-          <Card title="Security" topColor="#6C63FF">
-            <span>
-              <h5>Password</h5>
-              <FontAwesomeIcon icon={faLock} size="lg" color="#6C63FF" />
-            </span>
-          </Card>
-        </div>
-      </div>
-    </div>
-    {/* <Modal>
-      <EditBank />
-    </Modal> */}
-
-    {/* ****************************Edit start************************ */}
-    {/* <div className="edit-page">
-      <div className="edit-modal">
-        <img
-          // onClick={this.handleDetailClose}
-          src={closeIcon}
-          alt="close"
-          className="close"
-        /> */}
-    {/* ******************verification details****************  */}
-    {/* <div className="title">
-          <h3>Edit Verification details</h3>
-        </div>
-        <div className="main">
-          <div className="left">
-            <form action="">
-              <div className="input-group">
-                <div className="input full">
-                  <label htmlFor="bvn">Bank verification details</label>
-                  <input
-                    // onInput={this.handleInput}
-                    type="text"
-                    name="bvn"
-                    id="bvn"
-                    // value={}
-                  />
-                </div>
-              </div>
-              <div className="input-group">
-                <div className="input full">
-                  <label htmlFor="TypeOfId">Type of ID</label>
-                  <select name="TypeOfId" id="TypeOfId">
-                    <option value="">Drivers License</option>
-                    <option value="">Voters card</option>
-                    <option value="">Inpernational Passport</option>
-                  </select>
-                </div>
-              </div>
-              <div className="input-group">
-                <div className="input full">
-                  <label htmlFor="">upload ID</label>
-                  <input
-                    // onInput={this.handleInput}
-                    type="file"
-                    name="id"
-                    id="id"
-                    // value={}
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-          <div className="right">
-            <img src={idImg} alt="user ID image" />
-          </div>
-        </div> */}
-
-    {/* *******************Edit bank details******************* */}
-
-    {/* <div className="title">
-          <h3>Edit bank details</h3>
-        </div>
-        <div className="main col">
-          <div className="input-group">
-            <div className="input full">
-              <label htmlFor="bvn">Bank verification details</label>
-              <input
-                // onInput={this.handleInput}
-                type="text"
-                name="bvn"
-                id="bvn"
-                // value={}
-              />
-            </div>
-          </div>
-          <div className="input-group">
-            <div className="input full">
-              <label htmlFor="bvn">Bank verification details</label>
-              <input
-                // onInput={this.handleInput}
-                type="text"
-                name="bvn"
-                id="bvn"
-                // value={}
-              />
-            </div>
-          </div>
-          <div className="input-group">
-            <div className="input full">
-              <label htmlFor="bvn">Bank verification details</label>
-              <select name="bank" id="bank">
-                <option value="Diamond Bank">Diamond Bank</option>
-                <option value="First Bank">First Bank</option>
-                <option value="Union Bank">Union Bank</option>
-                <option value="UBA Bank">UBA Bank</option>
-              </select>
-            </div>
-          </div>
-        </div> */}
-
-    {/* ***************************Edit personal details******************** */}
-    {/* <div className="title">Edit personal details</div>
-        <div className="main col">
-          <div className="input-group">
-            <div className="input half">
-              <label htmlFor="">First Name</label>
-              <input type="text" name="" id="" />
-            </div>
-            <div className="input half">
-              <label htmlFor="">Last Name</label>
-              <input type="text" name="" id="" />
-            </div>
-          </div>
-          <div className="input-group">
-            <div className="input half">
-              <label htmlFor="">Phone Number</label>
-              <input type="text" name="" id="" />
-            </div>
-            <div className="input half">
-              <label htmlFor="">Email</label>
-              <input type="text" name="" id="" />
-            </div>
-          </div>
-          <div className="input-group">
-            <div className="input half">
-              <label htmlFor="">Address</label>
-              <input type="text" name="" id="" />
-            </div>
-            <div className="input half">
-              <label htmlFor="">State</label>
-              <input type="text" name="" id="" />
-            </div>
-          </div>
-        </div> */}
-
-    {/* *******************************End********************* */}
-
-    {/* <div className=" submit-group">
-          <input className="submit" type="submit" value="Submit" />
-        </div>
-      </div>
-    </div> */}
-  </React.Fragment>
-);
 export default Profile;

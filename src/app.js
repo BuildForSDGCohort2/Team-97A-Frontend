@@ -6,9 +6,7 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-
 import Loader from "./components/Loader";
-
 import logo from "./images/logo.svg";
 import LandingPage from "./components/langinPage/landingPage";
 import Login from "./components/auth/login/login";
@@ -20,7 +18,7 @@ import ForgotPassword from "./components/auth/forgotPassword/forgotPassword";
 import MainDashboard from "./components/mainDashboard/mainDashboard";
 import DetailPage from "./components/detailPage/detailPage";
 import NewPackage from "./components/newPackage/newPackage";
-import { getCurrentUser } from "./services/dataService";
+import APICLient from "./services/dataService";
 import "./app.css";
 
 function App() {
@@ -32,7 +30,7 @@ function App() {
   // Fetches current user and adds it to state
   async function fetchUserData() {
     try {
-      const user = await getCurrentUser();
+      const user = await APICLient.getCurrentUser();
       console.log(user);
       setUser(user);
     } catch (e) {}
@@ -77,7 +75,7 @@ function App() {
 
   return (
     <Router>
-      <Loader />
+      {/* <Loader /> */}
       <div className="App" id="top">
         <nav className="nav">
           <div className="logo">
@@ -136,7 +134,7 @@ function App() {
           />
           <Route
             path="/packages/"
-            render={(props) => <MainDashboard user={user} {...props} />}
+            render={(props) => <MainDashboard {...props} />}
           />
         </Switch>
         {/* footer component */}
