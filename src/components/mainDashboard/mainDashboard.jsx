@@ -26,6 +26,8 @@ class MainDashboard extends Component {
     this.setState({ packages: packages || [] });
   }
 
+  /********************methods for allPackages component******************/
+
   getQueriedPackages = () => {
     // this logic gets all the packages in the state
     // if there is a search query string it filters the packages by the query string
@@ -117,17 +119,18 @@ class MainDashboard extends Component {
 
   handleVerification = async () => {
     try {
-      const verification = { ...this.state.verification };
+      const user = { ...this.state.user };
+      const verification = this.state.verification;
       verification.user = this.state.user.id;
       const data = new FormData();
       for (let key in verification) {
         data.append(key, verification[key]);
       }
-
       this.state.user.is_verified
         ? await APIClient.updateUserVerification(data, verification.id)
         : await APIClient.verifyUser(data);
-
+      user.is_verified = true;
+      this.setState({ user });
       this.props.history.push("/packages/profile/");
       toast("your have been verified successfully");
     } catch (e) {
