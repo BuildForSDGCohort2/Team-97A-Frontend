@@ -52,7 +52,7 @@ button {
   color: #40da86;
 }
 
-.input {
+.wallet-input {
   background-color: teal;
   border-radius: 20px;
   border-width: 0;
@@ -61,11 +61,11 @@ button {
   width: 300px;
 }
 
-.input:focus {
+.wallet-input:focus {
   outline: none;
 }
 
-.input::placeholder {
+.wallet-input::placeholder {
   color: #fff;
 }
 .modal {

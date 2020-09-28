@@ -5,7 +5,7 @@ import verifiedImg from "../../../images/dashboard/verified.png";
 import notificationIcon from "../../../images/dashboard/notification.png";
 import powerIcon from "../../../images/dashboard/power.png";
 import "./dashboardTop.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const DashboardTop = ({ onLogout, user }) => {
   return (
@@ -57,7 +57,10 @@ const DashboardTop = ({ onLogout, user }) => {
         </div>
       </div>
       <div className={!user.is_verified ? "not-verified-warning" : "hide"}>
-        you are not yet verified!! <span> click here to verify</span>
+        you are not yet verified!!
+        <span>
+          <Link to="/packages/profile/verify/">click here to verify</Link>
+        </span>
       </div>
     </React.Fragment>
   );

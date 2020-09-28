@@ -45,7 +45,7 @@ axiosInstance.interceptors.response.use(
 );
 
 /***************************users***********************/
-export const getCurrentUser = async () => {
+const getCurrentUser = async () => {
   const access_token = localStorage.getItem("token");
   const JWTuser = JWTDecode(access_token);
   const user_id = JWTuser.user_id;
@@ -53,19 +53,36 @@ export const getCurrentUser = async () => {
   return user;
 };
 
-export const getAllUsers = async () => {
+const getAllUsers = async () => {
   const { data: users } = await axiosInstance.get(`/accounts/users/`);
   return users;
 };
 
+const editUser = async (user) => {
+  const respponse = await axiosInstance.patch(
+    `/accounts/users/${user.id}/`,
+    user
+  );
+  return respponse;
+};
+
+const verifyUser = async (data) => {
+  await axiosInstance.post(`/accounts/verify/`, data);
+};
+
+const updateUserVerification = async (data, id) => {
+  console.log(data);
+  await axiosInstance.put(`/accounts/verify/${id}/`, data);
+};
+
 /****************** packages********************/
 
-export const createNewPackage = async (data) => {
+const createNewPackage = async (data) => {
   const response = await axiosInstance.post("/packages/", data);
   return response.data;
 };
 
-export const getAllPackages = async () => {
+const getAllPackages = async () => {
   try {
     const { data: packages } = await axiosInstance.get("/packages/");
     return packages;
@@ -74,7 +91,7 @@ export const getAllPackages = async () => {
   }
 };
 
-export const getSinglePackage = async (packageID) => {
+const getSinglePackage = async (packageID) => {
   try {
     const { data: singlePackage } = await axiosInstance.get(
       `/packages/${packageID}/`
@@ -85,7 +102,7 @@ export const getSinglePackage = async (packageID) => {
   }
 };
 
-export const updatePackage = async (singlePackage) => {
+const updatePackage = async (singlePackage) => {
   const response = await axiosInstance.patch(
     `/packages/${singlePackage.id}/`,
     singlePackage
@@ -95,10 +112,23 @@ export const updatePackage = async (singlePackage) => {
 
 /**************************tracker****************/
 
-export const updateTracker = async (tracker) => {
+const updateTracker = async (tracker) => {
   const response = await axiosInstance.patch(
     `/trackers/${tracker.id}/`,
     tracker
   );
   return response.data;
+};
+
+export default {
+  getCurrentUser,
+  getAllUsers,
+  editUser,
+  verifyUser,
+  updateUserVerification,
+  createNewPackage,
+  getAllPackages,
+  getSinglePackage,
+  updatePackage,
+  updateTracker,
 };
