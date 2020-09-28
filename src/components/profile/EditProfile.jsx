@@ -151,7 +151,9 @@ export class EditPersonalDetails extends Component {
     return (
       <React.Fragment>
         {" "}
-        <div className="title">Edit personal details</div>
+        <div className="title">
+          <h3>Edit personal details</h3>
+        </div>
         <div className="main col">
           <div className="input-group">
             <div className="input half">

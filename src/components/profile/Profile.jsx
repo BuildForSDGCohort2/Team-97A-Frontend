@@ -11,72 +11,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Card from "./Card";
 import "./Profile.css";
-import APIClient from "../../services/dataService";
-import { toast } from "react-toastify";
 
 const Profile = (props) => {
   const [modalVisible, setModalVisible] = useState({});
-  const [currentUser, setCurrentUser] = useState({});
-  const [verification, setVerification] = useState({});
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
-  const fetchUser = async () => {
-    const user = await APIClient.getCurrentUser();
-    const verification = user.verification ? user.verification : {};
-    setVerification(verification);
-    setCurrentUser(user);
-  };
-
-  const handleProfileInput = (e) => {
-    const user = { ...currentUser };
-    user[e.target.name] = e.target.value;
-    setCurrentUser(user);
-  };
-
-  const handleVerificationInput = (e) => {
-    const modifiedVerification = { ...verification };
-    if (e.target.type === "file") {
-      const uploadedFile = e.target.files[0];
-      modifiedVerification[e.target.name] = uploadedFile;
-    } else {
-      modifiedVerification[e.target.name] = e.target.value;
-    }
-    setVerification(modifiedVerification);
-  };
-
-  const handleEditPersonalDetails = async () => {
-    try {
-      await APIClient.editUser(currentUser);
-      toast("Personal details updated successfully");
-      setModalVisible({ editPersonal: false });
-    } catch (e) {
-      console.log(e.response);
-    }
-  };
-
-  const handleVerification = async () => {
-    try {
-      verification.user = currentUser.id;
-      const data = new FormData();
-      for (let key in verification) {
-        data.append(key, verification[key]);
-      }
-
-      currentUser.is_verified
-        ? await APIClient.updateUserVerification(data, verification.id)
-        : await APIClient.verifyUser(data);
-
-      setModalVisible({ editVerification: false });
-      props.history.push("/packages/profile/");
-      toast("your have been verified successfully");
-    } catch (e) {
-      console.log(e.response);
-      toast.error("could not verify you at this moment");
-    }
-  };
 
   return (
     <React.Fragment>
@@ -90,12 +27,12 @@ const Profile = (props) => {
               onEditClick={() => setModalVisible({ editPersonal: true })}
             >
               <FontAwesomeIcon icon={faUserCircle} className="user-icon" />
-              <h5>{currentUser.first_name + " " + currentUser.last_name}</h5>
-              <h5>{currentUser.phone_number}</h5>
-              <h5>{currentUser.email}</h5>
-              <h5>{currentUser.address}</h5>
+              <h5>{props.user.first_name + " " + props.user.last_name}</h5>
+              <h5>{props.user.phone_number}</h5>
+              <h5>{props.user.email}</h5>
+              <h5>{props.user.address}</h5>
               <FontAwesomeIcon
-                icon={currentUser.is_verified ? faShieldAlt : faTimesCircle}
+                icon={props.user.is_verified ? faShieldAlt : faTimesCircle}
                 className="shield-icon"
               />
             </Card>
@@ -106,9 +43,9 @@ const Profile = (props) => {
               topColor="#FF6584"
               onEditClick={() => setModalVisible({ editBank: true })}
             >
-              <h5>{verification.account_name}</h5>
-              <h5>{verification.account_number}</h5>
-              <h5>{verification.bank_name}</h5>
+              <h5>{props.verification.account_name}</h5>
+              <h5>{props.verification.account_number}</h5>
+              <h5>{props.verification.bank_name}</h5>
             </Card>
             <Card
               title="Verification"
@@ -118,7 +55,7 @@ const Profile = (props) => {
               <span>
                 <h5>BVN</h5>
                 <FontAwesomeIcon
-                  icon={verification.BVN ? faCheckCircle : faTimesCircle}
+                  icon={props.verification.BVN ? faCheckCircle : faTimesCircle}
                   size="lg"
                   color="#5ED8A2"
                 />
@@ -126,7 +63,7 @@ const Profile = (props) => {
               <span>
                 <h5>Identification</h5>
                 <FontAwesomeIcon
-                  icon={verification.NIN ? faCheckCircle : faTimesCircle}
+                  icon={props.verification.NIN ? faCheckCircle : faTimesCircle}
                   size="lg"
                   color="#5ED8A2"
                 />
@@ -146,9 +83,9 @@ const Profile = (props) => {
         onClose={() => setModalVisible({ editPersonal: false })}
       >
         <EditPersonalDetails
-          data={currentUser}
-          onInputChange={handleProfileInput}
-          onSubmit={handleEditPersonalDetails}
+          data={props.user}
+          onInputChange={props.onProfilelInput}
+          onSubmit={props.onEditPersonalDetails}
         />
       </EditModal>
       <EditModal
@@ -163,8 +100,8 @@ const Profile = (props) => {
         }}
       >
         <EditBank
-          data={verification}
-          onInputChange={handleVerificationInput}
+          data={props.verification}
+          onInputChange={props.onVerificationInput}
           onSubmit={() =>
             setModalVisible({ editBank: false, editVerification: true })
           }
@@ -178,9 +115,9 @@ const Profile = (props) => {
         }}
       >
         <EditVerification
-          data={verification}
-          onSubmit={() => handleVerification()}
-          onInputChange={handleVerificationInput}
+          data={props.verification}
+          onSubmit={() => props.onVerify()}
+          onInputChange={props.onVerificationInput}
         />
       </EditModal>
     </React.Fragment>

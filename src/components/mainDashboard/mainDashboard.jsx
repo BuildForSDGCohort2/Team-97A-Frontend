@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import APICLient from "../../services/dataService";
+import APIClient from "../../services/dataService";
 import DashboardTop from "./dashboardTop/dashboardTop";
 import Sidebar from "./sidebar/sidebar";
 import "./mainDashboard.css";
@@ -15,11 +15,13 @@ class MainDashboard extends Component {
     queries: { origin: "", destination: "" },
     packages: [],
     user: {},
+    verification: {},
   };
 
   async componentDidMount() {
-    const packages = await APICLient.getAllPackages();
-    const user = await APICLient.getCurrentUser();
+    const packages = await APIClient.getAllPackages();
+    const user = await APIClient.getCurrentUser();
+    this.setState({ verification: user.verification || {} });
     this.setState({ user: user || {} });
     this.setState({ packages: packages || [] });
   }
@@ -84,6 +86,56 @@ class MainDashboard extends Component {
     this.props.history.push("/");
   };
 
+  /*******************methods for profile****************************/
+
+  handleProfileInput = (e) => {
+    const user = { ...this.state.user };
+    user[e.target.name] = e.target.value;
+    this.setState({ user });
+  };
+
+  handleVerificationInput = (e) => {
+    const modifiedVerification = { ...this.state.verification };
+    if (e.target.type === "file") {
+      const uploadedFile = e.target.files[0];
+      modifiedVerification[e.target.name] = uploadedFile;
+    } else {
+      modifiedVerification[e.target.name] = e.target.value;
+    }
+    this.setState({ verification: modifiedVerification });
+  };
+
+  handleEditPersonalDetails = async () => {
+    try {
+      await APIClient.editUser(this.state.user);
+      toast("Personal details updated successfully");
+      this.props.history.push("/packages/profile/");
+    } catch (e) {
+      console.log(e.response);
+    }
+  };
+
+  handleVerification = async () => {
+    try {
+      const verification = { ...this.state.verification };
+      verification.user = this.state.user.id;
+      const data = new FormData();
+      for (let key in verification) {
+        data.append(key, verification[key]);
+      }
+
+      this.state.user.is_verified
+        ? await APIClient.updateUserVerification(data, verification.id)
+        : await APIClient.verifyUser(data);
+
+      this.props.history.push("/packages/profile/");
+      toast("your have been verified successfully");
+    } catch (e) {
+      console.log(e.response);
+      toast.error("could not verify you at this moment");
+    }
+  };
+
   render() {
     return localStorage.getItem("token") ? (
       <div className="dashboard-page">
@@ -120,7 +172,17 @@ class MainDashboard extends Component {
             <Route
               path="/packages/profile/"
               render={(props) => {
-                return <Profile {...props} user={{ ...this.state.user }} />;
+                return (
+                  <Profile
+                    {...props}
+                    user={this.state.user}
+                    verification={this.state.verification}
+                    onProfilelInput={this.handleProfileInput}
+                    onVerificationInput={this.handleVerificationInput}
+                    onEditPersonalDetails={this.handleEditPersonalDetails}
+                    onVerify={this.handleVerification}
+                  />
+                );
               }}
             />
             <Route
