@@ -12,7 +12,7 @@ const DashboardTop = ({ onLogout, user }) => {
     <React.Fragment>
       <div className="dashboard-top">
         <div className="dashboard-top-left">
-          <Link to="/profile/" className="profile-link">
+          <Link to="/packages/profile/" className="profile-link">
             <div className="profile-photo-container">
               <img src={profilePhoto} alt="" className="profile-photo" />
             </div>

@@ -31,7 +31,6 @@ function App() {
   async function fetchUserData() {
     try {
       const user = await APICLient.getCurrentUser();
-      console.log(user);
       setUser(user);
     } catch (e) {}
   }

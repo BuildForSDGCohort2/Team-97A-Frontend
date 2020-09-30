@@ -49,20 +49,25 @@ class NewPackage extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const data = { ...this.state.data };
-    data.owner = this.props.user.id;
-    const formData = new FormData();
-    for (const key in data) {
-      formData.append(key, data[key]);
-    }
-    try {
-      const newPackage = await APICLient.createNewPackage(formData);
-      console.log(newPackage);
-      toast("Package added successfully");
-      // push to checkout / payment page here when checkout page is implemented
-      this.props.history.push(`/package/${newPackage.id}/`);
-    } catch (error) {
-      toast.warn("could not add this package");
+    if (this.state.user.is_verified) {
+      const data = { ...this.state.data };
+      data.owner = this.state.user.id;
+      const formData = new FormData();
+      for (const key in data) {
+        formData.append(key, data[key]);
+      }
+      try {
+        const newPackage = await APICLient.createNewPackage(formData);
+        console.log(newPackage);
+        toast("Package added successfully");
+        // push to checkout / payment page here when checkout page is implemented
+        this.props.history.push(`/package/${newPackage.id}/`);
+      } catch (error) {
+        console.log(error.response);
+        toast.warn("could not add this package");
+      }
+    } else {
+      toast.error("you are not yet verified.");
     }
   };
 
@@ -96,7 +101,7 @@ class NewPackage extends Component {
               <div className="input half">
                 <label htmlFor="dest_address">Package name</label>
                 <input
-                  onInput={this.handleInput}
+                  onChange={this.handleInput}
                   type="text"
                   name="name"
                   id="name"
@@ -121,7 +126,7 @@ class NewPackage extends Component {
               <div className="input half">
                 <label htmlFor="pick_address">Pick-up Address</label>
                 <input
-                  onInput={this.handleInput}
+                  onChange={this.handleInput}
                   type="text"
                   name="pick_address"
                   id="pick_address"
@@ -131,7 +136,7 @@ class NewPackage extends Component {
               <div className="input half">
                 <label htmlFor="dest_address">Dilevery Address</label>
                 <input
-                  onInput={this.handleInput}
+                  onChange={this.handleInput}
                   type="text"
                   name="dest_address"
                   id="dest_address"
@@ -145,7 +150,7 @@ class NewPackage extends Component {
                 <label htmlFor="origin">Origin (city)</label>
                 <span className="input-wrapper">
                   <input
-                    onInput={this.handleInput}
+                    onChange={this.handleInput}
                     type="text"
                     name="origin"
                     id="origin"
@@ -158,7 +163,7 @@ class NewPackage extends Component {
                 <label htmlFor="destination">Destination (city)</label>
                 <span className="input-wrapper">
                   <input
-                    onInput={this.handleInput}
+                    onChange={this.handleInput}
                     type="text"
                     name="destination"
                     id="destination"
@@ -173,7 +178,7 @@ class NewPackage extends Component {
                 <label htmlFor="delivery_period">Dilevery Period</label>
                 <span className="input-wrapper">
                   <input
-                    onInput={this.handleInput}
+                    onChange={this.handleInput}
                     type="text"
                     name="delivery_period"
                     id="delivery_period"
@@ -187,7 +192,7 @@ class NewPackage extends Component {
                 <label htmlFor="cost">cost</label>
                 <span className="input-wrapper">
                   <input
-                    onInput={this.handleInput}
+                    onChange={this.handleInput}
                     type="text"
                     name="price"
                     id="price"
@@ -218,7 +223,7 @@ class NewPackage extends Component {
                 <label htmlFor="weight">Weight</label>
                 <span className="input-wrapper">
                   <input
-                    onInput={this.handleInput}
+                    onChange={this.handleInput}
                     type="text"
                     name="weight"
                     id="weight"
@@ -233,7 +238,7 @@ class NewPackage extends Component {
               <div className="input full">
                 <label htmlFor="description">Other info</label>
                 <input
-                  onInput={this.handleInput}
+                  onChange={this.handleInput}
                   type="text"
                   name="description"
                   id="description"
@@ -246,7 +251,7 @@ class NewPackage extends Component {
               <div className="input full">
                 <label htmlFor="package_image">Package Image</label>
                 <input
-                  onInput={this.handleImageInput}
+                  onChange={this.handleImageInput}
                   type="file"
                   name="package_image"
                   id="package_image"

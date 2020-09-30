@@ -7,14 +7,9 @@ import destinationIcon from "../../../images/dashboard/destination.png";
 import "./table.css";
 
 class PackageTable extends Component {
-  state = { currentPage: 1, totalPages: 0 };
-
-  componentDidMount() {
-    const totalPages = Math.ceil(
-      this.props.packages.length / this.props.numPerPage
-    );
-    this.setState({ totalPages });
-  }
+  state = {
+    currentPage: 1,
+  };
 
   // handles onclick of the pagination prompts
   handlePaginate = (dir) => {
@@ -35,40 +30,44 @@ class PackageTable extends Component {
 
   render() {
     const { onPackageClick, packages } = this.props;
-    const { currentPage, totalPages } = this.state;
+    const { currentPage } = this.state;
     return (
       <React.Fragment>
         <table>
-          <tr>
-            <th>Name</th>
-            <th>Weight</th>
-            <th>Origin</th>
-            <th>Destination</th>
-            <th>Priority</th>
-            <th>Cost</th>
-          </tr>
-          {this.getPanginatedData().map((item) => {
-            return (
-              <tr key={item.id} onClick={() => onPackageClick(item.id)}>
-                {item.title}
-                <td>{item.name}</td>
-                <td>{item.weight} KG</td>
-                <td className="origin">
-                  <img src={originIcon} alt="origin icon" /> {item.origin}
-                </td>
-                <td className="destination">
-                  <img src={destinationIcon} alt="destination icon" />{" "}
-                  {item.destination}
-                </td>
-                <td className="priority-td">
-                  <p className={item.priority + " priority "}>
-                    {item.priority}
-                  </p>
-                </td>
-                <td>{item.price} NGN</td>
-              </tr>
-            );
-          })}
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Weight</th>
+              <th>Origin</th>
+              <th>Destination</th>
+              <th>Priority</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.getPanginatedData().map((item) => {
+              return (
+                <tr key={item.id} onClick={() => onPackageClick(item.id)}>
+                  {item.title}
+                  <td>{item.name}</td>
+                  <td>{item.weight} KG</td>
+                  <td className="origin">
+                    <img src={originIcon} alt="origin icon" /> {item.origin}
+                  </td>
+                  <td className="destination">
+                    <img src={destinationIcon} alt="destination icon" />{" "}
+                    {item.destination}
+                  </td>
+                  <td className="priority-td">
+                    <p className={item.priority + " priority "}>
+                      {item.priority}
+                    </p>
+                  </td>
+                  <td>{item.price} NGN</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
         <div className="pagination">
           {packages.length === 0 ? (
@@ -80,14 +79,19 @@ class PackageTable extends Component {
             </p>
           )}
           <img
-            style={currentPage <= 1 ? { display: "none" } : {}}
+            style={currentPage === 1 ? { display: "none" } : {}}
             onClick={() => this.handlePaginate("prev")}
             src={prevIcon}
             alt="previous icon"
           />
 
           <img
-            style={currentPage >= totalPages ? { display: "none" } : {}}
+            style={
+              currentPage >=
+              Math.ceil(this.props.packages.length / this.props.numPerPage)
+                ? { display: "none" }
+                : {}
+            }
             onClick={() => this.handlePaginate("next")}
             src={nextIcon}
             alt="next icon"
