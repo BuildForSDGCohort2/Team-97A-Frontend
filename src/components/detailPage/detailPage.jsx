@@ -22,8 +22,8 @@ class DetailPage extends Component {
   detailRef = React.createRef();
 
   handleDetailClose = () => {
-    this.props.history.push("/packages/all");
-    this.detailRef.current.style.display = "none";
+    this.props.history.goBack();
+    // this.detailRef.current.style.display = "none";
   };
 
   handlePinChange = (e) => {
@@ -199,7 +199,10 @@ class DetailPage extends Component {
                       "flex";
                   }}
                 >
-                  Tracker
+                  Tracker{" "}
+                  {this.props.user.id === owner
+                    ? "(Belongs to you)"
+                    : "(Assigned to you)"}
                 </p>
               ) : (
                 <button
