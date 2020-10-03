@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-
-import Sidebar from "../mainDashboard/sidebar/sidebar";
-import DashboardTop from "../mainDashboard/dashboardTop/dashboardTop";
 import Card from "../profile/Card";
 import { useRavePayment } from "react-ravepayment";
 
@@ -56,30 +53,34 @@ const Wallet = () => {
               topColor="#67AFD0"
             >
               <table className="table">
-                <tr>
-                  <th>Date</th>
-                  <th>PackageID</th>
-                  <th>Type</th>
-                  <th>Amount</th>
-                </tr>
-                <tr>
-                  <td>21-02-2020</td>
-                  <td>-</td>
-                  <td>Credit</td>
-                  <td className="amount-text">NGN 15,102.98</td>
-                </tr>
-                <tr>
-                  <td>21-02-2020</td>
-                  <td>-</td>
-                  <td>Credit</td>
-                  <td className="amount-text">NGN 15,102.98</td>
-                </tr>
-                <tr>
-                  <td>21-02-2020</td>
-                  <td>-</td>
-                  <td>Credit</td>
-                  <td className="amount-text">NGN 15,102.98</td>
-                </tr>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>PackageID</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>21-02-2020</td>
+                    <td>-</td>
+                    <td>Credit</td>
+                    <td className="amount-text">NGN 15,102.98</td>
+                  </tr>
+                  <tr>
+                    <td>21-02-2020</td>
+                    <td>-</td>
+                    <td>Credit</td>
+                    <td className="amount-text">NGN 15,102.98</td>
+                  </tr>
+                  <tr>
+                    <td>21-02-2020</td>
+                    <td>-</td>
+                    <td>Credit</td>
+                    <td className="amount-text">NGN 15,102.98</td>
+                  </tr>
+                </tbody>
               </table>
             </Card>
           </div>

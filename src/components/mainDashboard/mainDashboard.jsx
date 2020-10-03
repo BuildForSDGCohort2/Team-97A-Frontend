@@ -54,7 +54,6 @@ class MainDashboard extends Component {
     // This logic returns all the packages of the current user
     // and returns both the packages that the user has sent and carried in an object
 
-    console.log(this.state.packages);
     const allPackages = [...this.state.packages];
 
     // packages that the user has sent
