@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import closeIcon from "../../images/dashboard/close.png";
-import profileImg from "../../images/dashboard/profile-photo1.png";
+import APIClient from "../../services/dataService";
 import TrackerAction from "./carrierTrackerAction";
 import Tracker from "./tracker";
 import PinForm from "./pinForm";
 import Rating from "./rating";
+import DisplayPerson from "./displayPerson";
 
 class CarrierTracker extends Component {
-  state = {};
+  state = { owner: {} };
+
+  async componentDidMount() {
+    try {
+      const owner = await APIClient.getSingleUser(
+        this.props.singlePackage.owner
+      );
+      this.setState({ owner });
+    } catch (e) {}
+  }
 
   trackerStatus = () => {
     const tracker = { ...this.props.singlePackage.tracker };
@@ -52,23 +62,19 @@ class CarrierTracker extends Component {
             )}
           </div>
 
-          <div className="sender">
-            <img src={profileImg} alt="profile" />
-            <div className="sender-details">
-              <div className="detail-container">
-                <p className="label">First Name</p>
-                <p className="detail">Jeremiah</p>
-              </div>
-              <div className="detail-container">
-                <p className="label">Last Name</p>
-                <p className="detail">Abdul</p>
-              </div>
-              <div className="detail-container">
-                <p className="label">Phone Number</p>
-                <p className="detail">09055808223</p>
-              </div>
-            </div>
-          </div>
+          <DisplayPerson
+            person={
+              trackerStatus === "in_transit" || trackerStatus === "is_delivered"
+                ? {
+                    first_name: this.props.singlePackage.recievers_first_name,
+                    last_name: this.props.singlePackage.recievers_last_name,
+                    phone_number: this.props.singlePackage
+                      .recievers_phone_number,
+                  }
+                : this.state.owner
+            }
+          />
+          {/* add recievers details here  */}
 
           <PinForm
             onPinChange={this.props.onPinChange}

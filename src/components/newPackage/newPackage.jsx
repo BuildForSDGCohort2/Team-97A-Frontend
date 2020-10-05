@@ -22,6 +22,9 @@ class NewPackage extends Component {
       priority: "",
       weight: "",
       origin: "",
+      recievers_first_name: "",
+      recievers_last_name: "",
+      recievers_phone_number: "",
     },
   };
 
@@ -90,6 +93,9 @@ class NewPackage extends Component {
       price,
       priority,
       weight,
+      recievers_first_name,
+      recievers_last_name,
+      recievers_phone_number,
     } = this.state.data;
 
     return (
@@ -241,7 +247,7 @@ class NewPackage extends Component {
             </div>
 
             <div className="input-group">
-              <div className="input full">
+              <div className="input half">
                 <label htmlFor="description">Other info</label>
                 <input
                   onChange={this.handleInput}
@@ -251,16 +257,53 @@ class NewPackage extends Component {
                   value={description}
                 />
               </div>
-            </div>
 
-            <div className="input-group">
-              <div className="input full">
+              <div className="input half">
                 <label htmlFor="package_image">Package Image</label>
                 <input
                   onChange={this.handleImageInput}
                   type="file"
                   name="package_image"
                   id="package_image"
+                />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div className="input half">
+                <label htmlFor="recievers_first_name">
+                  Recievers first name
+                </label>
+                <input
+                  onChange={this.handleInput}
+                  type="text"
+                  name="recievers_first_name"
+                  id="recievers_first_name"
+                  value={recievers_first_name}
+                />
+              </div>
+              <div className="input half">
+                <label htmlFor="recievers_last_name">Recievers Last name</label>
+                <input
+                  onChange={this.handleInput}
+                  type="text"
+                  name="recievers_last_name"
+                  id="recievers_last_name"
+                  value={recievers_last_name}
+                />
+              </div>
+            </div>
+            <div className="input-group">
+              <div className="input full">
+                <label htmlFor="recievers_phone_number">
+                  Recievers Phone Number
+                </label>
+                <input
+                  onChange={this.handleInput}
+                  type="text"
+                  name="recievers_phone_number"
+                  id="recievers_phone_number"
+                  value={recievers_phone_number}
                 />
               </div>
             </div>

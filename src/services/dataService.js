@@ -58,6 +58,11 @@ const getAllUsers = async () => {
   return users;
 };
 
+const getSingleUser = async (user_id) => {
+  const { data: user } = await axiosInstance.get(`/accounts/users/${user_id}/`);
+  return user;
+};
+
 const editUser = async (user) => {
   const respponse = await axiosInstance.patch(
     `/accounts/users/${user.id}/`,
@@ -133,6 +138,7 @@ const transerFunds = async (singlePackage) => {
 export default {
   getCurrentUser,
   getAllUsers,
+  getSingleUser,
   editUser,
   verifyUser,
   updateUserVerification,
