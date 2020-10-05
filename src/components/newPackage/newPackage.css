@@ -39,9 +39,10 @@
   width: 50%;
   max-height: 95%;
   position: relative;
-  padding: 1em;
+  padding: 0.5em 1em;
   border: 2px solid #c3deec;
   border-radius: 5px;
+  font-size: 0.9em;
 }
 
 .close {
@@ -80,6 +81,16 @@ select,
   font-family: Montserrat Alternates;
 }
 
+.unit-container {
+  padding: 0.3em;
+  border: 1px solid #67afd0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
 .input-wrapper {
   width: 100%;
 }
@@ -87,8 +98,15 @@ select,
 input,
 select {
   width: 100%;
-  padding: 0.7em;
+  padding: 0.5em;
   border: 1px solid #67afd0;
+}
+
+.input-wrapper {
+  display: flex;
+  /* border: 1px solid #67afd0; */
+  justify-content: center;
+  align-items: center;
 }
 
 .unit-container {

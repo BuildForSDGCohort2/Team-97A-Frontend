@@ -58,6 +58,11 @@ const getAllUsers = async () => {
   return users;
 };
 
+const getSingleUser = async (user_id) => {
+  const { data: user } = await axiosInstance.get(`/accounts/users/${user_id}/`);
+  return user;
+};
+
 const editUser = async (user) => {
   const respponse = await axiosInstance.patch(
     `/accounts/users/${user.id}/`,
@@ -120,9 +125,20 @@ const updateTracker = async (tracker) => {
   return response.data;
 };
 
+// ************************wallet*************************
+
+const transerFunds = async (singlePackage) => {
+  const response = await axiosInstance.post(
+    `/wallets/transfer/${singlePackage.price}/`,
+    singlePackage
+  );
+  return response;
+};
+
 export default {
   getCurrentUser,
   getAllUsers,
+  getSingleUser,
   editUser,
   verifyUser,
   updateUserVerification,
@@ -131,4 +147,5 @@ export default {
   getSinglePackage,
   updatePackage,
   updateTracker,
+  transerFunds,
 };

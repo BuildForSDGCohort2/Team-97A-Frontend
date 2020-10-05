@@ -22,6 +22,9 @@ class NewPackage extends Component {
       priority: "",
       weight: "",
       origin: "",
+      recievers_first_name: "",
+      recievers_last_name: "",
+      recievers_phone_number: "",
     },
   };
 
@@ -57,11 +60,17 @@ class NewPackage extends Component {
         formData.append(key, data[key]);
       }
       try {
-        const newPackage = await APICLient.createNewPackage(formData);
-        console.log(newPackage);
-        toast("Package added successfully");
-        // push to checkout / payment page here when checkout page is implemented
-        this.props.history.push(`/package/${newPackage.id}/`);
+        if (data.price <= this.state.user.wallet.current_balance) {
+          const newPackage = await APICLient.createNewPackage(formData);
+          const tracker = { ...newPackage.tracker };
+          tracker.is_confirmed = true;
+          await APICLient.updateTracker(tracker);
+          console.log(newPackage);
+          toast("Package added successfully");
+          this.props.history.push(`/package/${newPackage.id}/`);
+        } else {
+          toast.warn("Insufficient balance!!  Pls fund your wallet");
+        }
       } catch (error) {
         console.log(error.response);
         toast.warn("could not add this package");
@@ -84,6 +93,9 @@ class NewPackage extends Component {
       price,
       priority,
       weight,
+      recievers_first_name,
+      recievers_last_name,
+      recievers_phone_number,
     } = this.state.data;
 
     return (
@@ -235,6 +247,54 @@ class NewPackage extends Component {
             </div>
 
             <div className="input-group">
+              <div className="input half">
+                <label htmlFor="recievers_phone_number">
+                  Recievers Phone Number
+                </label>
+                <input
+                  onChange={this.handleInput}
+                  type="text"
+                  name="recievers_phone_number"
+                  id="recievers_phone_number"
+                  value={recievers_phone_number}
+                />
+              </div>
+              <div className="input half">
+                <label htmlFor="recievers_last_name">Recievers Last name</label>
+                <input
+                  onChange={this.handleInput}
+                  type="text"
+                  name="recievers_last_name"
+                  id="recievers_last_name"
+                  value={recievers_last_name}
+                />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <div className="input half">
+                <label htmlFor="recievers_first_name">
+                  Recievers first name
+                </label>
+                <input
+                  onChange={this.handleInput}
+                  type="text"
+                  name="recievers_first_name"
+                  id="recievers_first_name"
+                  value={recievers_first_name}
+                />
+              </div>
+              <div className="input half">
+                <label htmlFor="package_image">Package Image</label>
+                <input
+                  onChange={this.handleImageInput}
+                  type="file"
+                  name="package_image"
+                  id="package_image"
+                />
+              </div>
+            </div>
+            <div className="input-group">
               <div className="input full">
                 <label htmlFor="description">Other info</label>
                 <input
@@ -243,18 +303,6 @@ class NewPackage extends Component {
                   name="description"
                   id="description"
                   value={description}
-                />
-              </div>
-            </div>
-
-            <div className="input-group">
-              <div className="input full">
-                <label htmlFor="package_image">Package Image</label>
-                <input
-                  onChange={this.handleImageInput}
-                  type="file"
-                  name="package_image"
-                  id="package_image"
                 />
               </div>
             </div>

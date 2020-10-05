@@ -22,8 +22,8 @@ class DetailPage extends Component {
   detailRef = React.createRef();
 
   handleDetailClose = () => {
-    this.props.history.push("/packages/all");
-    this.detailRef.current.style.display = "none";
+    this.props.history.push("/packages/all/");
+    // this.detailRef.current.style.display = "none";
   };
 
   handlePinChange = (e) => {
@@ -47,7 +47,7 @@ class DetailPage extends Component {
       toast("collection confirmed");
     } catch (e) {
       this.setState({ singlePackage: originalPackage });
-      toast.warn("could not confirm collection at this point");
+      toast.warn("could not confirm delivery at this point");
     }
   };
 
@@ -62,8 +62,12 @@ class DetailPage extends Component {
         modifiedPackage.tracker = tracker;
         this.setState({ singlePackage: modifiedPackage });
 
+        //update tracker to confirmed
         await APICLient.updateTracker(tracker);
-        toast("collection confirmed");
+        toast("Delivery confirmed");
+
+        // transfer money from owner's wallet to carrier
+        APICLient.transerFunds(modifiedPackage);
       } catch (e) {
         this.setState({ singlePackage: originalPackage });
         toast.warn("could not confirm delivery at this moment");
@@ -71,8 +75,6 @@ class DetailPage extends Component {
     } else {
       toast.error("incorrect pin");
     }
-    console.log(pin);
-    //send pin to backend here
   };
 
   handleAcceptMission = async () => {
@@ -113,14 +115,14 @@ class DetailPage extends Component {
     return (
       <div className="package-detail-page" ref={this.detailRef}>
         <div className="package-detail-main animate">
-          <h2 className="package-sn">Package - {id}</h2>
+          <h3 className="package-sn">Package - {id}</h3>
           <img
             onClick={this.handleDetailClose}
             src={closeIcon}
             alt="close"
             className="close"
           />
-          <h2 className="page-title">Package detail</h2>
+          <h3 className="page-title">Package detail</h3>
           <div className="row">
             <div className="detail-left">
               <div className="long-detail-row">
@@ -199,7 +201,10 @@ class DetailPage extends Component {
                       "flex";
                   }}
                 >
-                  Tracker
+                  Tracker{" "}
+                  {this.props.user.id === owner
+                    ? "(Belongs to you)"
+                    : "(Assigned to you)"}
                 </p>
               ) : (
                 <button
