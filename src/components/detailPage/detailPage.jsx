@@ -115,14 +115,14 @@ class DetailPage extends Component {
     return (
       <div className="package-detail-page" ref={this.detailRef}>
         <div className="package-detail-main animate">
-          <h2 className="package-sn">Package - {id}</h2>
+          <h3 className="package-sn">Package - {id}</h3>
           <img
             onClick={this.handleDetailClose}
             src={closeIcon}
             alt="close"
             className="close"
           />
-          <h2 className="page-title">Package detail</h2>
+          <h3 className="page-title">Package detail</h3>
           <div className="row">
             <div className="detail-left">
               <div className="long-detail-row">

@@ -39,10 +39,10 @@
   background-color: white;
   width: 70%;
   position: relative;
-  padding: 1em;
+  padding: 0.5em 1em;
   border: 2px solid #c3deec;
   border-radius: 5px;
-  max-height: 90%;
+  max-height: 95%;
 }
 
 .close {

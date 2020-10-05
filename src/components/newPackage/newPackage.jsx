@@ -248,23 +248,25 @@ class NewPackage extends Component {
 
             <div className="input-group">
               <div className="input half">
-                <label htmlFor="description">Other info</label>
+                <label htmlFor="recievers_phone_number">
+                  Recievers Phone Number
+                </label>
                 <input
                   onChange={this.handleInput}
                   type="text"
-                  name="description"
-                  id="description"
-                  value={description}
+                  name="recievers_phone_number"
+                  id="recievers_phone_number"
+                  value={recievers_phone_number}
                 />
               </div>
-
               <div className="input half">
-                <label htmlFor="package_image">Package Image</label>
+                <label htmlFor="recievers_last_name">Recievers Last name</label>
                 <input
-                  onChange={this.handleImageInput}
-                  type="file"
-                  name="package_image"
-                  id="package_image"
+                  onChange={this.handleInput}
+                  type="text"
+                  name="recievers_last_name"
+                  id="recievers_last_name"
+                  value={recievers_last_name}
                 />
               </div>
             </div>
@@ -283,27 +285,24 @@ class NewPackage extends Component {
                 />
               </div>
               <div className="input half">
-                <label htmlFor="recievers_last_name">Recievers Last name</label>
+                <label htmlFor="package_image">Package Image</label>
                 <input
-                  onChange={this.handleInput}
-                  type="text"
-                  name="recievers_last_name"
-                  id="recievers_last_name"
-                  value={recievers_last_name}
+                  onChange={this.handleImageInput}
+                  type="file"
+                  name="package_image"
+                  id="package_image"
                 />
               </div>
             </div>
             <div className="input-group">
               <div className="input full">
-                <label htmlFor="recievers_phone_number">
-                  Recievers Phone Number
-                </label>
+                <label htmlFor="description">Other info</label>
                 <input
                   onChange={this.handleInput}
                   type="text"
-                  name="recievers_phone_number"
-                  id="recievers_phone_number"
-                  value={recievers_phone_number}
+                  name="description"
+                  id="description"
+                  value={description}
                 />
               </div>
             </div>

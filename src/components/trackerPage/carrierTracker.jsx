@@ -8,14 +8,21 @@ import Rating from "./rating";
 import DisplayPerson from "./displayPerson";
 
 class CarrierTracker extends Component {
-  state = { owner: {} };
+  state = { owner: {}, reciever: {} };
 
   async componentDidMount() {
     try {
       const owner = await APIClient.getSingleUser(
         this.props.singlePackage.owner
       );
-      this.setState({ owner });
+
+      const reciever = {
+        first_name: this.props.singlePackage.recievers_first_name,
+        last_name: this.props.singlePackage.recievers_last_name,
+        phone_number: this.props.singlePackage.recievers_phone_number,
+      };
+
+      this.setState({ owner, reciever });
     } catch (e) {}
   }
 
@@ -41,7 +48,7 @@ class CarrierTracker extends Component {
     return (
       <div className="tracker-page " ref={this.trackerRef}>
         <div className="tracker-main animate">
-          <h4 className="tracker-status">Pending </h4>
+          <h4 className="tracker-status">{trackerStatus}</h4>
           <img
             onClick={this.handleTrackerClose}
             src={closeIcon}
@@ -65,16 +72,10 @@ class CarrierTracker extends Component {
           <DisplayPerson
             person={
               trackerStatus === "in_transit" || trackerStatus === "is_delivered"
-                ? {
-                    first_name: this.props.singlePackage.recievers_first_name,
-                    last_name: this.props.singlePackage.recievers_last_name,
-                    phone_number: this.props.singlePackage
-                      .recievers_phone_number,
-                  }
+                ? this.state.reciever
                 : this.state.owner
             }
           />
-          {/* add recievers details here  */}
 
           <PinForm
             onPinChange={this.props.onPinChange}
