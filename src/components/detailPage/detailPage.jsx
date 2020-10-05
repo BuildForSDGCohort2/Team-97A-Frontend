@@ -22,7 +22,7 @@ class DetailPage extends Component {
   detailRef = React.createRef();
 
   handleDetailClose = () => {
-    this.props.history.goBack();
+    this.props.history.push("/packages/all/");
     // this.detailRef.current.style.display = "none";
   };
 
@@ -47,7 +47,7 @@ class DetailPage extends Component {
       toast("collection confirmed");
     } catch (e) {
       this.setState({ singlePackage: originalPackage });
-      toast.warn("could not confirm collection at this point");
+      toast.warn("could not confirm delivery at this point");
     }
   };
 
@@ -62,8 +62,12 @@ class DetailPage extends Component {
         modifiedPackage.tracker = tracker;
         this.setState({ singlePackage: modifiedPackage });
 
+        //update tracker to confirmed
         await APICLient.updateTracker(tracker);
-        toast("collection confirmed");
+        toast("Delivery confirmed");
+
+        // transfer money from owner's wallet to carrier
+        APICLient.transerFunds(modifiedPackage);
       } catch (e) {
         this.setState({ singlePackage: originalPackage });
         toast.warn("could not confirm delivery at this moment");
@@ -71,8 +75,6 @@ class DetailPage extends Component {
     } else {
       toast.error("incorrect pin");
     }
-    console.log(pin);
-    //send pin to backend here
   };
 
   handleAcceptMission = async () => {

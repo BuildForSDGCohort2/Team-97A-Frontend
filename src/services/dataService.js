@@ -120,6 +120,16 @@ const updateTracker = async (tracker) => {
   return response.data;
 };
 
+// ************************wallet*************************
+
+const transerFunds = async (singlePackage) => {
+  const response = await axiosInstance.post(
+    `/wallets/transfer/${singlePackage.price}/`,
+    singlePackage
+  );
+  return response;
+};
+
 export default {
   getCurrentUser,
   getAllUsers,
@@ -131,4 +141,5 @@ export default {
   getSinglePackage,
   updatePackage,
   updateTracker,
+  transerFunds,
 };

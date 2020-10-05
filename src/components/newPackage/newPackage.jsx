@@ -57,11 +57,17 @@ class NewPackage extends Component {
         formData.append(key, data[key]);
       }
       try {
-        const newPackage = await APICLient.createNewPackage(formData);
-        console.log(newPackage);
-        toast("Package added successfully");
-        // push to checkout / payment page here when checkout page is implemented
-        this.props.history.push(`/package/${newPackage.id}/`);
+        if (data.price <= this.state.user.wallet.current_balance) {
+          const newPackage = await APICLient.createNewPackage(formData);
+          const tracker = { ...newPackage.tracker };
+          tracker.is_confirmed = true;
+          await APICLient.updateTracker(tracker);
+          console.log(newPackage);
+          toast("Package added successfully");
+          this.props.history.push(`/package/${newPackage.id}/`);
+        } else {
+          toast.warn("Insufficient balance!!  Pls fund your wallet");
+        }
       } catch (error) {
         console.log(error.response);
         toast.warn("could not add this package");
