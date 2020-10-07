@@ -2,6 +2,7 @@ import React from "react";
 import "./login.css";
 import login_icon from "../../../images/icons/login.svg";
 import { Link, Redirect } from "react-router-dom";
+import settings from "../../../config/settings";
 
 class Login extends React.Component {
   constructor(props) {
@@ -67,7 +68,7 @@ class Login extends React.Component {
 
     data = JSON.stringify(data);
     this.setState({ loading: true });
-    fetch("http://localhost:8000/api/v1/accounts/obtain/", {
+    fetch(`${settings.BASE_URL}/accounts/obtain/`, {
       method: "POST",
       body: data,
       headers: new Headers({ "content-type": "application/json" }),

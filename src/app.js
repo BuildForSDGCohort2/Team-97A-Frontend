@@ -6,7 +6,6 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import Loader from "./components/Loader";
 import logo from "./images/logo.svg";
 import LandingPage from "./components/langinPage/landingPage";
 import Login from "./components/auth/login/login";
@@ -31,7 +30,6 @@ function App() {
   async function fetchUserData() {
     try {
       const user = await APICLient.getCurrentUser();
-      console.log(user);
       setUser(user);
     } catch (e) {}
   }
@@ -75,7 +73,6 @@ function App() {
 
   return (
     <Router>
-      {/* <Loader /> */}
       <div className="App" id="top">
         <nav className="nav">
           <div className="logo">

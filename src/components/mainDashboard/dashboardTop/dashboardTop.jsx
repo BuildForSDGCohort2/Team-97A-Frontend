@@ -5,14 +5,14 @@ import verifiedImg from "../../../images/dashboard/verified.png";
 import notificationIcon from "../../../images/dashboard/notification.png";
 import powerIcon from "../../../images/dashboard/power.png";
 import "./dashboardTop.css";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const DashboardTop = ({ onLogout, user }) => {
   return (
     <React.Fragment>
       <div className="dashboard-top">
         <div className="dashboard-top-left">
-          <Link to="/profile/" className="profile-link">
+          <Link to="/packages/profile/" className="profile-link">
             <div className="profile-photo-container">
               <img src={profilePhoto} alt="" className="profile-photo" />
             </div>

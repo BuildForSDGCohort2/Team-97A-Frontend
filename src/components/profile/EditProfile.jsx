@@ -56,10 +56,7 @@ export class EditVerification extends Component {
             </form>
           </div>
           <div className="right">
-            <img
-              src={data.upload_id ? data.upload_id : idImg}
-              alt="user ID image"
-            />
+            <img src={data.upload_id ? data.upload_id : idImg} alt="user ID" />
           </div>
         </div>
         <div onClick={this.props.onSubmit} className=" submit-group">

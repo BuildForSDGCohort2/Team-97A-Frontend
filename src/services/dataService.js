@@ -1,15 +1,17 @@
 import axios from "axios";
 import JWTDecode from "jwt-decode";
-import { toast } from "react-toastify";
+import settings from "../config/settings";
+
+export const headers = {
+  Authorization: "Bearer " + localStorage.getItem("access_token"),
+  "Content-Type": "application/json",
+  accept: "application/json",
+};
 
 const axiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/v1",
+  baseURL: `${settings.BASE_URL}`,
   timeout: 5000,
-  headers: {
-    Authorization: "Bearer " + localStorage.getItem("access_token"),
-    "Content-Type": "application/json",
-    accept: "application/json",
-  },
+  headers,
 });
 
 axiosInstance.interceptors.response.use(
@@ -18,6 +20,7 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (
+      error.response &&
       error.response.status === 403 &&
       error.response.statusText === "Forbidden"
     ) {
@@ -56,6 +59,11 @@ const getCurrentUser = async () => {
 const getAllUsers = async () => {
   const { data: users } = await axiosInstance.get(`/accounts/users/`);
   return users;
+};
+
+const getSingleUser = async (user_id) => {
+  const { data: user } = await axiosInstance.get(`/accounts/users/${user_id}/`);
+  return user;
 };
 
 const editUser = async (user) => {
@@ -120,9 +128,20 @@ const updateTracker = async (tracker) => {
   return response.data;
 };
 
+// ************************wallet*************************
+
+const transerFunds = async (singlePackage) => {
+  const response = await axiosInstance.post(
+    `/wallets/transfer/${singlePackage.price}/`,
+    singlePackage
+  );
+  return response;
+};
+
 export default {
   getCurrentUser,
   getAllUsers,
+  getSingleUser,
   editUser,
   verifyUser,
   updateUserVerification,
@@ -131,4 +150,5 @@ export default {
   getSinglePackage,
   updatePackage,
   updateTracker,
+  transerFunds,
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { EditBank, EditVerification, EditPersonalDetails } from "./EditProfile";
 import EditModal from "./editProfileModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

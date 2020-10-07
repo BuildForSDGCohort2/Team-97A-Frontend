@@ -1,16 +1,26 @@
 import React, { Component } from "react";
 import closeIcon from "../../images/dashboard/close.png";
-import profileImg from "../../images/dashboard/profile-photo1.png";
-import TrackerAction from "./ownerTrackerAction";
 import Tracker from "./tracker";
 import DisplayPin from "./displayPin";
 import Rating from "./rating";
 import "./trackerPage.css";
+import DisplayPerson from "./displayPerson";
+import APIClient from "../../services/dataService";
 
 class OwnerTracker extends Component {
   state = {
     rating: 0,
+    carrier: {},
   };
+
+  async componentDidMount() {
+    try {
+      const carrier = await APIClient.getSingleUser(
+        this.props.singlePackage.carrier
+      );
+      this.setState({ carrier });
+    } catch (e) {}
+  }
 
   trackerStatus = () => {
     const tracker = { ...this.props.singlePackage.tracker };
@@ -36,8 +46,6 @@ class OwnerTracker extends Component {
     this.trackerRef.current.style.display = "none";
   };
 
-  handleCancel = () => {};
-
   render() {
     const trackerStatus = this.trackerStatus();
     return (
@@ -53,33 +61,17 @@ class OwnerTracker extends Component {
 
           <div className="description">
             {trackerStatus === "is_confirmed" ? (
-              <h4>Your package has been assigned to :</h4>
+              <h4>Your package has not yet been assigned </h4>
             ) : trackerStatus === "in_transit" ? (
               <h4>Your package has been assigned to :</h4>
-            ) : trackerStatus === "in_delivered" ? (
-              <h4>Package successfully delivered to :</h4>
+            ) : trackerStatus === "is_delivered" ? (
+              <h4>Package successfully delivered by :</h4>
             ) : (
-              <h4>Your packaged has not yet been assigned</h4>
+              <h4>Your packaged has not yet been confirmed</h4>
             )}
           </div>
 
-          <div className="sender">
-            <img src={profileImg} alt="profile" />
-            <div className="sender-details">
-              <div className="detail-container">
-                <p className="label">First Name</p>
-                <p className="detail">Jeremiah</p>
-              </div>
-              <div className="detail-container">
-                <p className="label">Last Name</p>
-                <p className="detail">Abdul</p>
-              </div>
-              <div className="detail-container">
-                <p className="label">Phone Number</p>
-                <p className="detail">09055808223</p>
-              </div>
-            </div>
-          </div>
+          <DisplayPerson person={this.state.carrier} />
 
           {trackerStatus === "delivered" ? null : (
             <DisplayPin
