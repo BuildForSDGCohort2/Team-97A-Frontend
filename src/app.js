@@ -6,7 +6,6 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import Loader from "./components/Loader";
 import logo from "./images/logo.svg";
 import LandingPage from "./components/langinPage/landingPage";
 import Login from "./components/auth/login/login";
@@ -74,7 +73,6 @@ function App() {
 
   return (
     <Router>
-      {/* <Loader /> */}
       <div className="App" id="top">
         <nav className="nav">
           <div className="logo">

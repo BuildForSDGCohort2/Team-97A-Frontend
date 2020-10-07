@@ -27,7 +27,6 @@ const Loader = ({ text = "Please wait ... ", visible = true }) => {
     </div>
   ) : null;
 };
-
 const styles = {
   container: {
     position: "absolute",
@@ -35,16 +34,14 @@ const styles = {
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "center",
-    width: "100%",
-    height: "100%",
+    width: "80%",
+    height: "70%",
     backdropFilter: " blur(40px)",
-    zIndex: 1,
+    zIndex: 2,
   },
-
   loader: {
     width: "250px",
   },
-
   text: {
     color: "#ffff00",
     borderWidth: 1,

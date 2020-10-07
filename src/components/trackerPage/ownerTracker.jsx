@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import closeIcon from "../../images/dashboard/close.png";
-import TrackerAction from "./ownerTrackerAction";
 import Tracker from "./tracker";
 import DisplayPin from "./displayPin";
 import Rating from "./rating";

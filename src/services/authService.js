@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const BASE_URL = "http://localhost:8000/api/v1";
+import settings from "../config/settings";
 
 async function register(data) {
   const newData = {};
@@ -12,7 +11,10 @@ async function register(data) {
   newData.address = data.address;
   newData.password1 = data.password1;
   newData.password2 = data.password2;
-  const response = await axios.post(`${BASE_URL}/accounts/register/`, newData);
+  const response = await axios.post(
+    `${settings.BASE_URL}/accounts/register/`,
+    newData
+  );
   return response;
 }
 

@@ -5,7 +5,7 @@ import verifiedImg from "../../../images/dashboard/verified.png";
 import notificationIcon from "../../../images/dashboard/notification.png";
 import powerIcon from "../../../images/dashboard/power.png";
 import "./dashboardTop.css";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const DashboardTop = ({ onLogout, user }) => {
   return (

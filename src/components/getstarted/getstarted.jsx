@@ -64,7 +64,7 @@ class GetStarted extends Component {
     } else {
       // if there are no errors then register new user
       try {
-        const response = await register(this.state.data);
+        await register(this.state.data);
         toast("account created successfully");
         this.props.history.push("/auth/login/");
       } catch (e) {
