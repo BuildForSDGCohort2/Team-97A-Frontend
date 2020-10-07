@@ -12,7 +12,7 @@ const settings = {
     ...base,
   },
   prod: {
-    BASE_URL: "https://backend.carigo.herokuapp.com/api/v1",
+    BASE_URL: "https://backend-carigo.herokuapp.com/api/v1",
     RAVE_BASE_URL: "https://api.ravepay.co",
     ...base,
   },
