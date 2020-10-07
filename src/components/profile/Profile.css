@@ -125,3 +125,9 @@
 .right img {
   width: 80%;
 }
+
+@media (max-width: 450px) {
+  .edit-modal {
+    width: 90%;
+  }
+}
