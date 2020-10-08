@@ -3,6 +3,13 @@
   justify-content: space-around;
 }
 
+.profile-left {
+  width: 48%;
+}
+.profile-right {
+  width: 48%;
+}
+
 .card {
   border-radius: 15px;
   background-color: white;
@@ -34,6 +41,10 @@
 
 .profile-left .card-body {
   padding: 50px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .profile-right .card-top {
@@ -41,7 +52,7 @@
 }
 
 .profile-right .card-body {
-  padding: 10px 80px;
+  padding: 10px 50px;
 }
 
 .profile-right .card .card-title {
@@ -53,12 +64,11 @@
   display: flex;
   justify-content: space-between;
   padding: 5px;
-  width: 255px;
 }
 
 .profile-right .card {
   margin-top: 10px;
-  width: 400px;
+  width: 100%;
 }
 
 .user-icon {
@@ -126,7 +136,30 @@
   width: 80%;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 600px) {
+  .profile-body {
+    flex-direction: column;
+  }
+
+  .profile-left {
+    width: 100%;
+  }
+  .profile-right {
+    width: 100%;
+  }
+
+  .profile-body .card {
+    margin: 0 0 1em 0;
+  }
+
+  .profile-body .card-body {
+    padding: 10px;
+  }
+
+  .profile-right .card {
+    width: initial;
+  }
+
   .edit-modal {
     width: 90%;
   }
