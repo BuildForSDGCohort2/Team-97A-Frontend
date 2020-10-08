@@ -14,6 +14,7 @@ import "./Profile.css";
 
 const Profile = (props) => {
   const [modalVisible, setModalVisible] = useState({});
+  const closeModals = () => {};
 
   return (
     <React.Fragment>

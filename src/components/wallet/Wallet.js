@@ -146,8 +146,9 @@ const Wallet = () => {
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Timestamp</th>
-                    <th>PackageID</th>
+                    <th>Time</th>
+                    {/* commenting out packageID as transactions are not affiliated to any package  */}
+                    {/* <th>PackageID</th> */}
                     <th>Type</th>
                     <th>Amount</th>
                   </tr>
@@ -155,7 +156,7 @@ const Wallet = () => {
                 <tbody>
                   {user.wallet &&
                     user.wallet.transactions.map((item) => (
-                      <tr>
+                      <tr key={item.created_at}>
                         {/* Date and time handling is ineffiecient here, will update later */}
                         <td
                           title={`at ${new Date(item.created_at)
@@ -164,7 +165,7 @@ const Wallet = () => {
                         >
                           {new Date(item.created_at).toDateString()}
                         </td>
-                        <td>-</td>
+                        {/* <td>-</td> */}
                         <td>{item.is_credit ? "Deposit" : "Withdrawal"}</td>
                         <td className="amount-text">{item.amount}</td>
                       </tr>

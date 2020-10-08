@@ -37,9 +37,6 @@ const Sidebar = () => {
             <img src={fileIcon} alt="" className="icon" />
           </Link>
         </div>
-        <div className="sidebar-menu-item">
-          <img src={sendIcon} alt="" className="icon" />
-        </div>
       </div>
     </div>
   );

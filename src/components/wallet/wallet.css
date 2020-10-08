@@ -25,10 +25,20 @@
   justify-content: space-around;
 }
 
+.wallet-balance,
+.wallet-history {
+  width: 48%;
+}
+.wallet-history {
+  font-size: 0.9em;
+}
+
 .wallet-balance .card .card-body {
   display: flex;
   flex-direction: column;
-  padding: 60px;
+  padding: 50px;
+  justify-content: center;
+  align-items: center;
 }
 
 .wallet-balance .card .card-body span {
@@ -71,4 +81,19 @@ button {
 .modal {
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  .wallet-body {
+    flex-direction: column;
+  }
+  .wallet-balance,
+  .wallet-history {
+    width: 100%;
+    margin: 0 0 1em 0;
+  }
+  .wallet-balance .card-body {
+    padding: 30px !important;
+    align-items: center;
+  }
 }
