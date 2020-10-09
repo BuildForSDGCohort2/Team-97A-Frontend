@@ -37,13 +37,13 @@ OTP: 12345
 ## Authors/ Team -97
 1. [Jeremiah Esieboma](https://github.com/esiebomaj) - Frontend Developer/TTL
 
-2. [Oluwafemi Oyepeju](https://github.com/chidoziemanagwu) - Backend Developer
+2. [Oluwafemi Adenuga](https://github.com/Solomon1999) - Backend Developer
 
 3. [Abdulrasheed Ibrahim](https://github.com/Abdoulrasheed) - Frontend Developer
 
 4. [Olagunju Daniel](https://github.com/todak2000) - Product Designer
 
-5. [Last Guy](https://github.com/moxeey) - Backend Developer
+5. [Adeyemi Sola](https://github.com/Deyems) - Backend Developer
 
 
 ## Contributing
