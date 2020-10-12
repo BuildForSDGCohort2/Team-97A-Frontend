@@ -60,7 +60,7 @@
 
 .input-group {
   display: flex;
-  margin: 0.6em;
+  margin: 0.4em;
   justify-content: space-between;
 }
 
@@ -102,6 +102,10 @@ select {
   border: 1px solid #67afd0;
 }
 
+.package-form label {
+  font-size: 0.9em;
+}
+
 .input-wrapper {
   display: flex;
   /* border: 1px solid #67afd0; */
@@ -134,6 +138,11 @@ select {
   background-color: #ff6584;
 }
 
+.error {
+  color: red;
+  font-size: 0.6em;
+}
+
 @media (max-width: 1026px) {
   .add-package-main {
     width: 80%;
@@ -152,7 +161,7 @@ select {
     cursor: pointer;
   }
   .input-group {
-    margin: 0.5em;
+    margin: 0.4em;
   }
 
   .input-wrapper {

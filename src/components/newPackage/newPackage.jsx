@@ -26,6 +26,7 @@ class NewPackage extends Component {
       recievers_last_name: "",
       recievers_phone_number: "",
     },
+    errors: {},
   };
 
   async componentDidMount() {
@@ -73,7 +74,15 @@ class NewPackage extends Component {
         }
       } catch (error) {
         console.log(error.response);
-        toast.warn("could not add this package");
+        if (error.response.status === 400) {
+          let errors = {};
+          for (let i in error.response.data) {
+            errors[i] = error.response.data[i][0];
+          }
+          this.setState({ errors });
+        } else {
+          toast.warn("could not add this package");
+        }
       }
     } else {
       toast.error("you are not yet verified.");
@@ -111,6 +120,7 @@ class NewPackage extends Component {
           <form onSubmit={this.handleSubmit} className="package-form">
             <div className="input-group">
               <div className="input half">
+                <small className="error">{this.state.errors.name}</small>
                 <label htmlFor="dest_address">Package name</label>
                 <input
                   onChange={this.handleInput}
@@ -121,6 +131,7 @@ class NewPackage extends Component {
                 />
               </div>
               <div className="input half">
+                <small className="error">{this.state.errors.priority}</small>
                 <label htmlFor="description">priority</label>
                 <select
                   onChange={this.handleInput}
@@ -128,6 +139,9 @@ class NewPackage extends Component {
                   id="priority"
                   value={priority}
                 >
+                  <option defaultValue hidden>
+                    Please Select
+                  </option>
                   <option value="HIGH">HIGH</option>
                   <option value="MEDIUM">MEDIUM</option>
                   <option value="LOW">LOW</option>
@@ -136,6 +150,9 @@ class NewPackage extends Component {
             </div>
             <div className="input-group">
               <div className="input half">
+                <small className="error">
+                  {this.state.errors.pick_address}
+                </small>
                 <label htmlFor="pick_address">Pick-up Address</label>
                 <input
                   onChange={this.handleInput}
@@ -146,6 +163,9 @@ class NewPackage extends Component {
                 />
               </div>
               <div className="input half">
+                <small className="error">
+                  {this.state.errors.dest_address}
+                </small>
                 <label htmlFor="dest_address">Dilevery Address</label>
                 <input
                   onChange={this.handleInput}
@@ -159,6 +179,7 @@ class NewPackage extends Component {
 
             <div className="input-group">
               <div className="input half">
+                <small className="error">{this.state.errors.origin}</small>
                 <label htmlFor="origin">Origin (city)</label>
                 <span className="input-wrapper">
                   <input
@@ -172,6 +193,7 @@ class NewPackage extends Component {
               </div>
 
               <div className="input half">
+                <small className="error">{this.state.errors.destination}</small>
                 <label htmlFor="destination">Destination (city)</label>
                 <span className="input-wrapper">
                   <input
@@ -187,6 +209,9 @@ class NewPackage extends Component {
 
             <div className="input-group">
               <div className="input half">
+                <small className="error">
+                  {this.state.errors.delivery_period}
+                </small>
                 <label htmlFor="delivery_period">Dilevery Period</label>
                 <span className="input-wrapper">
                   <input
@@ -201,6 +226,7 @@ class NewPackage extends Component {
               </div>
 
               <div className="input half">
+                <small className="error">{this.state.errors.price}</small>
                 <label htmlFor="cost">cost</label>
                 <span className="input-wrapper">
                   <input
@@ -217,6 +243,7 @@ class NewPackage extends Component {
 
             <div className="input-group">
               <div className="input half">
+                <small className="error">{this.state.errors.category}</small>
                 <label htmlFor="category">Category</label>
                 <select
                   onChange={this.handleInput}
@@ -224,6 +251,9 @@ class NewPackage extends Component {
                   id="category"
                   value={category}
                 >
+                  <option defaultValue hidden>
+                    Please Select
+                  </option>
                   <option value="CLOTHS">CLOTHS</option>
                   <option value="DOCUMENTS">DOCUMENTS</option>
                   <option value="GROCERY">GROCERY</option>
@@ -232,6 +262,7 @@ class NewPackage extends Component {
               </div>
 
               <div className="input half">
+                <small className="error">{this.state.errors.weight}</small>
                 <label htmlFor="weight">Weight</label>
                 <span className="input-wrapper">
                   <input
@@ -248,6 +279,9 @@ class NewPackage extends Component {
 
             <div className="input-group">
               <div className="input half">
+                <small className="error">
+                  {this.state.errors.recievers_phone_number}
+                </small>
                 <label htmlFor="recievers_phone_number">
                   Recievers Phone Number
                 </label>
@@ -260,6 +294,9 @@ class NewPackage extends Component {
                 />
               </div>
               <div className="input half">
+                <small className="error">
+                  {this.state.errors.recievers_last_name}
+                </small>
                 <label htmlFor="recievers_last_name">Recievers Last name</label>
                 <input
                   onChange={this.handleInput}
@@ -273,6 +310,9 @@ class NewPackage extends Component {
 
             <div className="input-group">
               <div className="input half">
+                <small className="error">
+                  {this.state.errors.recievers_first_name}
+                </small>
                 <label htmlFor="recievers_first_name">
                   Recievers first name
                 </label>
@@ -285,6 +325,9 @@ class NewPackage extends Component {
                 />
               </div>
               <div className="input half">
+                <small className="error">
+                  {this.state.errors.package_image}
+                </small>
                 <label htmlFor="package_image">Package Image</label>
                 <input
                   onChange={this.handleImageInput}
@@ -296,6 +339,7 @@ class NewPackage extends Component {
             </div>
             <div className="input-group">
               <div className="input full">
+                <small className="error">{this.state.errors.description}</small>
                 <label htmlFor="description">Other info</label>
                 <input
                   onChange={this.handleInput}
